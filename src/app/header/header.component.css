@@ -1,3 +1,19 @@
 .toolbar {
   background-color: darkorange;
 }
+
+.menu-button {
+  color: ghostwhite;
+}
+.profile-button {
+  color: ghostwhite;
+  cursor: auto;
+  margin-left: auto
+}
+
+header {
+  font-size: 75%;
+  align-items: center;
+  color: ghostwhite;
+  margin-left: 6%;
+}
