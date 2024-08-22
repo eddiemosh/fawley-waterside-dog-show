@@ -1,0 +1,16 @@
+.tickets-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  transform: scale(2);
+  margin-top: -20%;
+}
+
+.tickets-icon {
+  transform: scale(1.5);
+}
+
+.tickets-text {
+  margin-top: 10%;
+}

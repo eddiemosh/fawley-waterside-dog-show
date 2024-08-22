@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgClass, NgForOf} from "@angular/common";
+import {NgClass, NgForOf, NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-slideshow',
@@ -7,7 +7,8 @@ import {NgClass, NgForOf} from "@angular/common";
   templateUrl: './slideshow.component.html',
   imports: [
     NgClass,
-    NgForOf
+    NgForOf,
+    NgOptimizedImage
   ],
   styleUrls: ['./slideshow.component.css']
 })
