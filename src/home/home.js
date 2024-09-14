@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, Box, Button } from '@mui/material';
+import {Container, Typography, Box, Button} from '@mui/material';
 import './home.css'; // Link to external CSS file
 
 const Home = () => {
