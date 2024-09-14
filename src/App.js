@@ -1,6 +1,6 @@
 // src/App.js
 import React from 'react';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/header/header';
 import Home from './home/home';
 import Events from './components/events/events';
@@ -9,13 +9,13 @@ import Payments from './components/payments/payments';
 
 function App() {
     return (
-        <Router>
-            <Header/>
+        <Router basename={process.env.PUBLIC_URL}>
+            <Header />
             <Routes>
-                <Route path="/fawley-waterside-dog-show/" element={<Home/>}/>
-                <Route path="/fawley-waterside-dog-show/events" element={<Events/>}/>
-                <Route path="/fawley-waterside-dog-show/tickets" element={<TicketSelection/>}/>
-                <Route path="/fawley-waterside-dog-show/payments" element={<Payments/>}/>
+                <Route path="/" element={<Home />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/tickets" element={<TicketSelection />} />
+                <Route path="/payments" element={<Payments />} />
             </Routes>
         </Router>
     );

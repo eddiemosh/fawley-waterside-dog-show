@@ -1,15 +1,23 @@
 // src/components/Events.js
 import React from 'react';
-import {Container, Typography, Button, Box, Grid} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
-import EventIcon from '@mui/icons-material/Event';  // Event icon for each event
-import './events.css'
+import { Container, Typography, Button, Box, IconButton } from '@mui/material';
+import EventIcon from '@mui/icons-material/Event'; // Import an icon for events
+import { useNavigate } from 'react-router-dom';
+import './events.css';
+
+const eventsList = [
+    { date: '1st December 2024', icon: <EventIcon /> },
+    { date: '15th December 2024', icon: <EventIcon /> },
+    { date: '10th January 2025', icon: <EventIcon /> },
+    { date: '20th February 2025', icon: <EventIcon /> },
+    { date: '5th March 2025', icon: <EventIcon /> }
+];
 
 const Events = () => {
     const navigate = useNavigate();
 
     const handleEventClick = () => {
-        navigate('/fawley-waterside-dog-show/tickets');
+        navigate('/tickets');
     };
 
     return (
@@ -17,41 +25,26 @@ const Events = () => {
             <Typography variant="h2" gutterBottom className="upcoming-events">
                 Upcoming Events
             </Typography>
-            <Grid container spacing={2} justifyContent="center">
-                {/* First Event */}
-                <Grid item xs={12} sm={6} md={4}>
-                    <Box className="event-box">
-                        <EventIcon style={{fontSize: 50}}/> {/* Event icon */}
-                        <Typography variant="h6" className="event-title">
-                            1st December 2024
+            <Box className="events-container">
+                {eventsList.map((event, index) => (
+                    <Box key={index} className="event-box">
+                        <IconButton className="event-icon">
+                            {event.icon}
+                        </IconButton>
+                        <Typography className="event-date">
+                            {event.date}
                         </Typography>
                         <Button
                             variant="contained"
                             color="primary"
+                            className="view-tickets-button"
                             onClick={handleEventClick}
                         >
                             View Tickets
                         </Button>
                     </Box>
-                </Grid>
-
-                {/* Add more events as needed */}
-                <Grid item xs={12} sm={6} md={4}>
-                    <Box className="event-box">
-                        <EventIcon style={{fontSize: 50}}/>
-                        <Typography variant="h6" className="event-title">
-                            15th January 2025
-                        </Typography>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleEventClick}
-                        >
-                            View Tickets
-                        </Button>
-                    </Box>
-                </Grid>
-            </Grid>
+                ))}
+            </Box>
         </Container>
     );
 };
