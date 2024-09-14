@@ -13,7 +13,7 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/fawley-waterside-dog-show/" element={<Home />} />
-                <Route path="//fawley-waterside-dog-show/events" element={<Events />} />
+                <Route path="/fawley-waterside-dog-show/events" element={<Events />} />
                 <Route path="/fawley-waterside-dog-show/tickets" element={<TicketSelection />} />
                 <Route path="/fawley-waterside-dog-show/payments" element={<Payments />} />
             </Routes>

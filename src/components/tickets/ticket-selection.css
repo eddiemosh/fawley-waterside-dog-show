@@ -1,52 +1,15 @@
-/* src/components/ticketSelection.css */
-.ticket-selection-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 4rem;
-    font-weight: 400;
-    color: #ff6f61; /* Customize as needed */
-    margin-top: 3% !important;
+/* src/components/TicketSelection.css */
+.ticket-selection {
+    margin-top: 20px;
 }
 
-.ticket-grid {
-    margin-bottom: 20px; /* Space between grid and button */
-}
+@media (max-width: 600px) {
+    .ticket-selection {
+        display: block;
+        text-align: center;
+    }
 
-.ticket-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.ticket-checkbox {
-    margin-top: 10px;
-}
-
-.ticket-actions {
-    justify-content: center;
-    padding: 0 16px 16px;
-}
-
-.checkout-button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 5%; /* Space above the button */
-    margin-bottom: 5%;
-}
-
-.checkout-button {
-    font-size: 1.2rem;
-    border-radius: 30px;
-    padding: 10px 20px;
-    background-color: #ff6f61;
-    color: #fff;
-    transition: background-color 0.3s ease;
-}
-
-.checkout-button:hover {
-    background-color: #e55d50;
+    .ticket-selection .MuiFormControlLabel-root {
+        width: 100%; /* Make checkboxes stack vertically */
+    }
 }
