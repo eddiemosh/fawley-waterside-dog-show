@@ -1,9 +1,16 @@
 // src/components/Home.js
 import React from 'react';
 import { Container, Typography, Box, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import './home.css'; // Import the CSS file
 
 const Home = () => {
+    const navigate = useNavigate();
+
+    const handleBuyTicketsClick = () => {
+        navigate('/events');
+    };
+
     return (
         <Container>
             <Box className="hero-container">
@@ -15,6 +22,7 @@ const Home = () => {
                 <Button
                     variant="contained"
                     className="buy-tickets-button"
+                    onClick={handleBuyTicketsClick}
                 >
                     Buy Tickets
                 </Button>

@@ -3,22 +3,21 @@ import React, { useState } from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const [anchorElMenu, setAnchorElMenu] = useState(null);
     const [anchorElProfile, setAnchorElProfile] = useState(null);
+    const navigate = useNavigate();
 
-    // Handle menu button click
     const handleMenuClick = (event) => {
         setAnchorElMenu(event.currentTarget);
     };
 
-    // Handle profile button click
     const handleProfileClick = (event) => {
         setAnchorElProfile(event.currentTarget);
     };
 
-    // Close both menus
     const handleMenuClose = () => {
         setAnchorElMenu(null);
     };
@@ -27,16 +26,14 @@ const Header = () => {
         setAnchorElProfile(null);
     };
 
-    // Handle menu item click
-    const handleMenuItemClick = (option) => {
+    const handleMenuItemClick = (page) => {
         handleMenuClose();
-        console.log(`Navigating to ${option}`); // Handle page navigation logic here
+        navigate(page); // Navigate to the selected page
     };
 
-    // Handle profile menu item click
-    const handleProfileMenuItemClick = (option) => {
+    const handleProfileItemClick = (option) => {
         handleProfileClose();
-        console.log(option); // Handle profile menu item logic here
+        console.log(option); // Handle profile menu item click logic here
     };
 
     return (
@@ -50,7 +47,11 @@ const Header = () => {
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" style={{ flexGrow: 1 }}>
+                <Typography
+                    variant="h6"
+                    style={{ flexGrow: 1, cursor: 'pointer' }}
+                    onClick={() => navigate('/')} // Navigate to home when title is clicked
+                >
                     Fawley & The Waterside Dog Show
                 </Typography>
                 <IconButton
@@ -59,27 +60,22 @@ const Header = () => {
                 >
                     <AccountCircleIcon />
                 </IconButton>
-
-                {/* Menu Button Dropdown */}
                 <Menu
                     anchorEl={anchorElMenu}
                     open={Boolean(anchorElMenu)}
                     onClose={handleMenuClose}
                 >
-                    <MenuItem onClick={() => handleMenuItemClick('Home')}>Home</MenuItem>
-                    <MenuItem onClick={() => handleMenuItemClick('Page 1')}>Page 1</MenuItem>
-                    <MenuItem onClick={() => handleMenuItemClick('Page 2')}>Page 2</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('/')}>Home</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('/events')}>Events</MenuItem>
                 </Menu>
-
-                {/* Profile Menu Dropdown */}
                 <Menu
                     anchorEl={anchorElProfile}
                     open={Boolean(anchorElProfile)}
                     onClose={handleProfileClose}
                 >
-                    <MenuItem onClick={() => handleProfileMenuItemClick('Manage Account')}>Manage Account</MenuItem>
-                    <MenuItem onClick={() => handleProfileMenuItemClick('Settings')}>Settings</MenuItem>
-                    <MenuItem onClick={() => handleProfileMenuItemClick('Logout')}>Logout</MenuItem>
+                    <MenuItem onClick={() => handleProfileItemClick('Manage Account')}>Manage Account</MenuItem>
+                    <MenuItem onClick={() => handleProfileItemClick('Settings')}>Settings</MenuItem>
+                    <MenuItem onClick={() => handleProfileItemClick('Logout')}>Logout</MenuItem>
                 </Menu>
             </Toolbar>
         </AppBar>
