@@ -16,7 +16,7 @@ const Payments = () => {
     const handlePaymentSubmit = () => {
         // Handle payment processing
         alert('Payment processed');
-        navigate('/fawley-waterside-dog-show/');
+        navigate('/');
     };
 
     return (

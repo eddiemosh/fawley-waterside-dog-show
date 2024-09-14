@@ -9,13 +9,13 @@ import Payments from './components/payments/payments';
 
 function App() {
     return (
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             <Header />
             <Routes>
-                <Route path="/fawley-waterside-dog-show/" element={<Home />} />
-                <Route path="//fawley-waterside-dog-show/events" element={<Events />} />
-                <Route path="/fawley-waterside-dog-show/tickets" element={<TicketSelection />} />
-                <Route path="/fawley-waterside-dog-show/payments" element={<Payments />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/tickets" element={<TicketSelection />} />
+                <Route path="/payments" element={<Payments />} />
             </Routes>
         </Router>
     );

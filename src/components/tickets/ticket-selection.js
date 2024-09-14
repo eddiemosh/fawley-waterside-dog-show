@@ -20,7 +20,7 @@ const TicketSelection = () => {
     };
 
     const handleCheckout = () => {
-        navigate('/fawley-waterside-dog-show/payments');
+        navigate('/payments');
     };
 
     return (

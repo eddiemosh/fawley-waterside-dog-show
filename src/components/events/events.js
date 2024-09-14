@@ -17,7 +17,7 @@ const Events = () => {
     const navigate = useNavigate();
 
     const handleEventClick = () => {
-        navigate('/fawley-waterside-dog-show/tickets');
+        navigate('/tickets');
     };
 
     return (

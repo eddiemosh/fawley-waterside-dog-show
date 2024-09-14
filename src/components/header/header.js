@@ -50,7 +50,7 @@ const Header = () => {
                 <Typography
                     variant="h6"
                     style={{ flexGrow: 1, cursor: 'pointer' }}
-                    onClick={() => navigate('/fawley-waterside-dog-show/')} // Navigate to home when title is clicked
+                    onClick={() => navigate('/')} // Navigate to home when title is clicked
                 >
                     Fawley & The Waterside Dog Show
                 </Typography>
@@ -65,8 +65,8 @@ const Header = () => {
                     open={Boolean(anchorElMenu)}
                     onClose={handleMenuClose}
                 >
-                    <MenuItem onClick={() => handleMenuItemClick('/fawley-waterside-dog-show/')}>Home</MenuItem>
-                    <MenuItem onClick={() => handleMenuItemClick('/fawley-waterside-dog-show/events')}>Events</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('/')}>Home</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('/events')}>Events</MenuItem>
                 </Menu>
                 <Menu
                     anchorEl={anchorElProfile}
