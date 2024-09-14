@@ -12,10 +12,10 @@ function App() {
         <Router>
             <Header />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/tickets" element={<TicketSelection />} />
-                <Route path="/payments" element={<Payments />} />
+                <Route path="/fawley-waterside-dog-show/" element={<Home />} />
+                <Route path="//fawley-waterside-dog-show/events" element={<Events />} />
+                <Route path="/fawley-waterside-dog-show/tickets" element={<TicketSelection />} />
+                <Route path="/fawley-waterside-dog-show/payments" element={<Payments />} />
             </Routes>
         </Router>
     );
