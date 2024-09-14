@@ -1,8 +1,7 @@
-// src/components/TicketSelection.js
 import React, { useState } from 'react';
-import { Container, Typography, Grid, Card, CardContent, CardActions, Checkbox, FormControlLabel, Button, Box } from '@mui/material';
+import { Container, Typography, Grid, Checkbox, FormControlLabel, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import './ticket-selection.css'; // Import custom CSS for additional styling if needed
+import './ticket-selection.css'; // Add external CSS for better control
 
 const ticketOptions = Array.from({ length: 20 }, (_, index) => `Ticket Type ${index + 1}`);
 
@@ -25,42 +24,30 @@ const TicketSelection = () => {
 
     return (
         <Container>
-            <Typography variant="h2" gutterBottom className="ticket-selection-title">
+            <Typography variant="h4" gutterBottom>
                 Select Tickets
             </Typography>
-            <Grid container spacing={3} className="ticket-grid">
+            <Grid container spacing={2}>
                 {ticketOptions.map((ticket) => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} key={ticket}>
-                        <Card className="ticket-card">
-                            <CardContent>
-                                <Typography variant="h6" component="div">
-                                    {ticket}
-                                </Typography>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value={ticket}
-                                            onChange={handleTicketChange}
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Select"
-                                    className="ticket-checkbox"
+                    <Grid item xs={12} sm={6} md={4} key={ticket}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    value={ticket}
+                                    onChange={handleTicketChange}
+                                    color="primary"
                                 />
-                            </CardContent>
-                            <CardActions className="ticket-actions">
-                                {/* You can add more actions if needed */}
-                            </CardActions>
-                        </Card>
+                            }
+                            label={ticket}
+                        />
                     </Grid>
                 ))}
             </Grid>
-            <Box className="checkout-button-container">
+            <Box mt={4}>
                 <Button
                     variant="contained"
                     color="primary"
                     onClick={handleCheckout}
-                    className="checkout-button"
                 >
                     Checkout
                 </Button>

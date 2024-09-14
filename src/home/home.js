@@ -1,16 +1,8 @@
-// src/components/Home.js
 import React from 'react';
 import { Container, Typography, Box, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import './home.css'; // Import the CSS file
+import './home.css'; // Link to external CSS file
 
 const Home = () => {
-    const navigate = useNavigate();
-
-    const handleBuyTicketsClick = () => {
-        navigate('/fawley-waterside-dog-show/events');
-    };
-
     return (
         <Container>
             <Box className="hero-container">
@@ -22,7 +14,7 @@ const Home = () => {
                 <Button
                     variant="contained"
                     className="buy-tickets-button"
-                    onClick={handleBuyTicketsClick}
+                    href="/fawley-waterside-dog-show/events" // Navigate to events page on button click
                 >
                     Buy Tickets
                 </Button>
