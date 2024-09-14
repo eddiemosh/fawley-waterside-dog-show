@@ -8,7 +8,7 @@ const Home = () => {
     const navigate = useNavigate();
 
     const handleBuyTicketsClick = () => {
-        navigate('/events');
+        navigate('/fawley-waterside-dog-show/events');
     };
 
     return (
