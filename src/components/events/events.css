@@ -1,53 +1,54 @@
 /* src/components/events.css */
 .upcoming-events {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     text-align: center;
     font-size: 2.5rem; /* Larger font size for emphasis */
-    font-weight: bold;
-    color: #ff6f61;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin-top: 3% !important;
+    font-weight: bold; /* Make the text bold */
+    color: #ff6f61; /* Customize text color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for better readability */
+    margin-top: 5% !important; /* Space above the title */
+}
+
+.events-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Space between title and event boxes */
 }
 
 .event-box {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 20px;
-    margin: 10px;
-    border: 2px solid #ddd;
+    background-color: #f5f5f5;
+    padding: 15px;
     border-radius: 10px;
-    background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 300px;
-    width: 100%; /* Full width for mobile */
+    width: 250px; /* Fixed width for event boxes */
+    text-align: center;
+    margin: 0 10px; /* Space between event boxes */
 }
 
-.event-box img {
-    width: 50px; /* Icon size */
-    height: 50px;
+.event-icon {
+    font-size: 3rem;
+    color: #ff6f61;
+    margin-bottom: 10px; /* Space between icon and date */
 }
 
-.event-title {
+.event-date {
     font-size: 1.5rem;
-    margin-bottom: 10px;
+    color: #333;
+    margin-bottom: 15px; /* Space between date and button */
 }
 
-@media (max-width: 600px) {
-    /* Stack events vertically for mobile */
-    .upcoming-events {
-        flex-direction: column;
-        align-items: center;
-    }
+.view-tickets-button {
+    font-size: 1.2rem;
+    border-radius: 30px;
+    background-color: #ff6f61;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
 
-    .event-box {
-        max-width: 90%; /* Adjust width for mobile */
-    }
-
-    .event-title {
-        font-size: 1.2rem;
-    }
+.view-tickets-button:hover {
+    background-color: #e55d50;
 }
