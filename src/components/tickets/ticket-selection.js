@@ -1,7 +1,8 @@
 // src/components/TicketSelection.js
 import React, { useState } from 'react';
-import { Container, Typography, Box, Checkbox, FormControlLabel, Button } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, CardActions, Checkbox, FormControlLabel, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import './ticket-selection.css'; // Import custom CSS for additional styling if needed
 
 const ticketOptions = Array.from({ length: 20 }, (_, index) => `Ticket Type ${index + 1}`);
 
@@ -24,32 +25,46 @@ const TicketSelection = () => {
 
     return (
         <Container>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h2" gutterBottom className="ticket-selection-title">
                 Select Tickets
             </Typography>
-            <Box>
+            <Grid container spacing={3} className="ticket-grid">
                 {ticketOptions.map((ticket) => (
-                    <FormControlLabel
-                        key={ticket}
-                        control={
-                            <Checkbox
-                                value={ticket}
-                                onChange={handleTicketChange}
-                                color="primary"
-                            />
-                        }
-                        label={ticket}
-                    />
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={ticket}>
+                        <Card className="ticket-card">
+                            <CardContent>
+                                <Typography variant="h6" component="div">
+                                    {ticket}
+                                </Typography>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value={ticket}
+                                            onChange={handleTicketChange}
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Select"
+                                    className="ticket-checkbox"
+                                />
+                            </CardContent>
+                            <CardActions className="ticket-actions">
+                                {/* You can add more actions if needed */}
+                            </CardActions>
+                        </Card>
+                    </Grid>
                 ))}
+            </Grid>
+            <Box className="checkout-button-container">
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleCheckout}
+                    className="checkout-button"
+                >
+                    Checkout
+                </Button>
             </Box>
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={handleCheckout}
-                style={{ marginTop: '20px' }}
-            >
-                Checkout
-            </Button>
         </Container>
     );
 };
