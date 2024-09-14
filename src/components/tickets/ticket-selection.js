@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {Container, Typography, Grid, Checkbox, FormControlLabel, Button, Box} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Container, Typography, Grid, Checkbox, FormControlLabel, Button, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import './ticket-selection.css'; // Add external CSS for better control
 
-const ticketOptions = Array.from({length: 20}, (_, index) => `Ticket Type ${index + 1}`);
+const ticketOptions = Array.from({ length: 20 }, (_, index) => `Ticket Type ${index + 1}`);
 
 const TicketSelection = () => {
     const [selectedTickets, setSelectedTickets] = useState([]);
