@@ -1,9 +1,9 @@
 // src/components/Header.js
-import React, { useState } from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem } from '@mui/material';
+import React, {useState} from 'react';
+import {AppBar, Toolbar, IconButton, Typography, Menu, MenuItem} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 const Header = () => {
     const [anchorElMenu, setAnchorElMenu] = useState(null);
@@ -45,11 +45,11 @@ const Header = () => {
                     aria-label="menu"
                     onClick={handleMenuClick}
                 >
-                    <MenuIcon />
+                    <MenuIcon/>
                 </IconButton>
                 <Typography
                     variant="h6"
-                    style={{ flexGrow: 1, cursor: 'pointer' }}
+                    style={{flexGrow: 1, cursor: 'pointer'}}
                     onClick={() => navigate('/fawley-waterside-dog-show/')} // Navigate to home when title is clicked
                 >
                     Fawley & The Waterside Dog Show
@@ -58,7 +58,7 @@ const Header = () => {
                     color="inherit"
                     onClick={handleProfileClick}
                 >
-                    <AccountCircleIcon />
+                    <AccountCircleIcon/>
                 </IconButton>
                 <Menu
                     anchorEl={anchorElMenu}
