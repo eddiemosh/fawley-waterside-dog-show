@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="11edc83d-ac48-4aab-a296-74bdce997f00" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/header/header.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/home/home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/header/header.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/header/header.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/header/header.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/header/header.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/slideshow/slideshow.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/slideshow/slideshow.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/slideshow/slideshow.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/slideshow/slideshow.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tickets/tickets.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tickets/tickets.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tickets/tickets.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/tickets/tickets.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/Originals/dog_show.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/Originals/image2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/Originals/image3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/dog_show.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/image2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/image3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/photothumb.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.spec.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="JavaScript File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="initial-setup" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2kqNk5DmdlowPfTIf2eBbjedFhC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "add-slideshow",
+    "last_opened_file_path": "C:/Users/hardy/rfi-project",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.2.5\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hardy\IdeaProjects\fawley-waterside-dog-show\src\assets\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hardy\IdeaProjects\fawley-waterside-dog-show\src\components" />
+      <recent name="C:\Users\hardy\IdeaProjects\fawley-waterside-dog-show\dist" />
+      <recent name="C:\Users\hardy\IdeaProjects\fawley-waterside-dog-show\src\assets" />
+      <recent name="C:\Users\hardy\IdeaProjects\fawley-waterside-dog-show\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.build">
+    <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular CLI Server" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.build" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="11edc83d-ac48-4aab-a296-74bdce997f00" name="Changes" comment="" />
+      <created>1724007304542</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1724007304542</updated>
+      <workItem from="1724007305590" duration="21962000" />
+    </task>
+    <task id="LOCAL-00001" summary="Adding angular stuff">
+      <option name="closed" value="true" />
+      <created>1724007607253</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1724007607253</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Removing .vscode">
+      <option name="closed" value="true" />
+      <created>1724011404067</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1724011404067</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changing angular.json to use cyan=orange theme">
+      <option name="closed" value="true" />
+      <created>1724011803325</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1724011803325</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Adding bootstrap">
+      <option name="closed" value="true" />
+      <created>1724012460706</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1724012460706</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Adding header">
+      <option name="closed" value="true" />
+      <created>1724013187990</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1724013187990</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Adding header">
+      <option name="closed" value="true" />
+      <created>1724013195767</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1724013195767</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Adding buttons to header">
+      <option name="closed" value="true" />
+      <created>1724014339560</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1724014339560</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Adding deploy.yml">
+      <option name="closed" value="true" />
+      <created>1724014824516</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1724014824516</updated>
+    </task>
+    <task id="LOCAL-00009" summary="changing deploy branch to main">
+      <option name="closed" value="true" />
+      <created>1724015090440</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1724015090440</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Removing whitespace">
+      <option name="closed" value="true" />
+      <created>1724015587412</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1724015587412</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Adding gh-pages">
+      <option name="closed" value="true" />
+      <created>1724015850399</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1724015850399</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Adding buy tickets button">
+      <option name="closed" value="true" />
+      <created>1724018655110</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1724018655110</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Changing branch to deploy from">
+      <option name="closed" value="true" />
+      <created>1724018872911</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1724018872911</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Changing branch to deploy from">
+      <option name="closed" value="true" />
+      <created>1724019186447</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1724019186447</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Adding slideshow">
+      <option name="closed" value="true" />
+      <created>1724366871305</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1724366871305</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Making slideshow just one image and having the buy tickets button">
+      <option name="closed" value="true" />
+      <created>1724368319847</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1724368319847</updated>
+    </task>
+    <task id="LOCAL-00017" summary="More changes">
+      <option name="closed" value="true" />
+      <created>1724369959450</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1724369959450</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <MESSAGE value="Adding angular stuff" />
+    <MESSAGE value="Removing .vscode" />
+    <MESSAGE value="Changing angular.json to use cyan=orange theme" />
+    <MESSAGE value="Adding bootstrap" />
+    <MESSAGE value="Adding header" />
+    <MESSAGE value="Adding buttons to header" />
+    <MESSAGE value="Adding deploy.yml" />
+    <MESSAGE value="changing deploy branch to main" />
+    <MESSAGE value="Removing whitespace" />
+    <MESSAGE value="Adding gh-pages" />
+    <MESSAGE value="Adding buy tickets button" />
+    <MESSAGE value="Changing branch to deploy from" />
+    <MESSAGE value="Adding slideshow" />
+    <MESSAGE value="Making slideshow just one image and having the buy tickets button" />
+    <MESSAGE value="More changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="More changes" />
+  </component>
+</project>
