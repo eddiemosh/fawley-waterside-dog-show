@@ -10,12 +10,15 @@
     margin-top: 5% !important; /* Space above the title */
 }
 
+/* Flex container for event boxes */
 .events-container {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping of boxes */
     margin-top: 20px; /* Space between title and event boxes */
 }
 
+/* Style for individual event box */
 .event-box {
     display: flex;
     flex-direction: column;
@@ -27,20 +30,24 @@
     width: 250px; /* Fixed width for event boxes */
     text-align: center;
     margin: 0 10px; /* Space between event boxes */
+    margin-bottom: 20px; /* Space between rows */
 }
 
+/* Style for event icon */
 .event-icon {
     font-size: 3rem;
     color: #ff6f61;
     margin-bottom: 10px; /* Space between icon and date */
 }
 
+/* Style for event date */
 .event-date {
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 15px; /* Space between date and button */
 }
 
+/* Style for view tickets button */
 .view-tickets-button {
     font-size: 1.2rem;
     border-radius: 30px;
@@ -49,6 +56,34 @@
     transition: background-color 0.3s ease;
 }
 
+/* Hover effect for button */
 .view-tickets-button:hover {
     background-color: #e55d50;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .events-container {
+        flex-direction: column; /* Stack event boxes vertically */
+        align-items: center; /* Center the stacked boxes */
+    }
+
+    .event-box {
+        width: 100%; /* Make the event boxes take up the full width */
+        max-width: 90%; /* Set a max-width to maintain readability */
+        margin: 10px 0; /* Add space between event boxes */
+    }
+
+    .upcoming-events {
+        font-size: 2rem; /* Reduce font size for the title */
+        margin-top: 20px; /* Adjust margin for mobile view */
+    }
+
+    .event-date {
+        font-size: 1.2rem; /* Slightly reduce font size for event dates */
+    }
+
+    .view-tickets-button {
+        font-size: 1rem; /* Reduce button size for mobile */
+    }
 }
