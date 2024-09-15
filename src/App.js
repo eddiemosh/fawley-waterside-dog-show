@@ -6,10 +6,10 @@ import Home from './home/home';
 import Events from './components/events/events';
 import TicketSelection from './components/tickets/ticket-selection';
 import Payments from './components/payments/payments';
-
+const basename = '/fawley-waterside-dog-show';
 function App() {
     return (
-        <Router basename={process.env.PUBLIC_URL}>
+        <Router basename={basename}>
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />

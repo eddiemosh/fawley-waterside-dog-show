@@ -49,7 +49,7 @@ const Header = () => {
                 </IconButton>
                 <Typography
                     variant="h6"
-                    style={{ flexGrow: 1, cursor: 'pointer' }}
+                    style={{ flexGrow: 1, cursor: 'pointer', fontSize: '90%', fontWeight: '600'}}
                     onClick={() => navigate('/')} // Navigate to home when title is clicked
                 >
                     Fawley & The Waterside Dog Show
