@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/fawley-waterside-dog-show/static/css/main.70c9b390.css",
-    "main.js": "/fawley-waterside-dog-show/static/js/main.7291433a.js",
+    "main.css": "/fawley-waterside-dog-show/static/css/main.71cee45f.css",
+    "main.js": "/fawley-waterside-dog-show/static/js/main.9efb6c3b.js",
     "static/js/453.9be98270.chunk.js": "/fawley-waterside-dog-show/static/js/453.9be98270.chunk.js",
     "index.html": "/fawley-waterside-dog-show/index.html",
-    "main.70c9b390.css.map": "/fawley-waterside-dog-show/static/css/main.70c9b390.css.map",
-    "main.7291433a.js.map": "/fawley-waterside-dog-show/static/js/main.7291433a.js.map",
+    "main.71cee45f.css.map": "/fawley-waterside-dog-show/static/css/main.71cee45f.css.map",
+    "main.9efb6c3b.js.map": "/fawley-waterside-dog-show/static/js/main.9efb6c3b.js.map",
     "453.9be98270.chunk.js.map": "/fawley-waterside-dog-show/static/js/453.9be98270.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.70c9b390.css",
-    "static/js/main.7291433a.js"
+    "static/css/main.71cee45f.css",
+    "static/js/main.9efb6c3b.js"
   ]
 }
