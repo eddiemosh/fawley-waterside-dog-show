@@ -16,19 +16,29 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 15px;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 200px; /* Make ticket card slightly smaller */
+    margin: 0 auto;
 }
 
-.ticket-checkbox {
+.ticket-select-container {
     margin-top: 10px;
 }
 
-.ticket-actions {
-    justify-content: center;
-    padding: 0 16px 16px;
+.ticket-select {
+    min-height: 30px !important; /* Reduce the height */
+    padding: 6px 10px !important; /* Adjust padding */
+}
+
+.MuiSelect-root {
+    min-height: 30px !important;
+}
+
+.MuiInputBase-root {
+    padding: 0px !important;
 }
 
 .checkout-button-container {
@@ -49,4 +59,13 @@
 
 .checkout-button:hover {
     background-color: #e55d50;
+}
+
+.quantity-text {
+    margin-right: 90px !important;
+    margin-left: -10px !important;
+}
+
+.dropdown {
+    width: 90%;
 }

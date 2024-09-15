@@ -1,22 +1,23 @@
 // src/components/TicketSelection.js
 import React, { useState } from 'react';
-import { Container, Typography, Grid, Card, CardContent, CardActions, Checkbox, FormControlLabel, Button, Box } from '@mui/material';
+import {
+    Container, Typography, Grid, Card, CardContent, FormControl, Select, MenuItem, Button, Box,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import './ticket-selection.css'; // Import custom CSS for additional styling if needed
+import './ticket-selection.css'; // Import custom CSS for additional styling
 
-const ticketOptions = Array.from({ length: 20 }, (_, index) => `Ticket Type ${index + 1}`);
+const ticketOptions = Array.from({ length: 200 }, (_, index) => `Ticket Type ${index + 1}`);
 
 const TicketSelection = () => {
-    const [selectedTickets, setSelectedTickets] = useState([]);
+    const [selectedTickets, setSelectedTickets] = useState({});
     const navigate = useNavigate();
 
-    const handleTicketChange = (event) => {
-        const ticket = event.target.value;
-        setSelectedTickets((prev) =>
-            prev.includes(ticket)
-                ? prev.filter((t) => t !== ticket)
-                : [...prev, ticket]
-        );
+    const handleQuantityChange = (event, ticket) => {
+        const quantity = event.target.value;
+        setSelectedTickets((prev) => ({
+            ...prev,
+            [ticket]: quantity,
+        }));
     };
 
     const handleCheckout = () => {
@@ -36,21 +37,27 @@ const TicketSelection = () => {
                                 <Typography variant="h6" component="div">
                                     {ticket}
                                 </Typography>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value={ticket}
-                                            onChange={handleTicketChange}
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Select"
-                                    className="ticket-checkbox"
-                                />
+                                <Grid container alignItems="center" spacing={2} className="ticket-select-container">
+                                    <Grid item xs={4}>
+                                        <Typography variant="body1" className="quantity-text">Quantity:</Typography>
+                                    </Grid>
+                                    <Grid item xs={8}>
+                                        <FormControl className="dropdown">
+                                            <Select
+                                                value={selectedTickets[ticket] || 0}
+                                                onChange={(event) => handleQuantityChange(event, ticket)}
+                                                className="ticket-select"
+                                            >
+                                                {[...Array(10).keys()].map((quantity) => (
+                                                    <MenuItem key={quantity} value={quantity}>
+                                                        {quantity}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+                                    </Grid>
+                                </Grid>
                             </CardContent>
-                            <CardActions className="ticket-actions">
-                                {/* You can add more actions if needed */}
-                            </CardActions>
                         </Card>
                     </Grid>
                 ))}
