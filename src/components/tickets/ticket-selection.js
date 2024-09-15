@@ -15,7 +15,7 @@ import {
 import {useNavigate} from 'react-router-dom';
 import './ticket-selection.css'; // Import custom CSS for additional styling
 
-const ticketOptions = Array.from({length: 200}, (_, index) => `Ticket Type ${index + 1}`);
+const ticketOptions = Array.from({length: 20}, (_, index) => `Ticket Type ${index + 1}`);
 
 const TicketSelection = () => {
     const [selectedTickets, setSelectedTickets] = useState({});
