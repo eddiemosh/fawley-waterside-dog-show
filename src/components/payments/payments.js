@@ -1,7 +1,7 @@
 // src/components/Payments.js
 import React from 'react';
-import { Container, Typography, Box, Button, RadioGroup, FormControlLabel, Radio } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import {Box, Button, Container, FormControlLabel, Radio, RadioGroup, Typography} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
 
 const paymentOptions = ['Credit Card', 'PayPal', 'Bank Transfer'];
 
@@ -30,7 +30,7 @@ const Payments = () => {
                         <FormControlLabel
                             key={option}
                             value={option}
-                            control={<Radio />}
+                            control={<Radio/>}
                             label={option}
                         />
                     ))}
@@ -40,7 +40,7 @@ const Payments = () => {
                 variant="contained"
                 color="primary"
                 onClick={handlePaymentSubmit}
-                style={{ marginTop: '20px' }}
+                style={{marginTop: '20px'}}
             >
                 Confirm Payment
             </Button>

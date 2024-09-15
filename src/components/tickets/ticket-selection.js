@@ -1,12 +1,21 @@
 // src/components/TicketSelection.js
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
-    Container, Typography, Grid, Card, CardContent, FormControl, Select, MenuItem, Button, Box,
+    Box,
+    Button,
+    Card,
+    CardContent,
+    Container,
+    FormControl,
+    Grid,
+    MenuItem,
+    Select,
+    Typography,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import './ticket-selection.css'; // Import custom CSS for additional styling
 
-const ticketOptions = Array.from({ length: 200 }, (_, index) => `Ticket Type ${index + 1}`);
+const ticketOptions = Array.from({length: 200}, (_, index) => `Ticket Type ${index + 1}`);
 
 const TicketSelection = () => {
     const [selectedTickets, setSelectedTickets] = useState({});
