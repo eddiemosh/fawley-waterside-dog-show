@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { Container, Typography, TextField, Button, Grid, IconButton, Box } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
 import './payments.css'; // Import custom CSS for additional styling if needed
+import { useNavigate } from "react-router-dom";
 
 const Payments = () => {
+    const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState({
         firstName: '',
         lastName: '',
@@ -42,6 +44,7 @@ const Payments = () => {
         event.preventDefault();
         console.log('User Info:', userInfo);
         console.log('Dogs Info:', dogs);
+        navigate('/payment-options');
         // Handle the submission logic here
     };
 
