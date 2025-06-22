@@ -1,0 +1,38 @@
+/* src/components/payments.css */
+.payment-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 3rem;
+    font-weight: 400;
+    color: #ff6f61;
+    margin-top: 3% !important;
+}
+
+.payment-form {
+    margin-top: 20px;
+}
+
+.doggie-info-title {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #333;
+}
+
+.dog-info-container {
+    margin-bottom: 15px; /* Space between each dog input section */
+}
+
+.submit-button {
+    font-size: 1.2rem;
+    border-radius: 30px;
+    padding: 10px 20px;
+    background-color: #ff6f61;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #e55d50;
+}

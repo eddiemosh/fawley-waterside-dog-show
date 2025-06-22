@@ -1,16 +1,16 @@
 // src/components/Events.js
 import React from 'react';
-import { Container, Typography, Button, Box, IconButton } from '@mui/material';
+import {Box, Button, Container, IconButton, Typography} from '@mui/material';
 import EventIcon from '@mui/icons-material/Event'; // Import an icon for events
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import './events.css';
 
 const eventsList = [
-    { date: '1st December 2024', icon: <EventIcon /> },
-    { date: '15th December 2024', icon: <EventIcon /> },
-    { date: '10th January 2025', icon: <EventIcon /> },
-    { date: '20th February 2025', icon: <EventIcon /> },
-    { date: '5th March 2025', icon: <EventIcon /> }
+    {date: '1st December 2024', icon: <EventIcon/>},
+    {date: '15th December 2024', icon: <EventIcon/>},
+    {date: '10th January 2025', icon: <EventIcon/>},
+    {date: '20th February 2025', icon: <EventIcon/>},
+    {date: '5th March 2025', icon: <EventIcon/>}
 ];
 
 const Events = () => {

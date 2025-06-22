@@ -1,7 +1,7 @@
 // src/components/Home.js
 import React from 'react';
-import { Container, Typography, Box, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import {Box, Button, Container, Typography} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
 import './home.css'; // Import the CSS file
 
 const Home = () => {
