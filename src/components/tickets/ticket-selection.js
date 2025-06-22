@@ -42,7 +42,7 @@ const TicketSelection = () => {
     const handleCheckout = () => {
         // Calculate total price of selected tickets
         const totalPrice = Object.values(selectedTickets).reduce((sum, ticket) => sum + ticket.price, 0);
-
+        console.log(totalPrice)
         // Navigate to the payment page and pass the total amount
         navigate('/payments', { state: { totalAmount: totalPrice * 100 } }); // Amount in cents for Stripe
     };

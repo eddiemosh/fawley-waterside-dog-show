@@ -11,7 +11,7 @@ const PaymentOptions = () => {
     const [paymentSuccess, setPaymentSuccess] = useState(false);
 
     const location = useLocation();
-    const { totalAmount } = location.state || { totalAmount: 0 }; // Get the totalAmount passed from TicketSelection
+    const { totalAmount } = location.state || { totalAmount: 300 }; // Get the totalAmount passed from TicketSelection
 
     // Fetch the client secret from Python Flask backend when the component loads
     useEffect(() => {
@@ -23,6 +23,7 @@ const PaymentOptions = () => {
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret))
             .catch((error) => console.error('Error fetching client secret:', error));
+        console.log(clientSecret)
     }, [totalAmount]);
 
     const handleCompletePayment = async (event) => {
