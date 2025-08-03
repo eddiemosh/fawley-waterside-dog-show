@@ -1,6 +1,6 @@
 [
   {
     "name": "frontend",
-    "imageUri": "211125545455.dkr.ecr.eu-north-1.amazonaws.com/dogshow-ui:latest"
+    "imageUri": "211125545455.dkr.ecr.eu-north-1.amazonaws.com/simple-docker-service-0e23e365c071:latest"
   }
 ]
