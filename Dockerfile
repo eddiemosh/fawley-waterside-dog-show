@@ -13,6 +13,7 @@ RUN npm ci
 COPY . .
 
 # Build the React app
+ENV NODE_ENV=production
 RUN npm run build
 
 # Stage 2: Serve with NGINX
