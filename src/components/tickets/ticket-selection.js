@@ -10,11 +10,11 @@ import {
     MenuItem,
     Select,
     Typography,
+    TextField,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import './ticket-selection.css'; // Import custom CSS for additional styling
+import './ticket-selection.css';
 
-// Define ticket data structure with names and prices
 const ticketData = [
     { name: 'General Admission', price: 3 },
     { name: 'VIP Admission', price: 3 },
@@ -25,9 +25,9 @@ const ticketData = [
 
 const TicketSelection = () => {
     const [selectedTickets, setSelectedTickets] = useState({});
+    const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
-    // Handle ticket quantity change and calculate total price
     const handleQuantityChange = (event, ticket) => {
         const quantity = event.target.value;
         setSelectedTickets((prev) => ({
@@ -40,20 +40,31 @@ const TicketSelection = () => {
     };
 
     const handleCheckout = () => {
-        // Calculate total price of selected tickets
         const totalPrice = Object.values(selectedTickets).reduce((sum, ticket) => sum + ticket.price, 0);
-        console.log(totalPrice)
-        // Navigate to the payment page and pass the total amount
-        navigate('/payments', { state: { totalAmount: totalPrice * 100 } }); // Amount in cents for Stripe
+        navigate('/payments', { state: { totalAmount: totalPrice * 100 } });
     };
+
+    // Filter tickets by search term
+    const filteredTickets = ticketData.filter(ticket =>
+        ticket.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <Container>
             <Typography variant="h2" gutterBottom className="ticket-selection-title">
                 Select Tickets
             </Typography>
+            <Box mb={3}>
+                <TextField
+                    label="Search tickets"
+                    variant="outlined"
+                    fullWidth
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                />
+            </Box>
             <Grid container spacing={3} className="ticket-grid">
-                {ticketData.map((ticket) => (
+                {filteredTickets.map((ticket) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={ticket.name}>
                         <Card className="ticket-card">
                             <CardContent>
@@ -80,7 +91,6 @@ const TicketSelection = () => {
                                         </FormControl>
                                     </Grid>
                                 </Grid>
-                                {/* Price under quantity, aligned to the left */}
                                 <Grid container alignItems="center" spacing={2} className="ticket-price-container">
                                     <Grid item xs={4}>
                                         <Typography variant="body1" className="price-text">Price:</Typography>

@@ -10,7 +10,6 @@ import PaymentOptions from "./components/payments/payment-options/payment-option
 import {Elements} from "@stripe/react-stripe-js";
 import {loadStripe} from "@stripe/stripe-js";
 
-const basename = '/';
 // Load your Stripe public key here (Test or Live)
 const stripePromise = loadStripe('pk_test_51PO5UrCxiZ7gi8V52FpcLKRVQdlPcAzkoe84sKorsQbhP8CSqhIyeVFeSbMmV8HvxbRryKdGIm5GHWhOONz3hmpk00wJSjYcm5');
 

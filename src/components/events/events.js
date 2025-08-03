@@ -6,11 +6,9 @@ import {useNavigate} from 'react-router-dom';
 import './events.css';
 
 const eventsList = [
-    {date: '1st December 2024', icon: <EventIcon/>},
-    {date: '15th December 2024', icon: <EventIcon/>},
-    {date: '10th January 2025', icon: <EventIcon/>},
-    {date: '20th February 2025', icon: <EventIcon/>},
-    {date: '5th March 2025', icon: <EventIcon/>}
+    {date: '10th August 2025', icon: <EventIcon/>},
+    {date: '5th December 2025 (Christmas Event)', icon: <EventIcon/>},
+    {date: '10th August 2026 (Next Year)', icon: <EventIcon/>},
 ];
 
 const Events = () => {
