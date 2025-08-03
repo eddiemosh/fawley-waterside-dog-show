@@ -25,13 +25,21 @@
     margin-bottom: 10px;
 }
 
+.small-card {
+    max-width: 180px;
+    padding: 8px;
+    font-size: 0.95rem;
+}
+
 @media (max-width: 600px) {
     .ticket-selection-title {
         font-size: 2rem;
     }
-    .ticket-card {
-        max-width: 100%;
-        padding: 8px;
+    .ticket-card,
+    .small-card {
+        max-width: 95%;
+        padding: 6px;
+        font-size: 0.9rem;
     }
     .ticket-grid {
         margin-bottom: 5px;

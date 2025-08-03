@@ -21,14 +21,42 @@ import './ticket-selection.css';
 
 // Pedigree tickets
 const pedigreeTickets = [
-    { name: 'Any Puppy', price: 5 },
-    { name: 'Any Junior', price: 5 },
+    { name: 'Any Puppy (6-12 mths)', price: 5 },
+    { name: 'Any Junior (12-18 mths)', price: 5 },
+    { name: 'Any Gundog', price: 5 },
+    { name: 'Any Utility', price: 5 },
+    { name: 'Any Hound', price: 5 },
+    { name: 'Any Toy', price: 5 },
+    { name: 'Any Working', price: 5 },
+    { name: 'Any Pastoral', price: 5 },
+    { name: 'Any Terrier', price: 5 },
+    { name: 'Any Open', price: 5 },
+    { name: 'Any Veteran', price: 5 },
+    { name: 'Junior Handler (U16)', price: 5 },
+    // { name: 'Best In Show', price: 5 },
+    // { name: 'Reserve In Show', price: 5 },
+    // { name: 'Best Puppy', price: 5 },
+    // { name: 'Best Veteran', price: 5 },
 ];
 
 // All Dog tickets
 const allDogTickets = [
     { name: 'Puppy', price: 4 },
     { name: 'Prettiest', price: 4 },
+    { name: 'Best Condition', price: 4 },
+    { name: 'Best Rescue', price: 4 },
+    { name: 'Waggiest Tail', price: 4 },
+    { name: "Child's Best Friend", price: 4 },
+    { name: 'Fancy Dress', price: 4 },
+    { name: 'Handsome', price: 4 },
+    { name: 'Fluffiest', price: 4 },
+    { name: 'Scruffiest', price: 4 },
+    { name: 'Smooth', price: 4 },
+    { name: 'Looks Like Owner', price: 4 },
+    { name: 'Obedience', price: 4 },
+    { name: 'Golden Oldie', price: 4 },
+    // { name: 'Best In Show', price: 4 },
+    // { name: 'Overall Best In Show', price: 4 },
 ];
 
 // Other tickets (unchanged)
@@ -83,13 +111,13 @@ const TicketSelection = () => {
             <Typography variant="h2" gutterBottom className="ticket-selection-title">
                 Select Tickets
             </Typography>
-            <Box mb={3}>
+            <Box mb={3} display="flex" justifyContent="center">
                 <TextField
                     label="Search tickets"
                     variant="outlined"
-                    fullWidth
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
+                    sx={{ width: { xs: '90%', sm: '350px' } }}
                 />
             </Box>
             {/* Pedigree Section */}
@@ -103,7 +131,7 @@ const TicketSelection = () => {
                     <Grid container spacing={2} className="ticket-grid" justifyContent="center">
                         {filteredPedigree.map((ticket) => (
                             <Grid item xs={12} sm={6} md={4} key={ticket.name}>
-                                <Card className="ticket-card">
+                                <Card className="ticket-card small-card">
                                     <CardContent>
                                         <Typography variant="h6" component="div" sx={{marginTop: '-10px'}}>
                                             {ticket.name}
@@ -156,7 +184,7 @@ const TicketSelection = () => {
                     <Grid container spacing={2} className="ticket-grid" justifyContent="center">
                         {filteredAllDog.map((ticket) => (
                             <Grid item xs={12} sm={6} md={4} key={ticket.name}>
-                                <Card className="ticket-card">
+                                <Card className="ticket-card small-card">
                                     <CardContent>
                                         <Typography variant="h6" component="div" sx={{marginTop: '-10px'}}>
                                             {ticket.name}
@@ -266,4 +294,3 @@ const TicketSelection = () => {
 };
 
 export default TicketSelection;
-
