@@ -11,24 +11,23 @@ import {Elements} from "@stripe/react-stripe-js";
 import {loadStripe} from "@stripe/stripe-js";
 
 // Load your Stripe public key here (Test or Live)
-const stripePromise = loadStripe('pk_test_51PO5UrCxiZ7gi8V52FpcLKRVQdlPcAzkoe84sKorsQbhP8CSqhIyeVFeSbMmV8HvxbRryKdGIm5GHWhOONz3hmpk00wJSjYcm5');
-
+const stripePromise = loadStripe('pk_test_51RsBRuCYSxVmD9YE961zzGoiktGTR3mBTNE5uMUF5uKPbkh3yC7lmDJJjWfPlb8ijNdNEk32xSTe0dlNnvmQ3MYJ00huCxokEG')
 function App() {
     return (
-        <Router>
-            <Header/>
-            <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/events" element={<Events/>}/>
-                <Route path="/tickets" element={<TicketSelection/>}/>
-                <Route path="/payments" element={<Payments/>}/>
-                <Route path="/payment-options" element={
-                    <Elements stripe={stripePromise}>
+        <Elements stripe={stripePromise}>
+            <Router>
+                <Header/>
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/events" element={<Events/>}/>
+                    <Route path="/tickets" element={<TicketSelection/>}/>
+                    <Route path="/payments" element={<Payments/>}/>
+                    <Route path="/payment-options" element={
                     <PaymentOptions/>
-                    </Elements>
-                }/>
-            </Routes>
-        </Router>
+                    }/>
+                </Routes>
+            </Router>
+        </Elements>
     );
 }
 
