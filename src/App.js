@@ -15,8 +15,8 @@ const stripePromise = loadStripe('pk_test_51RsBRuCYSxVmD9YE961zzGoiktGTR3mBTNE5u
 function App() {
     return (
         <Elements stripe={stripePromise}>
+            <Header/>
             <Router>
-                <Header/>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/events" element={<Events/>}/>
