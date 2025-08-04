@@ -14,20 +14,20 @@ import {loadStripe} from "@stripe/stripe-js";
 const stripePromise = loadStripe('pk_test_51RsBRuCYSxVmD9YE961zzGoiktGTR3mBTNE5uMUF5uKPbkh3yC7lmDJJjWfPlb8ijNdNEk32xSTe0dlNnvmQ3MYJ00huCxokEG')
 function App() {
     return (
-        <Elements stripe={stripePromise}>
-            <Router>
-                <Header/>
-                <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/events" element={<Events/>}/>
-                    <Route path="/tickets" element={<TicketSelection/>}/>
-                    <Route path="/payments" element={<Payments/>}/>
-                    <Route path="/payment-options" element={
-                    <PaymentOptions/>
-                    }/>
-                </Routes>
-            </Router>
-        </Elements>
+        <Router>
+            <Header/>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/events" element={<Events/>}/>
+                <Route path="/tickets" element={<TicketSelection/>}/>
+                <Route path="/payments" element={<Payments/>}/>
+                <Route path="/payment-options" element={
+                    <Elements stripe={stripePromise}>
+                        <PaymentOptions/>
+                    </Elements>
+                }/>
+            </Routes>
+        </Router>
     );
 }
 
