@@ -1,17 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { loadStripe } from '@stripe/stripe-js';
 import { Container, Typography, Button } from '@mui/material';
-
-const stripePromise = loadStripe("pk_test_...");
 
 const PaymentOptions = () => {
     const location = useLocation();
     const { totalAmount } = location.state || { totalAmount: 300 };
 
     const handleCheckout = async () => {
-        const stripe = await stripePromise;
-
         const response = await fetch('https://api.fawleydogshow.com/create-payment-intent', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
