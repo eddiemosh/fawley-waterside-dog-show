@@ -7,7 +7,8 @@ import {
     Button,
     Grid,
     IconButton,
-    Box
+    Box,
+    MenuItem
 } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
 import './payments.css'; // Import custom CSS for additional styling if needed
@@ -159,9 +160,9 @@ const Payments = () => {
                                     fullWidth
                                     required
                                 >
-                                    <option value="">Select</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                    <MenuItem value="">Select</MenuItem>
+                                    <MenuItem value="Male">Male</MenuItem>
+                                    <MenuItem value="Female">Female</MenuItem>
                                 </TextField>
                             </Grid>
                             <Grid item xs={12} sm={1}>
