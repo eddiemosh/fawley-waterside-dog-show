@@ -1,12 +1,20 @@
 // src/components/Payments.js
 import React, { useState } from 'react';
-import { Container, Typography, TextField, Button, Grid, IconButton, Box } from '@mui/material';
+import {
+    Container,
+    Typography,
+    TextField,
+    Button,
+    Grid,
+    IconButton,
+    Box,
+    MenuItem
+} from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
 import './payments.css'; // Import custom CSS for additional styling if needed
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Payments = () => {
-    const navigate = useNavigate();
     const location = useLocation();
 
     // Extract totalAmount from location state
@@ -45,13 +53,33 @@ const Payments = () => {
         setDogs(updatedDogs);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         console.log('User Info:', userInfo);
         console.log('Dogs Info:', dogs);
-        console.log('Total Amount:', totalAmount); // Log total amount
-        navigate('/payment-options');
-        // Handle the submission logic here
+        console.log('Total Amount:', totalAmount);
+
+        try {
+            const response = await fetch('https://api.fawleydogshow.com/create-payment-intent', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    amount: totalAmount,
+                    userInfo,
+                    dogs,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (data.url) {
+                window.location.href = data.url; // Redirect to Stripe Checkout
+            } else {
+                console.error('Failed to get redirect URL:', data);
+            }
+        } catch (error) {
+            console.error('Checkout request failed:', error);
+        }
     };
 
     return (
@@ -124,13 +152,18 @@ const Payments = () => {
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <TextField
+                                    select
                                     label="Sex"
                                     name="sex"
                                     value={dog.sex}
                                     onChange={(event) => handleDogChange(index, event)}
                                     fullWidth
                                     required
-                                />
+                                >
+                                    <MenuItem value="">Select</MenuItem>
+                                    <MenuItem value="Male">Male</MenuItem>
+                                    <MenuItem value="Female">Female</MenuItem>
+                                </TextField>
                             </Grid>
                             <Grid item xs={12} sm={1}>
                                 <IconButton onClick={() => handleRemoveDog(index)} disabled={dogs.length === 1}>

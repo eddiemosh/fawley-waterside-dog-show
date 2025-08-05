@@ -6,7 +6,6 @@ import Home from './home/home';
 import Events from './components/events/events';
 import TicketSelection from './components/tickets/ticket-selection';
 import Payments from './components/payments/payments';
-import PaymentOptions from "./components/payments/payment-options/payment-options";
 
 function App() {
     return (
@@ -17,7 +16,6 @@ function App() {
                 <Route path="/events" element={<Events/>}/>
                 <Route path="/tickets" element={<TicketSelection/>}/>
                 <Route path="/payments" element={<Payments/>}/>
-                <Route path="/payment-options" element={<PaymentOptions/>}/>
             </Routes>
         </Router>
     );
