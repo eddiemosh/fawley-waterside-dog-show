@@ -17,9 +17,7 @@ function App() {
                 <Route path="/events" element={<Events/>}/>
                 <Route path="/tickets" element={<TicketSelection/>}/>
                 <Route path="/payments" element={<Payments/>}/>
-                <Route path="/payment-options" element={
-                    <PaymentOptions/>
-                }/>
+                <Route path="/payment-options" element={<PaymentOptions/>}/>
             </Routes>
         </Router>
     );
