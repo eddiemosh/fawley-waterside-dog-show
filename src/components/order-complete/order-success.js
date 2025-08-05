@@ -19,6 +19,10 @@ const OrderSuccess = () => {
             <Typography variant="h6" className="order-id">
                 {orderId}
             </Typography>
+            <Typography variant="body1" className="order-message">
+                <br />
+                A confirmation email has been sent.
+            </Typography>
             <Button
                 variant="contained"
                 color="primary"
