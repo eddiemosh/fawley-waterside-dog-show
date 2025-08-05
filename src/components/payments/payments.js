@@ -151,13 +151,18 @@ const Payments = () => {
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <TextField
+                                    select
                                     label="Sex"
                                     name="sex"
                                     value={dog.sex}
                                     onChange={(event) => handleDogChange(index, event)}
                                     fullWidth
                                     required
-                                />
+                                >
+                                    <option value="">Select</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </TextField>
                             </Grid>
                             <Grid item xs={12} sm={1}>
                                 <IconButton onClick={() => handleRemoveDog(index)} disabled={dogs.length === 1}>
