@@ -6,6 +6,8 @@ import Home from './home/home';
 import Events from './components/events/events';
 import TicketSelection from './components/tickets/ticket-selection';
 import Payments from './components/payments/payments';
+import OrderSuccess from "./components/order-complete/order-success";
+import OrderFailure from "./components/order-complete/order-failure";
 
 function App() {
     return (
@@ -16,6 +18,8 @@ function App() {
                 <Route path="/events" element={<Events/>}/>
                 <Route path="/tickets" element={<TicketSelection/>}/>
                 <Route path="/payments" element={<Payments/>}/>
+                <Route path="/order-success" element={<OrderSuccess />} />
+                <Route path="/order-failure" element={<OrderFailure />} />
             </Routes>
         </Router>
     );
