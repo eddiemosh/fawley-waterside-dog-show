@@ -26,7 +26,7 @@ const Payments = () => {
         email: '',
     });
 
-    const [dogs, setDogs] = useState([{ name: '', dob: '', sex: '' }]);
+    const [dogs, setDogs] = useState([{ name: '', date_of_birth: '', sex: '' }]);
 
     const handleUserInfoChange = (event) => {
         const { name, value } = event.target;
@@ -45,7 +45,7 @@ const Payments = () => {
     };
 
     const handleAddDog = () => {
-        setDogs([...dogs, { name: '', dob: '', sex: '' }]);
+        setDogs([...dogs, { name: '', date_of_birth: '', sex: '' }]);
     };
 
     const handleRemoveDog = (index) => {
@@ -58,15 +58,17 @@ const Payments = () => {
         console.log('User Info:', userInfo);
         console.log('Dogs Info:', dogs);
         console.log('Total Amount:', totalAmount);
-
         try {
             const response = await fetch('https://api.fawleydogshow.com/payment/create-payment-intent', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    amount: totalAmount,
-                    userInfo,
-                    dogs,
+                    first_name: userInfo.firstName,
+                    last_name: userInfo.lastName,
+                    email_address: userInfo.email,
+                    doggie_info: dogs,
+                    pedigree_tickets: {},
+                    all_dog_tickets: {},
                 }),
             });
 
@@ -141,10 +143,10 @@ const Payments = () => {
                             <Grid item xs={12} sm={4}>
                                 <TextField
                                     label="Date of Birth"
-                                    name="dob"
+                                    name="date_of_birth"
                                     type="date"
                                     InputLabelProps={{ shrink: true }}
-                                    value={dog.dob}
+                                    value={dog.date_of_birth}
                                     onChange={(event) => handleDogChange(index, event)}
                                     fullWidth
                                     required
