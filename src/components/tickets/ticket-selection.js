@@ -19,7 +19,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useNavigate } from 'react-router-dom';
 import './ticket-selection.css';
 
-// Pedigree tickets
 const pedigreeTickets = [
     { name: 'Any Puppy (6-12 mths)', price: 5 },
     { name: 'Any Junior (12-18 mths)', price: 5 },
@@ -33,13 +32,8 @@ const pedigreeTickets = [
     { name: 'Any Open', price: 5 },
     { name: 'Any Veteran', price: 5 },
     { name: 'Junior Handler (U16)', price: 5 },
-    // { name: 'Best In Show', price: 5 },
-    // { name: 'Reserve In Show', price: 5 },
-    // { name: 'Best Puppy', price: 5 },
-    // { name: 'Best Veteran', price: 5 },
 ];
 
-// All Dog tickets
 const allDogTickets = [
     { name: 'Puppy', price: 4 },
     { name: 'Prettiest', price: 4 },
@@ -55,11 +49,7 @@ const allDogTickets = [
     { name: 'Looks Like Owner', price: 4 },
     { name: 'Obedience', price: 4 },
     { name: 'Golden Oldie', price: 4 },
-    // { name: 'Best In Show', price: 4 },
-    // { name: 'Overall Best In Show', price: 4 },
 ];
-
-
 
 const TicketSelection = () => {
     const [selectedTickets, setSelectedTickets] = useState({});
@@ -67,7 +57,7 @@ const TicketSelection = () => {
     const navigate = useNavigate();
 
     const handleQuantityChange = (event, ticket) => {
-        const quantity = event.target.value;
+        const quantity = parseInt(event.target.value);
         setSelectedTickets((prev) => ({
             ...prev,
             [ticket.name]: {
@@ -78,22 +68,39 @@ const TicketSelection = () => {
     };
 
     const handleCheckout = () => {
-        const totalPrice = Object.values(selectedTickets).reduce((sum, ticket) => sum + ticket.price, 0);
-        navigate('/payments', { state: { totalAmount: totalPrice * 100 } });
+        let total = 0;
+        const pedigree = {};
+        const allDog = {};
+
+        Object.entries(selectedTickets).forEach(([name, details]) => {
+            if (details.quantity > 0) {
+                total += details.price;
+                if (pedigreeTickets.find(t => t.name === name)) {
+                    pedigree[name] = details.quantity;
+                } else if (allDogTickets.find(t => t.name === name)) {
+                    allDog[name] = details.quantity;
+                }
+            }
+        });
+
+        navigate('/payments', {
+            state: {
+                totalAmount: total * 100, // in pence
+                pedigreeTickets: pedigree,
+                allDogTickets: allDog
+            }
+        });
     };
 
-    // Combine all tickets for search
     const allTickets = [
         ...pedigreeTickets.map(t => ({ ...t, section: 'Pedigree' })),
         ...allDogTickets.map(t => ({ ...t, section: 'All Dog' })),
     ];
 
-    // Filter tickets by search term
     const filteredTickets = allTickets.filter(ticket =>
         ticket.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Split filtered tickets by section
     const filteredPedigree = filteredTickets.filter(t => t.section === 'Pedigree');
     const filteredAllDog = filteredTickets.filter(t => t.section === 'All Dog');
 
@@ -111,6 +118,7 @@ const TicketSelection = () => {
                     sx={{ width: { xs: '90%', sm: '350px' } }}
                 />
             </Box>
+
             {/* Pedigree Section */}
             <Accordion defaultExpanded sx={{ mb: 2 }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="pedigree-content" id="pedigree-header">
@@ -124,7 +132,7 @@ const TicketSelection = () => {
                             <Grid item xs={12} sm={6} md={4} key={ticket.name}>
                                 <Card className="ticket-card small-card">
                                     <CardContent>
-                                        <Typography variant="h6" component="div" sx={{marginTop: '-10px'}}>
+                                        <Typography variant="h6" component="div" sx={{ marginTop: '-10px' }}>
                                             {ticket.name}
                                         </Typography>
                                         <Grid container alignItems="center" spacing={2} className="ticket-select-container">
@@ -164,6 +172,7 @@ const TicketSelection = () => {
                     </Grid>
                 </AccordionDetails>
             </Accordion>
+
             {/* All Dog Section */}
             <Accordion defaultExpanded sx={{ mb: 2 }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="alldog-content" id="alldog-header">
@@ -177,7 +186,7 @@ const TicketSelection = () => {
                             <Grid item xs={12} sm={6} md={4} key={ticket.name}>
                                 <Card className="ticket-card small-card">
                                     <CardContent>
-                                        <Typography variant="h6" component="div" sx={{marginTop: '-10px'}}>
+                                        <Typography variant="h6" component="div" sx={{ marginTop: '-10px' }}>
                                             {ticket.name}
                                         </Typography>
                                         <Grid container alignItems="center" spacing={2} className="ticket-select-container">
@@ -217,6 +226,7 @@ const TicketSelection = () => {
                     </Grid>
                 </AccordionDetails>
             </Accordion>
+
             <Box className="checkout-button-container">
                 <Button
                     variant="contained"
