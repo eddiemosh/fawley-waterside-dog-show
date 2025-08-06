@@ -60,7 +60,7 @@ const Payments = () => {
         console.log('Total Amount:', totalAmount);
 
         try {
-            const response = await fetch('https://api.fawleydogshow.com/create-payment-intent', {
+            const response = await fetch('https://api.fawleydogshow.com/payment/create-payment-intent', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
