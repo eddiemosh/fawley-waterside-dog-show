@@ -58,15 +58,25 @@ const Payments = () => {
         console.log('User Info:', userInfo);
         console.log('Dogs Info:', dogs);
         console.log('Total Amount:', totalAmount);
+
+        // Convert array of dogs into a dictionary
+        const doggieDict = dogs.reduce((acc, dog, index) => {
+            acc[`dog_${index + 1}`] = dog;
+            return acc;
+        }, {});
+
         try {
-            const response = await fetch('https://api.fawleydogshow.com/payment/create-payment-intent', {
+            const queryParams = new URLSearchParams({
+                first_name: userInfo.firstName,
+                last_name: userInfo.lastName,
+                email_address: userInfo.email,
+            });
+
+            const response = await fetch(`https://api.fawleydogshow.com/payment/create-payment-intent?${queryParams.toString()}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    first_name: userInfo.firstName,
-                    last_name: userInfo.lastName,
-                    email_address: userInfo.email,
-                    doggie_info: dogs,
+                    doggie_info: doggieDict,
                     pedigree_tickets: {},
                     all_dog_tickets: {},
                 }),
