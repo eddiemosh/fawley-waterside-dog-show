@@ -136,7 +136,7 @@ const Payments = () => {
                             value={userInfo.email}
                             onChange={handleUserInfoChange}
                             fullWidth
-                            required
+                            helperText="Recommended for order confirmation, but not required."
                         />
                     </Grid>
                 </Grid>
