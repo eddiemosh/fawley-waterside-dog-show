@@ -67,6 +67,7 @@ const Header = () => {
                 >
                     <MenuItem onClick={() => handleMenuItemClick('/')}>Home</MenuItem>
                     <MenuItem onClick={() => handleMenuItemClick('/events')}>Events</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('/analytics')}>Analytics</MenuItem>
                 </Menu>
                 <Menu
                     anchorEl={anchorElProfile}
