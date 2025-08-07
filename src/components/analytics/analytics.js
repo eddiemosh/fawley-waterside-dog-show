@@ -158,8 +158,7 @@ const Analytics = () => {
 
     return (
         <Container>
-            <Typography variant="h4" gutterBottom>Analytics</Typography>
-            <Accordion expanded={ticketExpanded} onChange={handleTicketAccordion} sx={{ mb: 2 }}>
+            <Accordion expanded={ticketExpanded} onChange={handleTicketAccordion} sx={{ mt: 3, mb: 2 }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <Typography variant="h5">Ticket Analytics</Typography>
                 </AccordionSummary>
