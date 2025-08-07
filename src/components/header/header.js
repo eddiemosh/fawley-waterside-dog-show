@@ -71,7 +71,7 @@ const Header = () => {
                 </Menu>
                 <Menu
                     anchorEl={anchorElProfile}
-                    open={Boolean(anchorElProfile)}
+                    // open={Boolean(anchorElProfile)}
                     onClose={handleProfileClose}
                 >
                     <MenuItem onClick={() => handleProfileItemClick('Manage Account')}>Manage Account</MenuItem>
