@@ -18,8 +18,11 @@ const Payments = () => {
     const location = useLocation();
     const [errorMessage, setErrorMessage] = useState('');
     // Extract totalAmount from location state
-    const { totalAmount } = location.state || { totalAmount: 0 };
-
+    const {
+        totalAmount = 0,
+        pedigreeTickets = {},
+        allDogTickets = {},
+    } = location.state || {};
     const [userInfo, setUserInfo] = useState({
         firstName: '',
         lastName: '',
@@ -59,7 +62,8 @@ const Payments = () => {
         console.log('User Info:', userInfo);
         console.log('Dogs Info:', dogs);
         console.log('Total Amount:', totalAmount);
-
+        console.log("pedigree:", pedigreeTickets);
+        console.log("all_dogs:", allDogTickets);
         // Convert array of dogs into a dictionary
         const doggieDict = dogs.reduce((acc, dog, index) => {
             acc[`dog_${index + 1}`] = dog;
@@ -78,8 +82,8 @@ const Payments = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     doggie_info: doggieDict,
-                    pedigree_tickets: {"any_puppy": 1},
-                    all_dog_tickets: {},
+                    pedigree_tickets: pedigreeTickets,
+                    all_dog_tickets: allDogTickets,
                 }),
             });
 
