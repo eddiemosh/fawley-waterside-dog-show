@@ -19,36 +19,69 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useNavigate } from 'react-router-dom';
 import './ticket-selection.css';
 
+// Mapping dictionaries
+const pedigreeNameMap = {
+    "Any Puppy (6-12 mths)": "any_puppy",
+    "Any Junior (12-18 mths)": "any_junior",
+    "Any Gundog": "any_gundog",
+    "Any Utility": "any_utility",
+    "Any Hound": "any_hound",
+    "Any Toy": "any_toy",
+    "Any Working": "any_working",
+    "Any Pastoral": "any_pastoral",
+    "Any Terrier": "any_terrier",
+    "Any Open": "any_open",
+    "Any Veteran": "any_veteran",
+    "Junior Handler (U16)": "junior_handler",
+};
+
+const allDogNameMap = {
+    "Puppy": "puppy",
+    "Prettiest": "prettiest",
+    "Best Condition": "best_condition",
+    "Best Rescue": "best_rescue",
+    "Waggiest Tail": "waggiest_tale",
+    "Child's Best Friend": "childs_best_friend",
+    "Fancy Dress": "fancy_dress",
+    "Handsome": "handsome",
+    "Fluffiest": "fluffiest",
+    "Scruffiest": "scruffiest",
+    "Smooth": "smooth",
+    "Looks Like Owner": "looks_like_owner",
+    "Obedience": "obedience",
+    "Golden Oldie": "golden_oldie",
+};
+
 const pedigreeTickets = [
-    { name: 'Any Puppy (6-12 mths)', price: 5 },
-    { name: 'Any Junior (12-18 mths)', price: 5 },
-    { name: 'Any Gundog', price: 5 },
-    { name: 'Any Utility', price: 5 },
-    { name: 'Any Hound', price: 5 },
-    { name: 'Any Toy', price: 5 },
-    { name: 'Any Working', price: 5 },
-    { name: 'Any Pastoral', price: 5 },
-    { name: 'Any Terrier', price: 5 },
-    { name: 'Any Open', price: 5 },
-    { name: 'Any Veteran', price: 5 },
-    { name: 'Junior Handler (U16)', price: 5 },
+    { name: "Any Puppy (6-12 mths)", price: 5 },
+    { name: "Any Junior (12-18 mths)", price: 5 },
+    { name: "Any Gundog", price: 5 },
+    { name: "Any Utility", price: 5 },
+    { name: "Any Hound", price: 5 },
+    { name: "Any Toy", price: 5 },
+    { name: "Any Working", price: 5 },
+    { name: "Any Pastoral", price: 5 },
+    { name: "Any Terrier", price: 5 },
+    { name: "Any Open", price: 5 },
+    { name: "Any Veteran", price: 5 },
+    { name: "Junior Handler (U16)", price: 5 }
 ];
 
 const allDogTickets = [
-    { name: 'Puppy', price: 4 },
-    { name: 'Prettiest', price: 4 },
-    { name: 'Best Condition', price: 4 },
-    { name: 'Best Rescue', price: 4 },
-    { name: 'Waggiest Tail', price: 4 },
-    { name: "Child's Best Friend", price: 4 },
-    { name: 'Fancy Dress', price: 4 },
-    { name: 'Handsome', price: 4 },
-    { name: 'Fluffiest', price: 4 },
-    { name: 'Scruffiest', price: 4 },
-    { name: 'Smooth', price: 4 },
-    { name: 'Looks Like Owner', price: 4 },
-    { name: 'Obedience', price: 4 },
-    { name: 'Golden Oldie', price: 4 },
+    { name: "Puppy", price: 3 },
+    { name: "Prettiest", price: 3 },
+    { name: "Best Condition", price: 3 },
+    { name: "Best Rescue", price: 3 },
+    { name: "Waggiest Tail", price: 3 },
+    { name: "Child's Best Friend", price: 3 },
+    { name: "Fancy Dress", price: 3 },
+    { name: "Handsome", price: 3 },
+    { name: "Fluffiest", price: 3 },
+    { name: "Scruffiest", price: 3 },
+    { name: "Smooth", price: 3 },
+    { name: "Looks Like Owner", price: 3 },
+    { name: "Obedience", price: 3 },
+    { name: "Golden Oldie", price: 3 }
 ];
 
 const TicketSelection = () => {
@@ -75,10 +108,17 @@ const TicketSelection = () => {
         Object.entries(selectedTickets).forEach(([name, details]) => {
             if (details.quantity > 0) {
                 total += details.price;
+
                 if (pedigreeTickets.find(t => t.name === name)) {
-                    pedigree[name] = details.quantity;
+                    const backendKey = pedigreeNameMap[name];
+                    if (backendKey) {
+                        pedigree[backendKey] = details.quantity;
+                    }
                 } else if (allDogTickets.find(t => t.name === name)) {
-                    allDog[name] = details.quantity;
+                    const backendKey = allDogNameMap[name];
+                    if (backendKey) {
+                        allDog[backendKey] = details.quantity;
+                    }
                 }
             }
         });
