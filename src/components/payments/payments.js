@@ -16,7 +16,7 @@ import { useLocation } from "react-router-dom";
 
 const Payments = () => {
     const location = useLocation();
-
+    const [errorMessage, setErrorMessage] = useState('');
     // Extract totalAmount from location state
     const { totalAmount } = location.state || { totalAmount: 0 };
 
@@ -55,6 +55,7 @@ const Payments = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setErrorMessage(''); // Clear any previous error
         console.log('User Info:', userInfo);
         console.log('Dogs Info:', dogs);
         console.log('Total Amount:', totalAmount);
@@ -77,7 +78,7 @@ const Payments = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     doggie_info: doggieDict,
-                    pedigree_tickets: {},
+                    pedigree_tickets: {"any_puppy": 1},
                     all_dog_tickets: {},
                 }),
             });
@@ -87,9 +88,11 @@ const Payments = () => {
             if (data.url) {
                 window.location.href = data.url; // Redirect to Stripe Checkout
             } else {
+                setErrorMessage( 'Something went wrong. Please try again. Error: ' + data.detail);
                 console.error('Failed to get redirect URL:', data);
             }
         } catch (error) {
+            setErrorMessage('Payment request failed. Please check your input and try again.');
             console.error('Checkout request failed:', error);
         }
     };
@@ -202,6 +205,11 @@ const Payments = () => {
                     </Button>
                 </Box>
             </form>
+            {errorMessage && (
+                <Typography color="error" sx={{ mt: 2 }}>
+                    {errorMessage}
+                </Typography>
+            )}
         </Container>
     );
 };
