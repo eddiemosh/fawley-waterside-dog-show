@@ -1,5 +1,4 @@
-// src/components/orders/OrderSuccess.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Container, Typography, Button } from '@mui/material';
 import './order-confirmation.css';
@@ -7,6 +6,30 @@ import './order-confirmation.css';
 const OrderSuccess = () => {
     const [searchParams] = useSearchParams();
     const orderId = searchParams.get('orderId');
+
+    useEffect(() => {
+        const notifyBackend = async () => {
+            if (!orderId) return;
+
+            try {
+                const response = await fetch('https://api.fawleydogshow.com/order/success', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ order_id: orderId }),
+                });
+
+                if (!response.ok) {
+                    console.error("Failed to notify backend about successful order");
+                }
+            } catch (error) {
+                console.error("Error calling backend:", error);
+            }
+        };
+
+        notifyBackend();
+    }, [orderId]);
 
     return (
         <Container className="order-page">
