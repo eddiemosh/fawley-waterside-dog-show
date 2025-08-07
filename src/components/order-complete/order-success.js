@@ -13,7 +13,7 @@ const OrderSuccess = () => {
 
             try {
                 const response = await fetch('https://api.fawleydogshow.com/order/success', {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                     },
