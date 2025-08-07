@@ -75,7 +75,7 @@
     }
 
     .upcoming-events {
-        font-size: 2rem; /* Reduce font size for the title */
+        font-size: 1rem; /* Reduce font size for the title */
         margin-top: 20px; /* Adjust margin for mobile view */
     }
 
