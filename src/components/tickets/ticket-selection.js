@@ -68,20 +68,20 @@ const pedigreeTickets = [
 ];
 
 const allDogTickets = [
-    { name: "Puppy", price: 3 },
-    { name: "Prettiest", price: 3 },
-    { name: "Best Condition", price: 3 },
-    { name: "Best Rescue", price: 3 },
-    { name: "Waggiest Tail", price: 3 },
-    { name: "Child's Best Friend", price: 3 },
-    { name: "Fancy Dress", price: 3 },
-    { name: "Handsome", price: 3 },
-    { name: "Fluffiest", price: 3 },
-    { name: "Scruffiest", price: 3 },
-    { name: "Smooth", price: 3 },
-    { name: "Looks Like Owner", price: 3 },
-    { name: "Obedience", price: 3 },
-    { name: "Golden Oldie", price: 3 }
+    { name: "Puppy", price: 4 },
+    { name: "Prettiest", price: 4 },
+    { name: "Best Condition", price: 4 },
+    { name: "Best Rescue", price: 4 },
+    { name: "Waggiest Tail", price: 4 },
+    { name: "Child's Best Friend", price: 4 },
+    { name: "Fancy Dress", price: 4 },
+    { name: "Handsome", price: 4 },
+    { name: "Fluffiest", price: 4 },
+    { name: "Scruffiest", price: 4 },
+    { name: "Smooth", price: 4 },
+    { name: "Looks Like Owner", price: 4 },
+    { name: "Obedience", price: 4 },
+    { name: "Golden Oldie", price: 4 }
 ];
 
 const TicketSelection = () => {
