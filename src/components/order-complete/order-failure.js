@@ -25,7 +25,7 @@ const OrderFailure = () => {
                 or
                 <br/>
                 send an email with your Order ID to:
-                <strong> hardyedward18@gmail.com</strong>
+                <strong> fawleydogshow@gmail.com</strong>
             </Typography>
 
             <Typography variant="body2" className="order-id" sx={{marginTop: 2}}>
