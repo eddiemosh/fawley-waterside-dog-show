@@ -89,17 +89,20 @@ const CashPayment = () => {
             return acc;
         }, {});
         try {
-            const response = await fetch('https://api.fawleydogshow.com/payment/cash', {
+            const queryParams = new URLSearchParams({
+                first_name: userInfo.firstName,
+                last_name: userInfo.lastName,
+                email_address: userInfo.email,
+                cash_amount: cashAmount,
+            });
+
+            const response = await fetch(`https://api.fawleydogshow.com/payment/cash?${queryParams.toString()}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    first_name: userInfo.firstName,
-                    last_name: userInfo.lastName,
-                    email_address: userInfo.email,
                     doggie_info: doggieDict,
                     pedigree_tickets: pedigree,
                     all_dog_tickets: allDog,
-                    cash_amount: cashAmount,
                 }),
             });
             if (!response.ok) throw new Error('Failed to record cash payment');
