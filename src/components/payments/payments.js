@@ -159,9 +159,9 @@ const Payments = () => {
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    label="Date of Birth"
+                                    label="Date of Birth (Year and Month)"
                                     name="date_of_birth"
-                                    type="date"
+                                    type="month"
                                     InputLabelProps={{ shrink: true }}
                                     value={dog.date_of_birth}
                                     onChange={(event) => handleDogChange(index, event)}
