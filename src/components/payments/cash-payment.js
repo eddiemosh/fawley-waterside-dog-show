@@ -15,6 +15,8 @@ import {
 } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
 import { pedigreeTickets, allDogTickets, pedigreeNameMap, allDogNameMap } from '../tickets/ticket-selection';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const allTickets = [
     ...pedigreeTickets.map(t => ({ ...t, section: 'Pedigree' })),
@@ -33,6 +35,9 @@ const CashPayment = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [ticketSearch, setTicketSearch] = useState('');
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMsg, setSnackbarMsg] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
     const handleUserInfoChange = (event) => {
         const { name, value } = event.target;
@@ -84,7 +89,7 @@ const CashPayment = () => {
             return acc;
         }, {});
         try {
-            const response = await fetch('https://api.fawleydogshow.com/payment/cash', {
+            const response = await fetch('https://api.fawleydogshow.com/payments/cash', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -99,15 +104,23 @@ const CashPayment = () => {
             });
             if (!response.ok) throw new Error('Failed to record cash payment');
             const data = await response.json();
-            setSuccessMessage(`${data.message} Order ID: ${data.order_id}`);
+            setSnackbarMsg(`${data.message} Order ID: ${data.order_id}`);
+            setSnackbarSeverity('success');
+            setSnackbarOpen(true);
+            setSuccessMessage('');
         } catch (err) {
+            setSnackbarMsg(err.message);
+            setSnackbarSeverity('error');
+            setSnackbarOpen(true);
             setErrorMessage(err.message);
         }
     };
 
     return (
         <Container>
-            <Typography variant="h4" gutterBottom>Record Cash Payment</Typography>
+            <Box mt={2} mb={4}>
+                <Typography variant="h4" gutterBottom>Record Cash Payment</Typography>
+            </Box>
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={4}>
@@ -178,6 +191,7 @@ const CashPayment = () => {
                                     onChange={e => handleDogChange(index, e)}
                                     fullWidth
                                     required
+                                    sx={{ minHeight: { xs: 56, sm: 56 }, '.MuiInputBase-root': { minHeight: { xs: 56, sm: 56 } } }}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={3}>
@@ -255,6 +269,11 @@ const CashPayment = () => {
                     <Typography color="primary" sx={{ mt: 2 }}>{successMessage}</Typography>
                 )}
             </form>
+            <Snackbar open={snackbarOpen} autoHideDuration={5000} onClose={() => setSnackbarOpen(false)} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+                <MuiAlert elevation={6} variant="filled" onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                    {snackbarMsg}
+                </MuiAlert>
+            </Snackbar>
         </Container>
     );
 };
