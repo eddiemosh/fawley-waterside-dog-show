@@ -89,7 +89,7 @@ const CashPayment = () => {
             return acc;
         }, {});
         try {
-            const response = await fetch('https://api.fawleydogshow.com/payments/cash', {
+            const response = await fetch('https://api.fawleydogshow.com/payment/cash', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
