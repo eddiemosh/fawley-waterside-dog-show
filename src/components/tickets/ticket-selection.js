@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import './ticket-selection.css';
 
 // Mapping dictionaries
-const pedigreeNameMap = {
+export const pedigreeNameMap = {
     "Any Puppy (6-12 mths)": "any_puppy",
     "Any Junior (12-18 mths)": "any_junior",
     "Any Gundog": "any_gundog",
@@ -35,7 +35,7 @@ const pedigreeNameMap = {
     "Junior Handler (U16)": "junior_handler",
 };
 
-const allDogNameMap = {
+export const allDogNameMap = {
     "Puppy": "puppy",
     "Prettiest": "prettiest",
     "Best Condition": "best_condition",
@@ -52,7 +52,7 @@ const allDogNameMap = {
     "Golden Oldie": "golden_oldie",
 };
 
-const pedigreeTickets = [
+export const pedigreeTickets = [
     { name: "Any Puppy (6-12 mths)", price: 5 },
     { name: "Any Junior (12-18 mths)", price: 5 },
     { name: "Any Gundog", price: 5 },
@@ -67,7 +67,7 @@ const pedigreeTickets = [
     { name: "Junior Handler (U16)", price: 5 }
 ];
 
-const allDogTickets = [
+export const allDogTickets = [
     { name: "Puppy", price: 4 },
     { name: "Prettiest", price: 4 },
     { name: "Best Condition", price: 4 },
