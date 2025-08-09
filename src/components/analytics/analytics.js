@@ -90,6 +90,10 @@ const allDogNameMap = {
 };
 
 const Analytics = () => {
+    const [auth, setAuth] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [authError, setAuthError] = useState('');
     const [openTicket, setOpenTicket] = useState(null);
     const [analytics, setAnalytics] = useState({});
     const [loading, setLoading] = useState(false);
@@ -101,6 +105,17 @@ const Analytics = () => {
     const [orderExpanded, setOrderExpanded] = useState(false);
     const [ticketExpanded, setTicketExpanded] = useState(false);
     const [orderSearch, setOrderSearch] = useState('');
+
+    const handleAuthSubmit = (e) => {
+        e.preventDefault();
+        const allowed = ["ed", "ian", "sally"];
+        if (allowed.includes(username.trim().toLowerCase())) {
+            setAuth(true);
+            setAuthError('');
+        } else {
+            setAuthError('Invalid username');
+        }
+    };
 
     const handleViewAnalytics = async (ticketName, ticketType) => {
         setOpenTicket(ticketName);
@@ -155,6 +170,50 @@ const Analytics = () => {
     );
 
     const prioritizedTickets = allTickets;
+
+    if (!auth) {
+        return (
+            <Container maxWidth="xs" sx={{ mt: 8 }}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        p: 4,
+                        border: '1px solid #ccc',
+                        borderRadius: 2,
+                        background: '#fff',
+                    }}
+                >
+                    <Typography variant="h5" gutterBottom>Analytics Login</Typography>
+                    <form onSubmit={handleAuthSubmit} style={{ width: '100%' }}>
+                        <TextField
+                            label="Username"
+                            value={username}
+                            onChange={e => setUsername(e.target.value)}
+                            fullWidth
+                            margin="normal"
+                            autoFocus
+                        />
+                        <TextField
+                            label="Password"
+                            type="password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            fullWidth
+                            margin="normal"
+                        />
+                        {authError && (
+                            <Typography color="error" sx={{ mt: 1 }}>{authError}</Typography>
+                        )}
+                        <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+                            Login
+                        </Button>
+                    </form>
+                </Box>
+            </Container>
+        );
+    }
 
     return (
         <Container>
