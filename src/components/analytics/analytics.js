@@ -278,6 +278,7 @@ const Analytics = () => {
                                             <Typography variant="body2"><b>Name:</b> {order.first_name} {order.last_name}</Typography>
                                             <Typography variant="body2"><b>Date:</b> {order.date_of_purchase ? new Date(order.date_of_purchase).toLocaleString() : 'N/A'}</Typography>
                                             <Typography variant="body2"><b>Email:</b> {order.email_address || 'N/A'}</Typography>
+                                            <Typography variant="body2"><b>Amount:</b> {order.amount}</Typography>
                                             <Typography variant="body2"><b>Order Status:</b> {order.order_status ? 'Complete' : 'Incomplete'}</Typography>
                                             {/* Pedigree Tickets */}
                                             {order.pedigree_tickets && Object.values(order.pedigree_tickets).some(v => v) && (
