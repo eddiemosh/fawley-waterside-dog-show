@@ -7,11 +7,11 @@ const Feedback = () => {
   const [error, setError] = useState('');
   const [ratings, setRatings] = useState({
     activities: 0,
-    value: 0,
+    value_for_money: 0,
     atmosphere: 0,
-    food: 0,
+    food_and_drinks: 0,
     vendors: 0,
-    overall: 0,
+    overall_experience: 0,
   });
 
   const aspects = [
