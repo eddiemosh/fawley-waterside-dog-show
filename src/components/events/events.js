@@ -20,7 +20,7 @@ const Events = () => {
 
     return (
         <Container>
-            <Typography variant="h2" gutterBottom className="upcoming-events">
+            <Typography variant="h3" gutterBottom className="upcoming-events">
                 Upcoming Events
             </Typography>
             <Box className="events-container">
