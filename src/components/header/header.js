@@ -1,25 +1,36 @@
 // src/components/Header.js
 import React, {useState} from 'react';
-import {AppBar, IconButton, Menu, MenuItem, Toolbar, Typography} from '@mui/material';
+import {
+    AppBar,
+    IconButton,
+    Toolbar,
+    Typography,
+    Drawer,
+    List,
+    ListItem,
+    ListItemText,
+    MenuItem,
+    Menu
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {useNavigate} from 'react-router-dom';
 
 const Header = () => {
-    const [anchorElMenu, setAnchorElMenu] = useState(null);
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const [anchorElProfile, setAnchorElProfile] = useState(null);
     const navigate = useNavigate();
 
-    const handleMenuClick = (event) => {
-        setAnchorElMenu(event.currentTarget);
+    const handleMenuClick = () => {
+        setDrawerOpen(true);
+    };
+
+    const handleDrawerClose = () => {
+        setDrawerOpen(false);
     };
 
     const handleProfileClick = (event) => {
         setAnchorElProfile(event.currentTarget);
-    };
-
-    const handleMenuClose = () => {
-        setAnchorElMenu(null);
     };
 
     const handleProfileClose = () => {
@@ -27,7 +38,7 @@ const Header = () => {
     };
 
     const handleMenuItemClick = (page) => {
-        handleMenuClose();
+        handleDrawerClose();
         navigate(page); // Navigate to the selected page
     };
 
@@ -60,16 +71,29 @@ const Header = () => {
                 >
                     <AccountCircleIcon/>
                 </IconButton>
-                <Menu
-                    anchorEl={anchorElMenu}
-                    open={Boolean(anchorElMenu)}
-                    onClose={handleMenuClose}
+                <Drawer
+                    anchor="left"
+                    open={drawerOpen}
+                    onClose={handleDrawerClose}
                 >
-                    <MenuItem onClick={() => handleMenuItemClick('/')}>Home</MenuItem>
-                    <MenuItem onClick={() => handleMenuItemClick('/events')}>Events</MenuItem>
-                    <MenuItem onClick={() => handleMenuItemClick('/analytics')}>Analytics</MenuItem>
-                    <MenuItem onClick={() => handleMenuItemClick('/cash')}>Cash</MenuItem>
-                </Menu>
+                    <div
+                        role="presentation"
+                        style={{ width: 180 }}
+                        onClick={handleDrawerClose}
+                        onKeyDown={handleDrawerClose}
+                    >
+                        <List>
+                            <ListItem button onClick={() => handleMenuItemClick('/')}> <ListItemText primary="Home" /> </ListItem>
+                            <ListItem button onClick={() => handleMenuItemClick('/events')}> <ListItemText primary="Events" /> </ListItem>
+                            <ListItem button onClick={() => handleMenuItemClick('/feedback')}> <ListItemText primary="Feedback" /> </ListItem>
+                        </List>
+                        <div style={{ borderTop: '5px solid #e0e0e0', margin: '2px 0' }} />
+                        <List>
+                            <ListItem button onClick={() => handleMenuItemClick('/analytics')}> <ListItemText primary="Analytics" /> </ListItem>
+                            <ListItem button onClick={() => handleMenuItemClick('/cash')}> <ListItemText primary="Cash" /> </ListItem>
+                        </List>
+                    </div>
+                </Drawer>
                 <Menu
                     anchorEl={anchorElProfile}
                     // open={Boolean(anchorElProfile)}
