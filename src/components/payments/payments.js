@@ -102,11 +102,11 @@ const Payments = () => {
     };
 
     return (
-        <Container>
-            <Typography variant="h4" gutterBottom className="payment-title">
+        <Container maxWidth="sm" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <Typography variant="h4" gutterBottom className="payment-title" style={{ color: '#2d7a5f', fontWeight: 700, textAlign: 'center', marginTop: 40, marginBottom: 32, letterSpacing: 1 }}>
                 Payment Information
             </Typography>
-            <form onSubmit={handleSubmit} className="payment-form">
+            <form onSubmit={handleSubmit} className="payment-form" style={{ background: '#fff', borderRadius: 18, boxShadow: '0 2px 8px rgba(45,122,95,0.06)', padding: 28, marginBottom: 24 }}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
                         <TextField
@@ -130,7 +130,7 @@ const Payments = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            label="Email"
+                            label="Email (recommended)"
                             name="email"
                             type="email"
                             value={userInfo.email}
@@ -140,13 +140,12 @@ const Payments = () => {
                         />
                     </Grid>
                 </Grid>
-
                 <Box mt={4}>
-                    <Typography variant="h5" gutterBottom className="doggie-info-title">
+                    <Typography variant="h5" gutterBottom className="doggie-info-title" style={{ color: '#2d7a5f', fontWeight: 600, textAlign: 'center', marginBottom: 18 }}>
                         Doggie Info
                     </Typography>
                     {dogs.map((dog, index) => (
-                        <Grid container spacing={2} key={index} alignItems="center" className="dog-info-container">
+                        <Grid container spacing={2} key={index} alignItems="center" className="dog-info-container" style={{ marginBottom: 8, background: '#f8f9fa', borderRadius: 10, padding: 10 }}>
                             <Grid item xs={12} sm={4}>
                                 <TextField
                                     label={`Dog ${index + 1} Name`}
@@ -184,7 +183,7 @@ const Payments = () => {
                                     <MenuItem value="Female">Female</MenuItem>
                                 </TextField>
                             </Grid>
-                            <Grid item xs={12} sm={1}>
+                            <Grid item xs={12} sm={1} style={{ textAlign: 'center' }}>
                                 <IconButton onClick={() => handleRemoveDog(index)} disabled={dogs.length === 1}>
                                     <Remove />
                                 </IconButton>
@@ -192,19 +191,29 @@ const Payments = () => {
                         </Grid>
                     ))}
                 </Box>
-
                 <Box mt={2} textAlign="center">
                     <Button
                         variant="outlined"
                         startIcon={<Add />}
                         onClick={handleAddDog}
+                        style={{ borderRadius: 10, color: '#2d7a5f', borderColor: '#2d7a5f', fontWeight: 600 }}
                     >
                         Add Another Dog
                     </Button>
                 </Box>
-
                 <Box mt={4} textAlign="center">
-                    <Button type="submit" variant="contained" color="primary" className="submit-button">
+                    <Button type="submit" variant="contained" className="checkout-button" style={{
+                        fontSize: '1.1rem',
+                        borderRadius: 18,
+                        padding: '12px 32px',
+                        background: 'linear-gradient(90deg, #2d7a5f 0%, #4caf50 100%)',
+                        color: '#fff',
+                        fontWeight: 600,
+                        letterSpacing: 1,
+                        border: 'none',
+                        minWidth: 140,
+                        boxShadow: '0 2px 8px rgba(76,175,80,0.08)'
+                    }}>
                         Submit Payment
                     </Button>
                 </Box>
