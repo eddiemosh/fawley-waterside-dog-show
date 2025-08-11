@@ -9,6 +9,10 @@
 
 .ticket-grid {
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
 }
 
 .ticket-card {
@@ -20,29 +24,41 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     text-align: center;
     width: 100%;
-    max-width: 250px;
-    margin: 0 auto;
+    max-width: 130px;
+    min-width: 90px;
+    flex: 1 1 90px;
+    padding: 4px;
+    font-size: 0.85rem;
+    margin: 0 2px 8px 2px;
     margin-bottom: 10px;
 }
 
 .small-card {
     max-width: 180px;
+    min-width: 140px;
+    flex: 1 1 140px;
     padding: 8px;
     font-size: 0.95rem;
+    margin: 0 4px 10px 4px;
 }
 
 @media (max-width: 600px) {
     .ticket-selection-title {
         font-size: 2rem;
     }
+    .ticket-grid {
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
     .ticket-card,
     .small-card {
-        max-width: 95%;
-        padding: 6px;
-        font-size: 0.9rem;
-    }
-    .ticket-grid {
-        margin-bottom: 5px;
+        max-width: 44%;
+        min-width: 90px;
+        padding: 3px;
+        font-size: 0.8rem;
+        margin: 0 1% 6px 1%;
+        box-sizing: border-box;
     }
 }
 

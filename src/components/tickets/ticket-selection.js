@@ -16,6 +16,8 @@ import {
     AccordionDetails,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { useNavigate } from 'react-router-dom';
 import './ticket-selection.css';
 
@@ -89,15 +91,30 @@ const TicketSelection = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
-    const handleQuantityChange = (event, ticket) => {
-        const quantity = parseInt(event.target.value);
-        setSelectedTickets((prev) => ({
-            ...prev,
-            [ticket.name]: {
-                quantity,
-                price: ticket.price * quantity,
-            },
-        }));
+    const handleIncrement = (ticket) => {
+        setSelectedTickets((prev) => {
+            const current = prev[ticket.name]?.quantity || 0;
+            return {
+                ...prev,
+                [ticket.name]: {
+                    quantity: current + 1,
+                    price: ticket.price * (current + 1),
+                },
+            };
+        });
+    };
+    const handleDecrement = (ticket) => {
+        setSelectedTickets((prev) => {
+            const current = prev[ticket.name]?.quantity || 0;
+            if (current <= 0) return prev;
+            return {
+                ...prev,
+                [ticket.name]: {
+                    quantity: current - 1,
+                    price: ticket.price * (current - 1),
+                },
+            };
+        });
     };
 
     const handleCheckout = () => {
@@ -183,40 +200,18 @@ const TicketSelection = () => {
                                     background: '#fff',
                                     padding: 12
                                 }}>
-                                    <CardContent>
-                                        <Typography variant="h6" component="div" sx={{ marginTop: '-10px', color: '#2d7a5f', fontWeight: 600 }}>
+                                    <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                                        <Typography variant="h6" component="div" sx={{ color: '#2d7a5f', fontWeight: 600, fontSize: '1.05rem', textAlign: 'center' }}>
                                             {ticket.name}
                                         </Typography>
-                                        <Grid container alignItems="center" spacing={2} className="ticket-select-container">
-                                            <Grid item xs={5}>
-                                                <Typography variant="body1" className="quantity-text">Quantity:</Typography>
-                                            </Grid>
-                                            <Grid item xs={7}>
-                                                <FormControl className="dropdown">
-                                                    <Select
-                                                        value={selectedTickets[ticket.name]?.quantity || 0}
-                                                        onChange={(event) => handleQuantityChange(event, ticket)}
-                                                        className="ticket-select"
-                                                    >
-                                                        {[...Array(10).keys()].map((quantity) => (
-                                                            <MenuItem key={quantity} value={quantity}>
-                                                                {quantity}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
-                                            </Grid>
-                                        </Grid>
-                                        <Grid container alignItems="center" spacing={2} className="ticket-price-container">
-                                            <Grid item xs={5}>
-                                                <Typography variant="body1" className="price-text">Price:</Typography>
-                                            </Grid>
-                                            <Grid item xs={7}>
-                                                <Typography variant="body2" className="price-amount" style={{ color: '#2d7a5f', fontWeight: 600 }}>
-                                                    £{ticket.price}
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
+                                        <Typography variant="body2" sx={{ color: '#888', fontWeight: 500, fontSize: '0.95rem', marginBottom: 1 }}>
+                                            £{ticket.price}
+                                        </Typography>
+                                        <Box display="flex" alignItems="center" gap={1}>
+                                            <Button size="small" onClick={() => handleDecrement(ticket)} style={{ minWidth: 32, padding: 4 }}><RemoveIcon /></Button>
+                                            <Typography variant="body1" sx={{ minWidth: 18, textAlign: 'center', fontWeight: 600 }}>{selectedTickets[ticket.name]?.quantity || 0}</Typography>
+                                            <Button size="small" onClick={() => handleIncrement(ticket)} style={{ minWidth: 32, padding: 4 }}><AddIcon /></Button>
+                                        </Box>
                                     </CardContent>
                                 </Card>
                             </Grid>
@@ -242,40 +237,18 @@ const TicketSelection = () => {
                                     background: '#fff',
                                     padding: 12
                                 }}>
-                                    <CardContent>
-                                        <Typography variant="h6" component="div" sx={{ marginTop: '-10px', color: '#388e3c', fontWeight: 600 }}>
+                                    <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                                        <Typography variant="h6" component="div" sx={{ color: '#388e3c', fontWeight: 600, fontSize: '1.05rem', textAlign: 'center' }}>
                                             {ticket.name}
                                         </Typography>
-                                        <Grid container alignItems="center" spacing={2} className="ticket-select-container">
-                                            <Grid item xs={5}>
-                                                <Typography variant="body1" className="quantity-text">Quantity:</Typography>
-                                            </Grid>
-                                            <Grid item xs={7}>
-                                                <FormControl className="dropdown">
-                                                    <Select
-                                                        value={selectedTickets[ticket.name]?.quantity || 0}
-                                                        onChange={(event) => handleQuantityChange(event, ticket)}
-                                                        className="ticket-select"
-                                                    >
-                                                        {[...Array(10).keys()].map((quantity) => (
-                                                            <MenuItem key={quantity} value={quantity}>
-                                                                {quantity}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
-                                            </Grid>
-                                        </Grid>
-                                        <Grid container alignItems="center" spacing={2} className="ticket-price-container">
-                                            <Grid item xs={5}>
-                                                <Typography variant="body1" className="price-text">Price:</Typography>
-                                            </Grid>
-                                            <Grid item xs={7}>
-                                                <Typography variant="body2" className="price-amount" style={{ color: '#388e3c', fontWeight: 600 }}>
-                                                    £{ticket.price}
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
+                                        <Typography variant="body2" sx={{ color: '#888', fontWeight: 500, fontSize: '0.95rem', marginBottom: 1 }}>
+                                            £{ticket.price}
+                                        </Typography>
+                                        <Box display="flex" alignItems="center" gap={1}>
+                                            <Button size="small" onClick={() => handleDecrement(ticket)} style={{ minWidth: 32, padding: 4 }}><RemoveIcon /></Button>
+                                            <Typography variant="body1" sx={{ minWidth: 18, textAlign: 'center', fontWeight: 600 }}>{selectedTickets[ticket.name]?.quantity || 0}</Typography>
+                                            <Button size="small" onClick={() => handleIncrement(ticket)} style={{ minWidth: 32, padding: 4 }}><AddIcon /></Button>
+                                        </Box>
                                     </CardContent>
                                 </Card>
                             </Grid>
