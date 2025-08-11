@@ -10,7 +10,7 @@ const Home = () => {
     const [testMode, setTestMode] = useState(false);
 
     useEffect(() => {
-        fetch('https://api.fawleydogshow.com/test/')
+        fetch('https://api.fawleydogshow.com/test')
             .then(res => res.json())
             .then(data => {
                 if (data && data.test_mode) setTestMode(true);
