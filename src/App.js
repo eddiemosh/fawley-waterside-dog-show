@@ -11,6 +11,7 @@ import OrderFailure from "./components/order-complete/order-failure";
 import Analytics from "./components/analytics/analytics";
 import CashPayment from "./components/payments/cash-payment";
 import Feedback from "./components/feedback/feedback";
+import Donations from "./components/payments/donations";
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/analytics" element={<Analytics />} />
                 <Route path="/cash" element={<CashPayment />} />
                 <Route path="/feedback" element={<Feedback />} />
+                <Route path="/donations" element={<Donations />} />
                 <Route path="*" element={<Home/>}/> {/* Redirect to Home for any unknown routes */}
             </Routes>
         </Router>
