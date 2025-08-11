@@ -24,10 +24,6 @@ const Donations = () => {
       setError('Please enter a valid donation amount.');
       return;
     }
-    if (!firstName.trim() || !lastName.trim()) {
-      setError('Please fill in your first and last name.');
-      return;
-    }
     setError('');
     try {
       const res = await fetch('https://api.fawleydogshow.com/donation/create', {
@@ -69,20 +65,18 @@ const Donations = () => {
         </Typography>
         <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
           <TextField
-            label="First Name"
+            label="First Name (optional)"
             variant="outlined"
             value={firstName}
             onChange={e => setFirstName(e.target.value)}
             style={{ width: 200, marginBottom: 8 }}
-            required
           />
           <TextField
-            label="Last Name"
+            label="Last Name (optional)"
             variant="outlined"
             value={lastName}
             onChange={e => setLastName(e.target.value)}
             style={{ width: 200, marginBottom: 8 }}
-            required
           />
           <TextField
             label="Email Address (recommended)"
