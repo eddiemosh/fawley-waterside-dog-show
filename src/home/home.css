@@ -13,13 +13,13 @@
 }
 
 .overlay-text {
-    font-size: 2rem !important;
-    font-weight: 800 !important;
-    /* background-color: rgba(0,0,0,0.5); */ /* Optional: Uncomment if needed */
-    padding: 20px;
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    width: 40% !important; /* Adjust width as needed */
+    padding: 20px !important;
     border-radius: 10px;
-    margin-bottom: 20% !important; /* Space between text and button */
-    margin-right: 40% !important;
+    margin-bottom: 40% !important; /* Space between text and button */
+    margin-right: 45% !important;
 
 }
 
