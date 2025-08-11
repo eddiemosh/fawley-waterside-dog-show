@@ -145,8 +145,15 @@ const TicketSelection = () => {
     const filteredAllDog = filteredTickets.filter(t => t.section === 'All Dog');
 
     return (
-        <Container maxWidth="sm" sx={{ px: { xs: 0, sm: 2 } }}>
-            <Typography variant="h2" gutterBottom className="ticket-selection-title">
+        <Container maxWidth="sm" sx={{ px: { xs: 0, sm: 2 }, minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <Typography variant="h2" gutterBottom className="ticket-selection-title" style={{
+                textAlign: 'center',
+                fontWeight: 700,
+                color: '#2d7a5f',
+                marginTop: 40,
+                marginBottom: 32,
+                letterSpacing: 1
+            }}>
                 Select Tickets
             </Typography>
             <Box mb={3} display="flex" justifyContent="center">
@@ -160,9 +167,9 @@ const TicketSelection = () => {
             </Box>
 
             {/* Pedigree Section */}
-            <Accordion defaultExpanded sx={{ mb: 2 }}>
+            <Accordion defaultExpanded sx={{ mb: 2, borderRadius: 2, boxShadow: '0 2px 6px rgba(45,122,95,0.08)' }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="pedigree-content" id="pedigree-header">
-                    <Typography variant="h5" sx={{ color: '#1976d2', fontWeight: 500 }}>
+                    <Typography variant="h5" sx={{ color: '#2d7a5f', fontWeight: 600 }}>
                         Pedigree Classes (£5)
                     </Typography>
                 </AccordionSummary>
@@ -170,9 +177,14 @@ const TicketSelection = () => {
                     <Grid container spacing={2} className="ticket-grid" justifyContent="center">
                         {filteredPedigree.map((ticket) => (
                             <Grid item xs={12} sm={6} md={4} key={ticket.name}>
-                                <Card className="ticket-card small-card">
+                                <Card className="ticket-card small-card" style={{
+                                    borderRadius: 18,
+                                    boxShadow: '0 4px 24px rgba(45,122,95,0.08)',
+                                    background: '#fff',
+                                    padding: 12
+                                }}>
                                     <CardContent>
-                                        <Typography variant="h6" component="div" sx={{ marginTop: '-10px' }}>
+                                        <Typography variant="h6" component="div" sx={{ marginTop: '-10px', color: '#2d7a5f', fontWeight: 600 }}>
                                             {ticket.name}
                                         </Typography>
                                         <Grid container alignItems="center" spacing={2} className="ticket-select-container">
@@ -200,7 +212,7 @@ const TicketSelection = () => {
                                                 <Typography variant="body1" className="price-text">Price:</Typography>
                                             </Grid>
                                             <Grid item xs={7}>
-                                                <Typography variant="body2" className="price-amount">
+                                                <Typography variant="body2" className="price-amount" style={{ color: '#2d7a5f', fontWeight: 600 }}>
                                                     £{ticket.price}
                                                 </Typography>
                                             </Grid>
@@ -214,9 +226,9 @@ const TicketSelection = () => {
             </Accordion>
 
             {/* All Dog Section */}
-            <Accordion defaultExpanded sx={{ mb: 2 }}>
+            <Accordion defaultExpanded sx={{ mb: 2, borderRadius: 2, boxShadow: '0 2px 6px rgba(76,175,80,0.08)' }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="alldog-content" id="alldog-header">
-                    <Typography variant="h5" sx={{ color: '#388e3c', fontWeight: 500 }}>
+                    <Typography variant="h5" sx={{ color: '#388e3c', fontWeight: 600 }}>
                         All Dog Classes (£4)
                     </Typography>
                 </AccordionSummary>
@@ -224,9 +236,14 @@ const TicketSelection = () => {
                     <Grid container spacing={2} className="ticket-grid" justifyContent="center">
                         {filteredAllDog.map((ticket) => (
                             <Grid item xs={12} sm={6} md={4} key={ticket.name}>
-                                <Card className="ticket-card small-card">
+                                <Card className="ticket-card small-card" style={{
+                                    borderRadius: 18,
+                                    boxShadow: '0 4px 24px rgba(76,175,80,0.08)',
+                                    background: '#fff',
+                                    padding: 12
+                                }}>
                                     <CardContent>
-                                        <Typography variant="h6" component="div" sx={{ marginTop: '-10px' }}>
+                                        <Typography variant="h6" component="div" sx={{ marginTop: '-10px', color: '#388e3c', fontWeight: 600 }}>
                                             {ticket.name}
                                         </Typography>
                                         <Grid container alignItems="center" spacing={2} className="ticket-select-container">
@@ -254,7 +271,7 @@ const TicketSelection = () => {
                                                 <Typography variant="body1" className="price-text">Price:</Typography>
                                             </Grid>
                                             <Grid item xs={7}>
-                                                <Typography variant="body2" className="price-amount">
+                                                <Typography variant="body2" className="price-amount" style={{ color: '#388e3c', fontWeight: 600 }}>
                                                     £{ticket.price}
                                                 </Typography>
                                             </Grid>
@@ -270,9 +287,20 @@ const TicketSelection = () => {
             <Box className="checkout-button-container">
                 <Button
                     variant="contained"
-                    color="primary"
                     onClick={handleCheckout}
                     className="checkout-button"
+                    style={{
+                        fontSize: '1.1rem',
+                        borderRadius: 18,
+                        padding: '12px 32px',
+                        background: 'linear-gradient(90deg, #2d7a5f 0%, #4caf50 100%)',
+                        color: '#fff',
+                        fontWeight: 600,
+                        letterSpacing: 1,
+                        border: 'none',
+                        minWidth: 140,
+                        boxShadow: '0 2px 8px rgba(76,175,80,0.08)'
+                    }}
                 >
                     Checkout
                 </Button>
