@@ -61,6 +61,7 @@ const Header = () => {
                 </IconButton>
                 <Typography
                     variant="h6"
+                    className="header-title"
                     style={{flexGrow: 1, cursor: 'pointer', fontSize: '1.1rem', fontWeight: '700', color: '#2d7a5f', letterSpacing: 1}}
                     onClick={() => navigate('/')}
                 >
