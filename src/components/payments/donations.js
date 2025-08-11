@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, Container, Typography, TextField, Paper } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Donations = () => {
   const [amount, setAmount] = useState('');
@@ -8,6 +9,7 @@ const Donations = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
 
   const handleAmountChange = (e) => {
     const value = e.target.value;
@@ -28,7 +30,7 @@ const Donations = () => {
     }
     setError('');
     try {
-      const res = await fetch('https://api.fawleydogshow.com/payment/donation', {
+      const res = await fetch('https://api.fawleydogshow.com/donation/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -39,32 +41,19 @@ const Donations = () => {
         })
       });
       if (res.ok) {
-        setSubmitted(true);
+        const data = await res.json();
+        if (data && data.checkout_url) {
+          window.location.href = data.checkout_url;
+        } else {
+          navigate('/donation-success');
+        }
       } else {
-        setError('Failed to process donation.');
+        navigate('/donation-failure');
       }
     } catch {
-      setError('Failed to process donation.');
+      navigate('/donation-failure');
     }
   };
-
-  if (submitted) {
-    return (
-      <Container maxWidth="sm" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <Paper elevation={3} style={{ padding: 32, borderRadius: 18, marginTop: 48 }}>
-          <Typography variant="h4" align="center" gutterBottom style={{ color: '#2d7a5f', fontWeight: 700 }}>
-            Thank You!
-          </Typography>
-          <Typography variant="body1" align="center" style={{ marginBottom: 24 }}>
-            Your donation of <b>£{Number(amount).toFixed(2)}</b> is greatly appreciated and will help support cancer research.
-          </Typography>
-          <Typography align="center" style={{ color: '#888' }}>
-            Together, we can make a difference.
-          </Typography>
-        </Paper>
-      </Container>
-    );
-  }
 
   return (
     <Container maxWidth="sm" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
