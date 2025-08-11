@@ -12,6 +12,8 @@ import Analytics from "./components/analytics/analytics";
 import CashPayment from "./components/payments/cash-payment";
 import Feedback from "./components/feedback/feedback";
 import Donations from "./components/payments/donations";
+import DonationSuccess from "./components/donation-complete/donation-success";
+import DonationFailure from "./components/donation-complete/donation-failure";
 // import About from './components/about/about';
 // import WhatToExpect from './components/about/what-to-expect';
 // import Contact from './components/about/contact';
@@ -31,6 +33,8 @@ function App() {
                 <Route path="/cash" element={<CashPayment />} />
                 <Route path="/feedback" element={<Feedback />} />
                 <Route path="/donations" element={<Donations />} />
+                <Route path="/donation-success" element={<DonationSuccess />} />
+                <Route path="/donation-failure" element={<DonationFailure />} />
                 {/*<Route path="/about" element={<About/>}/>*/}
                 {/*<Route path="/what-to-expect" element={<WhatToExpect/>}/>*/}
                 {/*<Route path="/contact" element={<Contact/>}/>*/}
