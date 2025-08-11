@@ -30,7 +30,7 @@ const Donations = () => {
     }
     setError('');
     try {
-      const res = await fetch('https://api.fawleydogshow.com/payment/donation', {
+      const res = await fetch('https://api.fawleydogshow.com/donation/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
