@@ -18,7 +18,8 @@ const Events = () => {
     };
 
     return (
-        <Container maxWidth="sm" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <Container maxWidth="sm"
+                   style={{minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
             <Typography className="upcoming-events" variant="h3" gutterBottom>
                 Upcoming Events
             </Typography>

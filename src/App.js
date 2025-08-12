@@ -29,14 +29,14 @@ function App() {
                 <Route path="/events" element={<Events/>}/>
                 <Route path="/tickets" element={<TicketSelection/>}/>
                 <Route path="/payments" element={<Payments/>}/>
-                <Route path="/order-success" element={<OrderSuccess />} />
-                <Route path="/order-failure" element={<OrderFailure />} />
-                <Route path="/analytics" element={<Analytics />} />
-                <Route path="/cash" element={<CashPayment />} />
-                <Route path="/feedback" element={<Feedback />} />
-                <Route path="/donations" element={<Donations />} />
-                <Route path="/donation-success" element={<DonationSuccess />} />
-                <Route path="/donation-failure" element={<DonationFailure />} />
+                <Route path="/order-success" element={<OrderSuccess/>}/>
+                <Route path="/order-failure" element={<OrderFailure/>}/>
+                <Route path="/analytics" element={<Analytics/>}/>
+                <Route path="/cash" element={<CashPayment/>}/>
+                <Route path="/feedback" element={<Feedback/>}/>
+                <Route path="/donations" element={<Donations/>}/>
+                <Route path="/donation-success" element={<DonationSuccess/>}/>
+                <Route path="/donation-failure" element={<DonationFailure/>}/>
                 <Route path="/about" element={<AboutUs/>}/>
                 <Route path="/what-to-expect" element={<WhatToExpect/>}/>
                 {/*<Route path="/contact" element={<Contact/>}/>*/}

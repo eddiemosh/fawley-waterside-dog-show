@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Container, Typography, Button } from '@mui/material';
+import React, {useEffect} from 'react';
+import {useSearchParams} from 'react-router-dom';
+import {Button, Container, Typography} from '@mui/material';
 import './order-confirmation.css';
 
 const OrderSuccess = () => {
@@ -17,7 +17,7 @@ const OrderSuccess = () => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ order_id: orderId }),
+                    body: JSON.stringify({order_id: orderId}),
                 });
 
                 if (!response.ok) {
@@ -43,14 +43,14 @@ const OrderSuccess = () => {
                 {orderId}
             </Typography>
             <Typography variant="body1" className="order-message">
-                <br />
+                <br/>
                 A confirmation email has been sent.
             </Typography>
             <Button
                 variant="contained"
                 color="primary"
                 href="/"
-                sx={{ marginTop: 3 }}
+                sx={{marginTop: 3}}
             >
                 Back to Home
             </Button>

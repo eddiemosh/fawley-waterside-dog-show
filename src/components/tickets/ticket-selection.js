@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
     Box,
     Button,
     Card,
     CardContent,
     Container,
-    FormControl,
-    Grid,
-    MenuItem,
-    Select,
-    Typography,
     TextField,
-    Accordion,
-    AccordionSummary,
-    AccordionDetails,
+    Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import './ticket-selection.css';
 
 // Mapping dictionaries
@@ -55,35 +51,35 @@ export const allDogNameMap = {
 };
 
 export const pedigreeTickets = [
-    { name: "Any Puppy (6-12 mths)", price: 5 },
-    { name: "Any Junior (12-18 mths)", price: 5 },
-    { name: "Any Gundog", price: 5 },
-    { name: "Any Utility", price: 5 },
-    { name: "Any Hound", price: 5 },
-    { name: "Any Toy", price: 5 },
-    { name: "Any Working", price: 5 },
-    { name: "Any Pastoral", price: 5 },
-    { name: "Any Terrier", price: 5 },
-    { name: "Any Open", price: 5 },
-    { name: "Any Veteran", price: 5 },
-    { name: "Junior Handler (U16)", price: 5 }
+    {name: "Any Puppy (6-12 mths)", price: 5},
+    {name: "Any Junior (12-18 mths)", price: 5},
+    {name: "Any Gundog", price: 5},
+    {name: "Any Utility", price: 5},
+    {name: "Any Hound", price: 5},
+    {name: "Any Toy", price: 5},
+    {name: "Any Working", price: 5},
+    {name: "Any Pastoral", price: 5},
+    {name: "Any Terrier", price: 5},
+    {name: "Any Open", price: 5},
+    {name: "Any Veteran", price: 5},
+    {name: "Junior Handler (U16)", price: 5}
 ];
 
 export const allDogTickets = [
-    { name: "Puppy", price: 4 },
-    { name: "Prettiest", price: 4 },
-    { name: "Best Condition", price: 4 },
-    { name: "Best Rescue", price: 4 },
-    { name: "Waggiest Tail", price: 4 },
-    { name: "Child's Best Friend", price: 4 },
-    { name: "Fancy Dress", price: 4 },
-    { name: "Handsome", price: 4 },
-    { name: "Fluffiest", price: 4 },
-    { name: "Scruffiest", price: 4 },
-    { name: "Smooth", price: 4 },
-    { name: "Looks Like Owner", price: 4 },
-    { name: "Obedience", price: 4 },
-    { name: "Golden Oldie", price: 4 }
+    {name: "Puppy", price: 4},
+    {name: "Prettiest", price: 4},
+    {name: "Best Condition", price: 4},
+    {name: "Best Rescue", price: 4},
+    {name: "Waggiest Tail", price: 4},
+    {name: "Child's Best Friend", price: 4},
+    {name: "Fancy Dress", price: 4},
+    {name: "Handsome", price: 4},
+    {name: "Fluffiest", price: 4},
+    {name: "Scruffiest", price: 4},
+    {name: "Smooth", price: 4},
+    {name: "Looks Like Owner", price: 4},
+    {name: "Obedience", price: 4},
+    {name: "Golden Oldie", price: 4}
 ];
 
 const TicketSelection = () => {
@@ -150,8 +146,8 @@ const TicketSelection = () => {
     };
 
     const allTickets = [
-        ...pedigreeTickets.map(t => ({ ...t, section: 'Pedigree' })),
-        ...allDogTickets.map(t => ({ ...t, section: 'All Dog' })),
+        ...pedigreeTickets.map(t => ({...t, section: 'Pedigree'})),
+        ...allDogTickets.map(t => ({...t, section: 'All Dog'})),
     ];
 
     const filteredTickets = allTickets.filter(ticket =>
@@ -162,7 +158,14 @@ const TicketSelection = () => {
     const filteredAllDog = filteredTickets.filter(t => t.section === 'All Dog');
 
     return (
-        <Container maxWidth="sm" sx={{ px: { xs: 0, sm: 2 }, minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', mt: { xs: 2, sm: 6 } }}>
+        <Container maxWidth="sm" sx={{
+            px: {xs: 0, sm: 2},
+            minHeight: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            mt: {xs: 2, sm: 6}
+        }}>
             <Typography variant="h3" gutterBottom className="ticket-selection-title" style={{
                 textAlign: 'center',
                 fontWeight: 700,
@@ -179,14 +182,15 @@ const TicketSelection = () => {
                     variant="outlined"
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
-                    sx={{ width: { xs: '90%', sm: '350px' } }}
+                    sx={{width: {xs: '90%', sm: '350px'}}}
                 />
             </Box>
 
             {/* Pedigree Section */}
-            <Accordion defaultExpanded={false} sx={{ mb: 2, borderRadius: 2, boxShadow: '0 2px 6px rgba(45,122,95,0.08)' }}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="pedigree-content" id="pedigree-header">
-                    <Typography variant="h5" sx={{ color: '#2d7a5f', fontWeight: 600 }}>
+            <Accordion defaultExpanded={false}
+                       sx={{mb: 2, borderRadius: 2, boxShadow: '0 2px 6px rgba(45,122,95,0.08)'}}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="pedigree-content" id="pedigree-header">
+                    <Typography variant="h5" sx={{color: '#2d7a5f', fontWeight: 600}}>
                         Pedigree Classes (£5)
                     </Typography>
                 </AccordionSummary>
@@ -194,17 +198,34 @@ const TicketSelection = () => {
                     <Box className="ticket-grid">
                         {filteredPedigree.map((ticket, idx) => (
                             <Card key={ticket.name} className="ticket-card small-card">
-                                <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                                    <Typography variant="h6" component="div" sx={{ color: '#2d7a5f', fontWeight: 600, fontSize: '1.05rem', textAlign: 'center' }}>
+                                <CardContent
+                                    style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8}}>
+                                    <Typography variant="h6" component="div" sx={{
+                                        color: '#2d7a5f',
+                                        fontWeight: 600,
+                                        fontSize: '1.05rem',
+                                        textAlign: 'center'
+                                    }}>
                                         {ticket.name}
                                     </Typography>
-                                    <Typography variant="body2" sx={{ color: '#888', fontWeight: 500, fontSize: '0.95rem', marginBottom: 1 }}>
+                                    <Typography variant="body2" sx={{
+                                        color: '#888',
+                                        fontWeight: 500,
+                                        fontSize: '0.95rem',
+                                        marginBottom: 1
+                                    }}>
                                         £{ticket.price}
                                     </Typography>
                                     <Box display="flex" alignItems="center" gap={1}>
-                                        <Button size="small" onClick={() => handleDecrement(ticket)} style={{ minWidth: 32, padding: 4 }}><RemoveIcon /></Button>
-                                        <Typography variant="body1" sx={{ minWidth: 18, textAlign: 'center', fontWeight: 600 }}>{selectedTickets[ticket.name]?.quantity || 0}</Typography>
-                                        <Button size="small" onClick={() => handleIncrement(ticket)} style={{ minWidth: 32, padding: 4 }}><AddIcon /></Button>
+                                        <Button size="small" onClick={() => handleDecrement(ticket)}
+                                                style={{minWidth: 32, padding: 4}}><RemoveIcon/></Button>
+                                        <Typography variant="body1" sx={{
+                                            minWidth: 18,
+                                            textAlign: 'center',
+                                            fontWeight: 600
+                                        }}>{selectedTickets[ticket.name]?.quantity || 0}</Typography>
+                                        <Button size="small" onClick={() => handleIncrement(ticket)}
+                                                style={{minWidth: 32, padding: 4}}><AddIcon/></Button>
                                     </Box>
                                 </CardContent>
                             </Card>
@@ -213,9 +234,10 @@ const TicketSelection = () => {
                 </AccordionDetails>
             </Accordion>
             {/* All Dog Section */}
-            <Accordion defaultExpanded={false} sx={{ mb: 2, borderRadius: 2, boxShadow: '0 2px 6px rgba(76,175,80,0.08)' }}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="alldog-content" id="alldog-header">
-                    <Typography variant="h5" sx={{ color: '#388e3c', fontWeight: 600 }}>
+            <Accordion defaultExpanded={false}
+                       sx={{mb: 2, borderRadius: 2, boxShadow: '0 2px 6px rgba(76,175,80,0.08)'}}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="alldog-content" id="alldog-header">
+                    <Typography variant="h5" sx={{color: '#388e3c', fontWeight: 600}}>
                         All Dog Classes (£4)
                     </Typography>
                 </AccordionSummary>
@@ -223,17 +245,34 @@ const TicketSelection = () => {
                     <Box className="ticket-grid">
                         {filteredAllDog.map((ticket, idx) => (
                             <Card key={ticket.name} className="ticket-card small-card">
-                                <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                                    <Typography variant="h6" component="div" sx={{ color: '#388e3c', fontWeight: 600, fontSize: '1.05rem', textAlign: 'center' }}>
+                                <CardContent
+                                    style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8}}>
+                                    <Typography variant="h6" component="div" sx={{
+                                        color: '#388e3c',
+                                        fontWeight: 600,
+                                        fontSize: '1.05rem',
+                                        textAlign: 'center'
+                                    }}>
                                         {ticket.name}
                                     </Typography>
-                                    <Typography variant="body2" sx={{ color: '#888', fontWeight: 500, fontSize: '0.95rem', marginBottom: 1 }}>
+                                    <Typography variant="body2" sx={{
+                                        color: '#888',
+                                        fontWeight: 500,
+                                        fontSize: '0.95rem',
+                                        marginBottom: 1
+                                    }}>
                                         £{ticket.price}
                                     </Typography>
                                     <Box display="flex" alignItems="center" gap={1}>
-                                        <Button size="small" onClick={() => handleDecrement(ticket)} style={{ minWidth: 32, padding: 4 }}><RemoveIcon /></Button>
-                                        <Typography variant="body1" sx={{ minWidth: 18, textAlign: 'center', fontWeight: 600 }}>{selectedTickets[ticket.name]?.quantity || 0}</Typography>
-                                        <Button size="small" onClick={() => handleIncrement(ticket)} style={{ minWidth: 32, padding: 4 }}><AddIcon /></Button>
+                                        <Button size="small" onClick={() => handleDecrement(ticket)}
+                                                style={{minWidth: 32, padding: 4}}><RemoveIcon/></Button>
+                                        <Typography variant="body1" sx={{
+                                            minWidth: 18,
+                                            textAlign: 'center',
+                                            fontWeight: 600
+                                        }}>{selectedTickets[ticket.name]?.quantity || 0}</Typography>
+                                        <Button size="small" onClick={() => handleIncrement(ticket)}
+                                                style={{minWidth: 32, padding: 4}}><AddIcon/></Button>
                                     </Box>
                                 </CardContent>
                             </Card>

@@ -1,18 +1,9 @@
 // src/components/Payments.js
-import React, { useState } from 'react';
-import {
-    Container,
-    Typography,
-    TextField,
-    Button,
-    Grid,
-    IconButton,
-    Box,
-    MenuItem
-} from '@mui/material';
-import { Add, Remove } from '@mui/icons-material';
+import React, {useState} from 'react';
+import {Box, Button, Container, Grid, IconButton, MenuItem, TextField, Typography} from '@mui/material';
+import {Add, Remove} from '@mui/icons-material';
 import './payments.css'; // Import custom CSS for additional styling if needed
-import { useLocation } from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 const Payments = () => {
     const location = useLocation();
@@ -29,10 +20,10 @@ const Payments = () => {
         email: '',
     });
 
-    const [dogs, setDogs] = useState([{ name: '', date_of_birth: '', sex: '' }]);
+    const [dogs, setDogs] = useState([{name: '', date_of_birth: '', sex: ''}]);
 
     const handleUserInfoChange = (event) => {
-        const { name, value } = event.target;
+        const {name, value} = event.target;
         setUserInfo((prevInfo) => ({
             ...prevInfo,
             [name]: value,
@@ -40,15 +31,15 @@ const Payments = () => {
     };
 
     const handleDogChange = (index, event) => {
-        const { name, value } = event.target;
+        const {name, value} = event.target;
         const updatedDogs = dogs.map((dog, i) =>
-            i === index ? { ...dog, [name]: value } : dog
+            i === index ? {...dog, [name]: value} : dog
         );
         setDogs(updatedDogs);
     };
 
     const handleAddDog = () => {
-        setDogs([...dogs, { name: '', date_of_birth: '', sex: '' }]);
+        setDogs([...dogs, {name: '', date_of_birth: '', sex: ''}]);
     };
 
     const handleRemoveDog = (index) => {
@@ -79,7 +70,7 @@ const Payments = () => {
 
             const response = await fetch(`https://api.fawleydogshow.com/payment/create?${queryParams.toString()}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     doggie_info: doggieDict,
                     pedigree_tickets: pedigreeTickets,
@@ -92,7 +83,7 @@ const Payments = () => {
             if (data.url) {
                 window.location.href = data.url; // Redirect to Stripe Checkout
             } else {
-                setErrorMessage( 'Something went wrong. Please try again. Error: ' + data.detail);
+                setErrorMessage('Something went wrong. Please try again. Error: ' + data.detail);
                 console.error('Failed to get redirect URL:', data);
             }
         } catch (error) {
@@ -102,11 +93,25 @@ const Payments = () => {
     };
 
     return (
-        <Container maxWidth="sm" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <Typography variant="h4" gutterBottom className="payment-title" style={{ color: '#2d7a5f', fontWeight: 700, textAlign: 'center', marginTop: 40, marginBottom: 32, letterSpacing: 1 }}>
+        <Container maxWidth="sm"
+                   style={{minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+            <Typography variant="h4" gutterBottom className="payment-title" style={{
+                color: '#2d7a5f',
+                fontWeight: 700,
+                textAlign: 'center',
+                marginTop: 40,
+                marginBottom: 32,
+                letterSpacing: 1
+            }}>
                 Payment Information
             </Typography>
-            <form onSubmit={handleSubmit} className="payment-form" style={{ background: '#fff', borderRadius: 18, boxShadow: '0 2px 8px rgba(45,122,95,0.06)', padding: 28, marginBottom: 24 }}>
+            <form onSubmit={handleSubmit} className="payment-form" style={{
+                background: '#fff',
+                borderRadius: 18,
+                boxShadow: '0 2px 8px rgba(45,122,95,0.06)',
+                padding: 28,
+                marginBottom: 24
+            }}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
                         <TextField
@@ -141,11 +146,13 @@ const Payments = () => {
                     </Grid>
                 </Grid>
                 <Box mt={4}>
-                    <Typography variant="h5" gutterBottom className="doggie-info-title" style={{ color: '#2d7a5f', fontWeight: 600, textAlign: 'center', marginBottom: 18 }}>
+                    <Typography variant="h5" gutterBottom className="doggie-info-title"
+                                style={{color: '#2d7a5f', fontWeight: 600, textAlign: 'center', marginBottom: 18}}>
                         Doggie Info
                     </Typography>
                     {dogs.map((dog, index) => (
-                        <Grid container spacing={2} key={index} alignItems="center" className="dog-info-container" style={{ marginBottom: 8, background: '#f8f9fa', borderRadius: 10, padding: 10 }}>
+                        <Grid container spacing={2} key={index} alignItems="center" className="dog-info-container"
+                              style={{marginBottom: 8, background: '#f8f9fa', borderRadius: 10, padding: 10}}>
                             <Grid item xs={12} sm={4}>
                                 <TextField
                                     label={`Dog ${index + 1} Name`}
@@ -161,7 +168,7 @@ const Payments = () => {
                                     label="Date of Birth (Year and Month)"
                                     name="date_of_birth"
                                     type="month"
-                                    InputLabelProps={{ shrink: true }}
+                                    InputLabelProps={{shrink: true}}
                                     value={dog.date_of_birth}
                                     onChange={(event) => handleDogChange(index, event)}
                                     fullWidth
@@ -183,9 +190,9 @@ const Payments = () => {
                                     <MenuItem value="Female">Female</MenuItem>
                                 </TextField>
                             </Grid>
-                            <Grid item xs={12} sm={1} style={{ textAlign: 'center' }}>
+                            <Grid item xs={12} sm={1} style={{textAlign: 'center'}}>
                                 <IconButton onClick={() => handleRemoveDog(index)} disabled={dogs.length === 1}>
-                                    <Remove />
+                                    <Remove/>
                                 </IconButton>
                             </Grid>
                         </Grid>
@@ -194,9 +201,9 @@ const Payments = () => {
                 <Box mt={2} textAlign="center">
                     <Button
                         variant="outlined"
-                        startIcon={<Add />}
+                        startIcon={<Add/>}
                         onClick={handleAddDog}
-                        style={{ borderRadius: 10, color: '#2d7a5f', borderColor: '#2d7a5f', fontWeight: 600 }}
+                        style={{borderRadius: 10, color: '#2d7a5f', borderColor: '#2d7a5f', fontWeight: 600}}
                     >
                         Add Another Dog
                     </Button>
@@ -219,7 +226,7 @@ const Payments = () => {
                 </Box>
             </form>
             {errorMessage && (
-                <Typography color="error" sx={{ mt: 2 }}>
+                <Typography color="error" sx={{mt: 2}}>
                     {errorMessage}
                 </Typography>
             )}
