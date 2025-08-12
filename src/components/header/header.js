@@ -93,7 +93,7 @@ const Header = () => {
                             <ListItem button onClick={() => handleMenuItemClick('/about')}> <ListItemText primary="About Us" primaryTypographyProps={{ style: { color: '#2d7a5f', fontWeight: 600 } }} /> </ListItem>
                             <ListItem button onClick={() => handleMenuItemClick('/what-to-expect')}> <ListItemText primary="What To Expect" primaryTypographyProps={{ style: { color: '#2d7a5f', fontWeight: 600 } }} /> </ListItem>
                             <ListItem button onClick={() => handleMenuItemClick('/contact')}> <ListItemText primary="Contact Us" primaryTypographyProps={{ style: { color: '#2d7a5f', fontWeight: 600 } }} /> </ListItem>
-                            <ListItem button onClick={() => handleMenuItemClick('/donation')}> <ListItemText primary="Donate" primaryTypographyProps={{ style: { color: '#2d7a5f', fontWeight: 600 } }} /> </ListItem>
+                            <ListItem button onClick={() => handleMenuItemClick('/donations')}> <ListItemText primary="Donate" primaryTypographyProps={{ style: { color: '#2d7a5f', fontWeight: 600 } }} /> </ListItem>
                         </List>
                         <div style={{ borderTop: '1px solid #e0e0e0', margin: '12px 0' }} />
                         <List>
