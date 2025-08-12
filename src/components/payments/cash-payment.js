@@ -24,15 +24,7 @@ const allTickets = [
 ];
 
 const CashPayment = () => {
-    const [auth, setAuth] = useState(false);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [authError, setAuthError] = useState('');
-    const [userInfo, setUserInfo] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-    });
+    const [userInfo, setUserInfo] = useState({ firstName: '', lastName: '', email: '' });
     const [dogs, setDogs] = useState([{ name: '', date_of_birth: '', sex: '' }]);
     const [selectedTickets, setSelectedTickets] = useState({});
     const [cashAmount, setCashAmount] = useState('');
@@ -123,165 +115,99 @@ const CashPayment = () => {
         }
     };
 
-    const handleAuthSubmit = (e) => {
-        e.preventDefault();
-        const allowed = ["ed", "ian", "sally"];
-        if (allowed.includes(username.trim().toLowerCase())) {
-            setAuth(true);
-            setAuthError('');
-        } else {
-            setAuthError('Invalid username');
-        }
-    };
-
-    if (!auth) {
-        return (
-            <Container maxWidth="xs" sx={{ mt: 8 }}>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        p: 4,
-                        border: '1px solid #ccc',
-                        borderRadius: 2,
-                        background: '#fff',
-                    }}
-                >
-                    <Typography variant="h5" gutterBottom>Cash Payment Login</Typography>
-                    <form onSubmit={handleAuthSubmit} style={{ width: '100%' }}>
-                        <TextField
-                            label="Username"
-                            value={username}
-                            onChange={e => setUsername(e.target.value)}
-                            fullWidth
-                            margin="normal"
-                            autoFocus
-                        />
-                        <TextField
-                            label="Password"
-                            type="password"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            fullWidth
-                            margin="normal"
-                        />
-                        {authError && (
-                            <Typography color="error" sx={{ mt: 1 }}>{authError}</Typography>
-                        )}
-                        <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
-                            Login
-                        </Button>
-                    </form>
-                </Box>
-            </Container>
-        );
-    }
-
     return (
         <Container>
-            <Box mt={2} mb={4}>
-                <Typography variant="h4" gutterBottom>Record Cash Payment</Typography>
-            </Box>
             <form onSubmit={handleSubmit}>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={4}>
-                        <TextField
-                            label="First Name"
-                            name="firstName"
-                            value={userInfo.firstName}
-                            onChange={handleUserInfoChange}
-                            fullWidth
-                            required
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField
-                            label="Last Name"
-                            name="lastName"
-                            value={userInfo.lastName}
-                            onChange={handleUserInfoChange}
-                            fullWidth
-                            required
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField
-                            label="Email"
-                            name="email"
-                            type="email"
-                            value={userInfo.email}
-                            onChange={handleUserInfoChange}
-                            fullWidth
-                            helperText="Recommended for order confirmation, but not required."
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField
-                            label="Cash Amount (£)"
-                            name="cashAmount"
-                            type="number"
-                            value={cashAmount}
-                            onChange={handleCashAmountChange}
-                            fullWidth
-                            required
-                            inputProps={{ min: 0, step: '0.01' }}
-                        />
-                    </Grid>
-                </Grid>
-                <Box mt={4}>
-                    <Typography variant="h5" gutterBottom>Doggie Info</Typography>
-                    {dogs.map((dog, index) => (
-                        <Grid container spacing={2} key={index} alignItems="center">
-                            <Grid item xs={12} sm={4}>
-                                <TextField
-                                    label={`Dog ${index + 1} Name`}
-                                    name="name"
-                                    value={dog.name}
-                                    onChange={e => handleDogChange(index, e)}
-                                    fullWidth
-                                    required
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={4}>
-                                <TextField
-                                    label="Date of Birth (Year and Month)"
-                                    name="date_of_birth"
-                                    type="month"
-                                    InputLabelProps={{ shrink: true }}
-                                    value={dog.date_of_birth}
-                                    onChange={e => handleDogChange(index, e)}
-                                    fullWidth
-                                    required
-                                    sx={{ minHeight: { xs: 56, sm: 56 }, '.MuiInputBase-root': { minHeight: { xs: 56, sm: 56 } } }}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={3}>
-                                <TextField
-                                    select
-                                    label="Sex"
-                                    name="sex"
-                                    value={dog.sex}
-                                    onChange={e => handleDogChange(index, e)}
-                                    fullWidth
-                                    required
-                                >
-                                    <MenuItem value="">Select</MenuItem>
-                                    <MenuItem value="Male">Male</MenuItem>
-                                    <MenuItem value="Female">Female</MenuItem>
-                                </TextField>
-                            </Grid>
-                            <Grid item xs={12} sm={1}>
-                                <IconButton onClick={() => handleRemoveDog(index)} disabled={dogs.length === 1}>
-                                    <Remove />
-                                </IconButton>
-                            </Grid>
+                <Box mt={2} mb={4}>
+                    <Typography variant="h4" gutterBottom>Record Cash Payment</Typography>
+                    <Grid container spacing={2} mb={2}>
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                label="First Name"
+                                name="firstName"
+                                value={userInfo.firstName}
+                                onChange={handleUserInfoChange}
+                                fullWidth
+                                required
+                            />
                         </Grid>
-                    ))}
-                    <Box mt={2} textAlign="center">
-                        <Button variant="outlined" startIcon={<Add />} onClick={handleAddDog}>
-                            Add Another Dog
-                        </Button>
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                label="Last Name"
+                                name="lastName"
+                                value={userInfo.lastName}
+                                onChange={handleUserInfoChange}
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                label="Email"
+                                name="email"
+                                type="email"
+                                value={userInfo.email}
+                                onChange={handleUserInfoChange}
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                    </Grid>
+                    <Box>
+                        <Typography variant="h6" gutterBottom>Dog Information</Typography>
+                        {dogs.map((dog, index) => (
+                            <Grid container spacing={2} key={index} mb={2}>
+                                <Grid item xs={12} sm={3}>
+                                    <TextField
+                                        label="Dog's Name"
+                                        name="name"
+                                        value={dog.name}
+                                        onChange={e => handleDogChange(index, e)}
+                                        fullWidth
+                                        required
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <TextField
+                                        label="Date of Birth (Year and Month)"
+                                        name="date_of_birth"
+                                        type="month"
+                                        InputLabelProps={{ shrink: true }}
+                                        value={dog.date_of_birth}
+                                        onChange={e => handleDogChange(index, e)}
+                                        fullWidth
+                                        required
+                                        sx={{ minHeight: { xs: 56, sm: 56 }, '.MuiInputBase-root': { minHeight: { xs: 56, sm: 56 } } }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={3}>
+                                    <TextField
+                                        select
+                                        label="Sex"
+                                        name="sex"
+                                        value={dog.sex}
+                                        onChange={e => handleDogChange(index, e)}
+                                        fullWidth
+                                        required
+                                    >
+                                        <MenuItem value="">Select</MenuItem>
+                                        <MenuItem value="Male">Male</MenuItem>
+                                        <MenuItem value="Female">Female</MenuItem>
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={12} sm={1} sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <IconButton onClick={() => handleRemoveDog(index)} disabled={dogs.length === 1} aria-label="Remove Dog">
+                                        <Remove />
+                                    </IconButton>
+                                </Grid>
+                            </Grid>
+                        ))}
+
+                        <Box mt={2} textAlign="center">
+                            <Button variant="outlined" startIcon={<Add />} onClick={handleAddDog}>
+                                Add Another Dog
+                            </Button>
+                        </Box>
                     </Box>
                 </Box>
                 <Box mt={4}>

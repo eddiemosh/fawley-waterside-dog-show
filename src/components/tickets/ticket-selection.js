@@ -191,35 +191,27 @@ const TicketSelection = () => {
                     </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Grid container spacing={2} className="ticket-grid" justifyContent="center">
-                        {filteredPedigree.map((ticket) => (
-                            <Grid item xs={12} sm={6} md={4} key={ticket.name}>
-                                <Card className="ticket-card small-card" style={{
-                                    borderRadius: 18,
-                                    boxShadow: '0 4px 24px rgba(45,122,95,0.08)',
-                                    background: '#fff',
-                                    padding: 12
-                                }}>
-                                    <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                                        <Typography variant="h6" component="div" sx={{ color: '#2d7a5f', fontWeight: 600, fontSize: '1.05rem', textAlign: 'center' }}>
-                                            {ticket.name}
-                                        </Typography>
-                                        <Typography variant="body2" sx={{ color: '#888', fontWeight: 500, fontSize: '0.95rem', marginBottom: 1 }}>
-                                            £{ticket.price}
-                                        </Typography>
-                                        <Box display="flex" alignItems="center" gap={1}>
-                                            <Button size="small" onClick={() => handleDecrement(ticket)} style={{ minWidth: 32, padding: 4 }}><RemoveIcon /></Button>
-                                            <Typography variant="body1" sx={{ minWidth: 18, textAlign: 'center', fontWeight: 600 }}>{selectedTickets[ticket.name]?.quantity || 0}</Typography>
-                                            <Button size="small" onClick={() => handleIncrement(ticket)} style={{ minWidth: 32, padding: 4 }}><AddIcon /></Button>
-                                        </Box>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+                    <Box className="ticket-grid">
+                        {filteredPedigree.map((ticket, idx) => (
+                            <Card key={ticket.name} className="ticket-card small-card">
+                                <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                                    <Typography variant="h6" component="div" sx={{ color: '#2d7a5f', fontWeight: 600, fontSize: '1.05rem', textAlign: 'center' }}>
+                                        {ticket.name}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ color: '#888', fontWeight: 500, fontSize: '0.95rem', marginBottom: 1 }}>
+                                        £{ticket.price}
+                                    </Typography>
+                                    <Box display="flex" alignItems="center" gap={1}>
+                                        <Button size="small" onClick={() => handleDecrement(ticket)} style={{ minWidth: 32, padding: 4 }}><RemoveIcon /></Button>
+                                        <Typography variant="body1" sx={{ minWidth: 18, textAlign: 'center', fontWeight: 600 }}>{selectedTickets[ticket.name]?.quantity || 0}</Typography>
+                                        <Button size="small" onClick={() => handleIncrement(ticket)} style={{ minWidth: 32, padding: 4 }}><AddIcon /></Button>
+                                    </Box>
+                                </CardContent>
+                            </Card>
                         ))}
-                    </Grid>
+                    </Box>
                 </AccordionDetails>
             </Accordion>
-
             {/* All Dog Section */}
             <Accordion defaultExpanded sx={{ mb: 2, borderRadius: 2, boxShadow: '0 2px 6px rgba(76,175,80,0.08)' }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="alldog-content" id="alldog-header">
@@ -228,32 +220,25 @@ const TicketSelection = () => {
                     </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Grid container spacing={2} className="ticket-grid" justifyContent="center">
-                        {filteredAllDog.map((ticket) => (
-                            <Grid item xs={12} sm={6} md={4} key={ticket.name}>
-                                <Card className="ticket-card small-card" style={{
-                                    borderRadius: 18,
-                                    boxShadow: '0 4px 24px rgba(76,175,80,0.08)',
-                                    background: '#fff',
-                                    padding: 12
-                                }}>
-                                    <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                                        <Typography variant="h6" component="div" sx={{ color: '#388e3c', fontWeight: 600, fontSize: '1.05rem', textAlign: 'center' }}>
-                                            {ticket.name}
-                                        </Typography>
-                                        <Typography variant="body2" sx={{ color: '#888', fontWeight: 500, fontSize: '0.95rem', marginBottom: 1 }}>
-                                            £{ticket.price}
-                                        </Typography>
-                                        <Box display="flex" alignItems="center" gap={1}>
-                                            <Button size="small" onClick={() => handleDecrement(ticket)} style={{ minWidth: 32, padding: 4 }}><RemoveIcon /></Button>
-                                            <Typography variant="body1" sx={{ minWidth: 18, textAlign: 'center', fontWeight: 600 }}>{selectedTickets[ticket.name]?.quantity || 0}</Typography>
-                                            <Button size="small" onClick={() => handleIncrement(ticket)} style={{ minWidth: 32, padding: 4 }}><AddIcon /></Button>
-                                        </Box>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+                    <Box className="ticket-grid">
+                        {filteredAllDog.map((ticket, idx) => (
+                            <Card key={ticket.name} className="ticket-card small-card">
+                                <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                                    <Typography variant="h6" component="div" sx={{ color: '#388e3c', fontWeight: 600, fontSize: '1.05rem', textAlign: 'center' }}>
+                                        {ticket.name}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ color: '#888', fontWeight: 500, fontSize: '0.95rem', marginBottom: 1 }}>
+                                        £{ticket.price}
+                                    </Typography>
+                                    <Box display="flex" alignItems="center" gap={1}>
+                                        <Button size="small" onClick={() => handleDecrement(ticket)} style={{ minWidth: 32, padding: 4 }}><RemoveIcon /></Button>
+                                        <Typography variant="body1" sx={{ minWidth: 18, textAlign: 'center', fontWeight: 600 }}>{selectedTickets[ticket.name]?.quantity || 0}</Typography>
+                                        <Button size="small" onClick={() => handleIncrement(ticket)} style={{ minWidth: 32, padding: 4 }}><AddIcon /></Button>
+                                    </Box>
+                                </CardContent>
+                            </Card>
                         ))}
-                    </Grid>
+                    </Box>
                 </AccordionDetails>
             </Accordion>
 
