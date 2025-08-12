@@ -162,13 +162,13 @@ const TicketSelection = () => {
     const filteredAllDog = filteredTickets.filter(t => t.section === 'All Dog');
 
     return (
-        <Container maxWidth="sm" sx={{ px: { xs: 0, sm: 2 }, minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <Typography variant="h2" gutterBottom className="ticket-selection-title" style={{
+        <Container maxWidth="sm" sx={{ px: { xs: 0, sm: 2 }, minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', mt: { xs: 2, sm: 6 } }}>
+            <Typography variant="h3" gutterBottom className="ticket-selection-title" style={{
                 textAlign: 'center',
                 fontWeight: 700,
                 color: '#2d7a5f',
-                marginTop: 40,
-                marginBottom: 32,
+                marginTop: 16,
+                marginBottom: 24,
                 letterSpacing: 1
             }}>
                 Select Tickets
@@ -184,7 +184,7 @@ const TicketSelection = () => {
             </Box>
 
             {/* Pedigree Section */}
-            <Accordion defaultExpanded sx={{ mb: 2, borderRadius: 2, boxShadow: '0 2px 6px rgba(45,122,95,0.08)' }}>
+            <Accordion defaultExpanded={false} sx={{ mb: 2, borderRadius: 2, boxShadow: '0 2px 6px rgba(45,122,95,0.08)' }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="pedigree-content" id="pedigree-header">
                     <Typography variant="h5" sx={{ color: '#2d7a5f', fontWeight: 600 }}>
                         Pedigree Classes (£5)
@@ -213,7 +213,7 @@ const TicketSelection = () => {
                 </AccordionDetails>
             </Accordion>
             {/* All Dog Section */}
-            <Accordion defaultExpanded sx={{ mb: 2, borderRadius: 2, boxShadow: '0 2px 6px rgba(76,175,80,0.08)' }}>
+            <Accordion defaultExpanded={false} sx={{ mb: 2, borderRadius: 2, boxShadow: '0 2px 6px rgba(76,175,80,0.08)' }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="alldog-content" id="alldog-header">
                     <Typography variant="h5" sx={{ color: '#388e3c', fontWeight: 600 }}>
                         All Dog Classes (£4)

@@ -51,7 +51,9 @@
 
 @media (max-width: 600px) {
     .ticket-selection-title {
-        font-size: 2rem;
+        font-size: 1.3rem;
+        margin-top: 12px;
+        margin-bottom: 18px;
     }
     /* Keep 2 per row on mobile */
     .ticket-grid {

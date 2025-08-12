@@ -19,59 +19,22 @@ const Events = () => {
 
     return (
         <Container maxWidth="sm" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <Typography variant="h3" gutterBottom style={{
-                textAlign: 'center',
-                fontWeight: 700,
-                color: '#2d7a5f',
-                marginTop: 40,
-                marginBottom: 32,
-                letterSpacing: 1
-            }}>
+            <Typography className="upcoming-events" variant="h3" gutterBottom>
                 Upcoming Events
             </Typography>
-            <Box style={{ display: 'flex', flexDirection: 'column', gap: 32, alignItems: 'center', width: '100%' }}>
+            <Box className="events-container">
                 {eventsList.map((event, index) => (
-                    <Box key={index} style={{
-                        background: '#fff',
-                        borderRadius: 18,
-                        boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
-                        padding: '32px 24px',
-                        minWidth: 260,
-                        maxWidth: 400,
-                        width: '100%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: 16
-                    }}>
-                        <IconButton style={{
-                            background: 'linear-gradient(90deg, #2d7a5f 0%, #4caf50 100%)',
-                            color: '#fff',
-                            fontSize: 32,
-                            width: 56,
-                            height: 56,
-                            marginBottom: 8
-                        }}>
+                    <Box className="event-box" key={index}>
+                        <IconButton className="event-icon">
                             {event.icon}
                         </IconButton>
-                        <Typography style={{ fontSize: '1.2rem', fontWeight: 600, color: '#2d7a5f', marginBottom: 8, textAlign: 'center' }}>
+                        <Typography className="event-date">
                             {event.date}
                         </Typography>
                         <Button
+                            className="view-tickets-button"
                             variant="contained"
                             onClick={handleEventClick}
-                            style={{
-                                fontSize: '1.1rem',
-                                padding: '10px 32px',
-                                borderRadius: 18,
-                                background: 'linear-gradient(90deg, #2d7a5f 0%, #4caf50 100%)',
-                                color: '#fff',
-                                fontWeight: 600,
-                                letterSpacing: 1,
-                                border: 'none',
-                                minWidth: 140,
-                                boxShadow: '0 2px 8px rgba(76,175,80,0.08)'
-                            }}
                         >
                             View Tickets
                         </Button>

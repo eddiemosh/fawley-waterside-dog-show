@@ -9,8 +9,7 @@ import {
     List,
     ListItem,
     ListItemText,
-    MenuItem,
-    Menu
+    Snackbar
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -18,7 +17,8 @@ import {useNavigate} from 'react-router-dom';
 
 const Header = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [anchorElProfile, setAnchorElProfile] = useState(null);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMsg, setSnackbarMsg] = useState("");
     const navigate = useNavigate();
 
     const handleMenuClick = () => {
@@ -29,22 +29,14 @@ const Header = () => {
         setDrawerOpen(false);
     };
 
-    const handleProfileClick = (event) => {
-        setAnchorElProfile(event.currentTarget);
-    };
-
-    const handleProfileClose = () => {
-        setAnchorElProfile(null);
+    const handleProfileClick = () => {
+        setSnackbarMsg("Oops, we haven't implemented this bit yet. Come back soon!");
+        setSnackbarOpen(true);
     };
 
     const handleMenuItemClick = (page) => {
         handleDrawerClose();
         navigate(page); // Navigate to the selected page
-    };
-
-    const handleProfileItemClick = (option) => {
-        handleProfileClose();
-        console.log(option); // Handle profile menu item click logic here
     };
 
     return (
@@ -102,16 +94,14 @@ const Header = () => {
                         </List>
                     </div>
                 </Drawer>
-                <Menu
-                    anchorEl={anchorElProfile}
-                    // open={Boolean(anchorElProfile)}
-                    onClose={handleProfileClose}
-                >
-                    <MenuItem onClick={() => handleProfileItemClick('Manage Account')}>Manage Account</MenuItem>
-                    <MenuItem onClick={() => handleProfileItemClick('Settings')}>Settings</MenuItem>
-                    <MenuItem onClick={() => handleProfileItemClick('Logout')}>Logout</MenuItem>
-                </Menu>
             </Toolbar>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={2000}
+                onClose={() => setSnackbarOpen(false)}
+                message={snackbarMsg}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            />
         </AppBar>
     );
 };
