@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
-    Container,
-    Typography,
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Box,
+    Button,
     Card,
     CardContent,
-    Button,
-    Box,
     CircularProgress,
-    TextField,
+    Collapse,
+    Container,
+    InputAdornment,
     List,
     ListItem,
     ListItemText,
-    Collapse,
-    InputAdornment,
-    Accordion,
-    AccordionSummary,
-    AccordionDetails
+    TextField,
+    Typography
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
@@ -23,38 +23,38 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 // Ticket definitions (copied from ticket-selection.js)
 const pedigreeTickets = [
-    { name: "Any Puppy (6-12 mths)", price: 5 },
-    { name: "Any Junior (12-18 mths)", price: 5 },
-    { name: "Any Gundog", price: 5 },
-    { name: "Any Utility", price: 5 },
-    { name: "Any Hound", price: 5 },
-    { name: "Any Toy", price: 5 },
-    { name: "Any Working", price: 5 },
-    { name: "Any Pastoral", price: 5 },
-    { name: "Any Terrier", price: 5 },
-    { name: "Any Open", price: 5 },
-    { name: "Any Veteran", price: 5 },
-    { name: "Junior Handler (U16)", price: 5 }
+    {name: "Any Puppy (6-12 mths)", price: 5},
+    {name: "Any Junior (12-18 mths)", price: 5},
+    {name: "Any Gundog", price: 5},
+    {name: "Any Utility", price: 5},
+    {name: "Any Hound", price: 5},
+    {name: "Any Toy", price: 5},
+    {name: "Any Working", price: 5},
+    {name: "Any Pastoral", price: 5},
+    {name: "Any Terrier", price: 5},
+    {name: "Any Open", price: 5},
+    {name: "Any Veteran", price: 5},
+    {name: "Junior Handler (U16)", price: 5}
 ];
 const allDogTickets = [
-    { name: "Puppy", price: 4 },
-    { name: "Prettiest", price: 4 },
-    { name: "Best Condition", price: 4 },
-    { name: "Best Rescue", price: 4 },
-    { name: "Waggiest Tail", price: 4 },
-    { name: "Child's Best Friend", price: 4 },
-    { name: "Fancy Dress", price: 4 },
-    { name: "Handsome", price: 4 },
-    { name: "Fluffiest", price: 4 },
-    { name: "Scruffiest", price: 4 },
-    { name: "Smooth", price: 4 },
-    { name: "Looks Like Owner", price: 4 },
-    { name: "Obedience", price: 4 },
-    { name: "Golden Oldie", price: 4 }
+    {name: "Puppy", price: 4},
+    {name: "Prettiest", price: 4},
+    {name: "Best Condition", price: 4},
+    {name: "Best Rescue", price: 4},
+    {name: "Waggiest Tail", price: 4},
+    {name: "Child's Best Friend", price: 4},
+    {name: "Fancy Dress", price: 4},
+    {name: "Handsome", price: 4},
+    {name: "Fluffiest", price: 4},
+    {name: "Scruffiest", price: 4},
+    {name: "Smooth", price: 4},
+    {name: "Looks Like Owner", price: 4},
+    {name: "Obedience", price: 4},
+    {name: "Golden Oldie", price: 4}
 ];
 const allTickets = [
-    ...pedigreeTickets.map(t => ({ ...t, type: 'Pedigree' })),
-    ...allDogTickets.map(t => ({ ...t, type: 'All Dog' })),
+    ...pedigreeTickets.map(t => ({...t, type: 'Pedigree'})),
+    ...allDogTickets.map(t => ({...t, type: 'All Dog'})),
 ];
 
 // Mapping dictionaries
@@ -137,7 +137,7 @@ const Analytics = () => {
             const response = await fetch(`https://api.fawleydogshow.com/analytics/ticket?ticket=${encodeURIComponent(backendKey)}`);
             if (!response.ok) throw new Error('Failed to fetch analytics');
             const data = await response.json();
-            setAnalytics(prev => ({ ...prev, [ticketName]: data }));
+            setAnalytics(prev => ({...prev, [ticketName]: data}));
         } catch (err) {
             setError(err.message);
         } finally {
@@ -173,7 +173,7 @@ const Analytics = () => {
 
     if (!auth) {
         return (
-            <Container maxWidth="xs" sx={{ mt: 8 }}>
+            <Container maxWidth="xs" sx={{mt: 8}}>
                 <Box
                     sx={{
                         display: 'flex',
@@ -186,7 +186,7 @@ const Analytics = () => {
                     }}
                 >
                     <Typography variant="h5" gutterBottom>Analytics Login</Typography>
-                    <form onSubmit={handleAuthSubmit} style={{ width: '100%' }}>
+                    <form onSubmit={handleAuthSubmit} style={{width: '100%'}}>
                         <TextField
                             label="Username"
                             value={username}
@@ -204,9 +204,9 @@ const Analytics = () => {
                             margin="normal"
                         />
                         {authError && (
-                            <Typography color="error" sx={{ mt: 1 }}>{authError}</Typography>
+                            <Typography color="error" sx={{mt: 1}}>{authError}</Typography>
                         )}
-                        <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+                        <Button type="submit" variant="contained" color="primary" fullWidth sx={{mt: 2}}>
                             Login
                         </Button>
                     </form>
@@ -217,8 +217,8 @@ const Analytics = () => {
 
     return (
         <Container>
-            <Accordion expanded={ticketExpanded} onChange={handleTicketAccordion} sx={{ mt: 3, mb: 2 }}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Accordion expanded={ticketExpanded} onChange={handleTicketAccordion} sx={{mt: 3, mb: 2}}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                     <Typography variant="h5">Ticket Analytics</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -228,20 +228,21 @@ const Analytics = () => {
                             variant="outlined"
                             value={searchTerm}
                             onChange={e => setSearchTerm(e.target.value)}
-                            sx={{ width: { xs: '90%', sm: '350px' } }}
+                            sx={{width: {xs: '90%', sm: '350px'}}}
                         />
                     </Box>
                     <Box display="flex" flexWrap="wrap" gap={2}>
                         {prioritizedTickets
                             .filter(ticket => ticket.name.toLowerCase().includes(searchTerm.toLowerCase()))
                             .map(ticket => (
-                                <Card key={ticket.name} sx={{ minWidth: 250, flex: '1 0 250px', position: 'relative' }}>
+                                <Card key={ticket.name} sx={{minWidth: 250, flex: '1 0 250px', position: 'relative'}}>
                                     <CardContent>
                                         <Typography variant="h6">{ticket.name}</Typography>
-                                        <Typography variant="body2" color="textSecondary">Type: {ticket.type}</Typography>
+                                        <Typography variant="body2"
+                                                    color="textSecondary">Type: {ticket.type}</Typography>
                                         <Button
                                             variant="outlined"
-                                            sx={{ mt: 2 }}
+                                            sx={{mt: 2}}
                                             onClick={() => handleViewAnalytics(ticket.name, ticket.type)}
                                         >
                                             View Analytics
@@ -249,17 +250,25 @@ const Analytics = () => {
                                         {openTicket === ticket.name && (
                                             <Button
                                                 size="small"
-                                                sx={{ position: 'absolute', top: 8, right: 8, minWidth: 0, padding: 0, zIndex: 2, background: 'white' }}
+                                                sx={{
+                                                    position: 'absolute',
+                                                    top: 8,
+                                                    right: 8,
+                                                    minWidth: 0,
+                                                    padding: 0,
+                                                    zIndex: 2,
+                                                    background: 'white'
+                                                }}
                                                 onClick={() => setOpenTicket(null)}
                                                 aria-label="Close analytics"
                                             >
-                                                <CloseIcon fontSize="small" />
+                                                <CloseIcon fontSize="small"/>
                                             </Button>
                                         )}
                                         <Collapse in={openTicket === ticket.name}>
                                             <Box mt={2}>
                                                 {loading ? (
-                                                    <CircularProgress size={24} />
+                                                    <CircularProgress size={24}/>
                                                 ) : error ? (
                                                     <Typography color="error">{error}</Typography>
                                                 ) : (
@@ -277,21 +286,22 @@ const Analytics = () => {
                                                             InputProps={{
                                                                 startAdornment: (
                                                                     <InputAdornment position="start">
-                                                                        <SearchIcon />
+                                                                        <SearchIcon/>
                                                                     </InputAdornment>
                                                                 ),
                                                             }}
-                                                            sx={{ mb: 2 }}
+                                                            sx={{mb: 2}}
                                                         />
                                                         <List>
                                                             {filteredBuyers.length === 0 ? (
                                                                 <ListItem>
-                                                                    <ListItemText primary="No buyers found." />
+                                                                    <ListItemText primary="No buyers found."/>
                                                                 </ListItem>
                                                             ) : (
                                                                 filteredBuyers.map((buyer, idx) => (
                                                                     <ListItem key={idx}>
-                                                                        <ListItemText primary={`${buyer.first_name} ${buyer.last_name}`} />
+                                                                        <ListItemText
+                                                                            primary={`${buyer.first_name} ${buyer.last_name}`}/>
                                                                     </ListItem>
                                                                 ))
                                                             )}
@@ -307,7 +317,7 @@ const Analytics = () => {
                 </AccordionDetails>
             </Accordion>
             <Accordion expanded={orderExpanded} onChange={handleOrderAccordion}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                     <Typography variant="h5">Order Analytics</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -317,11 +327,11 @@ const Analytics = () => {
                             variant="outlined"
                             value={orderSearch}
                             onChange={e => setOrderSearch(e.target.value)}
-                            sx={{ width: { xs: '90%', sm: '350px' } }}
+                            sx={{width: {xs: '90%', sm: '350px'}}}
                         />
                     </Box>
                     {orderLoading ? (
-                        <CircularProgress />
+                        <CircularProgress/>
                     ) : orderError ? (
                         <Typography color="error">{orderError}</Typography>
                     ) : (
@@ -332,18 +342,27 @@ const Analytics = () => {
                                 orderData
                                     .filter(order => order.order_id.toLowerCase().includes(orderSearch.toLowerCase()))
                                     .map(order => (
-                                        <Card key={order.order_id} sx={{ width: '100%', p: 2, background: '#f9f9f9' }}>
-                                            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>Order ID: {order.order_id}</Typography>
-                                            <Typography variant="body2"><b>Name:</b> {order.first_name} {order.last_name}</Typography>
-                                            <Typography variant="body2"><b>Date:</b> {order.date_of_purchase ? new Date(order.date_of_purchase).toLocaleString() : 'N/A'}</Typography>
-                                            <Typography variant="body2"><b>Email:</b> {order.email_address || 'N/A'}</Typography>
+                                        <Card key={order.order_id} sx={{width: '100%', p: 2, background: '#f9f9f9'}}>
+                                            <Typography variant="subtitle1" sx={{fontWeight: 600, mb: 1}}>Order
+                                                ID: {order.order_id}</Typography>
+                                            <Typography
+                                                variant="body2"><b>Name:</b> {order.first_name} {order.last_name}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2"><b>Date:</b> {order.date_of_purchase ? new Date(order.date_of_purchase).toLocaleString() : 'N/A'}
+                                            </Typography>
+                                            <Typography variant="body2"><b>Email:</b> {order.email_address || 'N/A'}
+                                            </Typography>
                                             <Typography variant="body2"><b>Amount:</b> £{order.amount}</Typography>
-                                            <Typography variant="body2"><b>Order Status:</b> {order.order_status ? 'Complete' : 'Incomplete'}</Typography>
+                                            <Typography variant="body2"><b>Order
+                                                Status:</b> {order.order_status ? 'Complete' : 'Incomplete'}
+                                            </Typography>
                                             {/* Pedigree Tickets */}
                                             {order.pedigree_tickets && Object.values(order.pedigree_tickets).some(v => v) && (
                                                 <Box mt={1}>
-                                                    <Typography variant="body2" sx={{ fontWeight: 500 }}>Pedigree Tickets:</Typography>
-                                                    <ul style={{ margin: 0, paddingLeft: 18 }}>
+                                                    <Typography variant="body2" sx={{fontWeight: 500}}>Pedigree
+                                                        Tickets:</Typography>
+                                                    <ul style={{margin: 0, paddingLeft: 18}}>
                                                         {Object.entries(order.pedigree_tickets)
                                                             .filter(([_, v]) => v)
                                                             .map(([k, v]) => (
@@ -355,8 +374,9 @@ const Analytics = () => {
                                             {/* All Dog Tickets */}
                                             {order.all_dog_tickets && Object.values(order.all_dog_tickets).some(v => v) && (
                                                 <Box mt={1}>
-                                                    <Typography variant="body2" sx={{ fontWeight: 500 }}>All Dog Tickets:</Typography>
-                                                    <ul style={{ margin: 0, paddingLeft: 18 }}>
+                                                    <Typography variant="body2" sx={{fontWeight: 500}}>All Dog
+                                                        Tickets:</Typography>
+                                                    <ul style={{margin: 0, paddingLeft: 18}}>
                                                         {Object.entries(order.all_dog_tickets)
                                                             .filter(([_, v]) => v)
                                                             .map(([k, v]) => (
@@ -368,11 +388,12 @@ const Analytics = () => {
                                             {/* Doggie Info */}
                                             {order.doggie_info && order.doggie_info.length > 0 && (
                                                 <Box mt={1}>
-                                                    <Typography variant="body2" sx={{ fontWeight: 500 }}>Doggie Info:</Typography>
-                                                    <ul style={{ margin: 0, paddingLeft: 18 }}>
+                                                    <Typography variant="body2" sx={{fontWeight: 500}}>Doggie
+                                                        Info:</Typography>
+                                                    <ul style={{margin: 0, paddingLeft: 18}}>
                                                         {order.doggie_info.map((dog, idx) => (
                                                             <li key={idx}>
-                                                                <span style={{ fontFamily: 'inherit', fontSize: '1rem' }}>
+                                                                <span style={{fontFamily: 'inherit', fontSize: '1rem'}}>
                                                                     Name: {dog.name}, DOB: {dog.date_of_birth}, Sex: {dog.sex}
                                                                 </span>
                                                             </li>

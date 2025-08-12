@@ -51,13 +51,17 @@
 
 @media (max-width: 600px) {
     .ticket-selection-title {
-        font-size: 2rem;
+        font-size: 1.3rem;
+        margin-top: 12px;
+        margin-bottom: 18px;
     }
+
     /* Keep 2 per row on mobile */
     .ticket-grid {
         grid-template-columns: 1fr 1fr;
         gap: 12px 8px;
     }
+
     .ticket-card,
     .small-card {
         min-width: 0;
@@ -127,5 +131,5 @@
 .MuiAccordion-root {
     margin-bottom: 8px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }

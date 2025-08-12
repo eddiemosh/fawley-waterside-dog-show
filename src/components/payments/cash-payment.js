@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
-    Container,
-    Typography,
-    TextField,
+    Box,
     Button,
+    Card,
+    CardContent,
+    Container,
+    FormControl,
     Grid,
     IconButton,
-    Box,
     MenuItem,
-    FormControl,
     Select,
-    Card,
-    CardContent
+    TextField,
+    Typography
 } from '@mui/material';
-import { Add, Remove } from '@mui/icons-material';
-import { pedigreeTickets, allDogTickets, pedigreeNameMap, allDogNameMap } from '../tickets/ticket-selection';
+import {Add, Remove} from '@mui/icons-material';
+import {allDogNameMap, allDogTickets, pedigreeNameMap, pedigreeTickets} from '../tickets/ticket-selection';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
 const allTickets = [
-    ...pedigreeTickets.map(t => ({ ...t, section: 'Pedigree' })),
-    ...allDogTickets.map(t => ({ ...t, section: 'All Dog' })),
+    ...pedigreeTickets.map(t => ({...t, section: 'Pedigree'})),
+    ...allDogTickets.map(t => ({...t, section: 'All Dog'})),
 ];
 
 const CashPayment = () => {
-    const [userInfo, setUserInfo] = useState({ firstName: '', lastName: '', email: '' });
-    const [dogs, setDogs] = useState([{ name: '', date_of_birth: '', sex: '' }]);
+    const [userInfo, setUserInfo] = useState({firstName: '', lastName: '', email: ''});
+    const [dogs, setDogs] = useState([{name: '', date_of_birth: '', sex: ''}]);
     const [selectedTickets, setSelectedTickets] = useState({});
     const [cashAmount, setCashAmount] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -36,23 +36,23 @@ const CashPayment = () => {
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
     const handleUserInfoChange = (event) => {
-        const { name, value } = event.target;
-        setUserInfo((prev) => ({ ...prev, [name]: value }));
+        const {name, value} = event.target;
+        setUserInfo((prev) => ({...prev, [name]: value}));
     };
 
     const handleDogChange = (index, event) => {
-        const { name, value } = event.target;
-        setDogs(dogs => dogs.map((dog, i) => i === index ? { ...dog, [name]: value } : dog));
+        const {name, value} = event.target;
+        setDogs(dogs => dogs.map((dog, i) => i === index ? {...dog, [name]: value} : dog));
     };
 
-    const handleAddDog = () => setDogs([...dogs, { name: '', date_of_birth: '', sex: '' }]);
+    const handleAddDog = () => setDogs([...dogs, {name: '', date_of_birth: '', sex: ''}]);
     const handleRemoveDog = (index) => setDogs(dogs => dogs.filter((_, i) => i !== index));
 
     const handleTicketChange = (event, ticket) => {
         const quantity = parseInt(event.target.value);
         setSelectedTickets((prev) => ({
             ...prev,
-            [ticket.name]: { quantity, price: ticket.price * quantity },
+            [ticket.name]: {quantity, price: ticket.price * quantity},
         }));
     };
 
@@ -94,7 +94,7 @@ const CashPayment = () => {
 
             const response = await fetch(`https://api.fawleydogshow.com/payment/cash?${queryParams.toString()}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     doggie_info: doggieDict,
                     pedigree_tickets: pedigree,
@@ -172,12 +172,15 @@ const CashPayment = () => {
                                         label="Date of Birth (Year and Month)"
                                         name="date_of_birth"
                                         type="month"
-                                        InputLabelProps={{ shrink: true }}
+                                        InputLabelProps={{shrink: true}}
                                         value={dog.date_of_birth}
                                         onChange={e => handleDogChange(index, e)}
                                         fullWidth
                                         required
-                                        sx={{ minHeight: { xs: 56, sm: 56 }, '.MuiInputBase-root': { minHeight: { xs: 56, sm: 56 } } }}
+                                        sx={{
+                                            minHeight: {xs: 56, sm: 56},
+                                            '.MuiInputBase-root': {minHeight: {xs: 56, sm: 56}}
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={3}>
@@ -195,16 +198,17 @@ const CashPayment = () => {
                                         <MenuItem value="Female">Female</MenuItem>
                                     </TextField>
                                 </Grid>
-                                <Grid item xs={12} sm={1} sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <IconButton onClick={() => handleRemoveDog(index)} disabled={dogs.length === 1} aria-label="Remove Dog">
-                                        <Remove />
+                                <Grid item xs={12} sm={1} sx={{display: 'flex', alignItems: 'center'}}>
+                                    <IconButton onClick={() => handleRemoveDog(index)} disabled={dogs.length === 1}
+                                                aria-label="Remove Dog">
+                                        <Remove/>
                                     </IconButton>
                                 </Grid>
                             </Grid>
                         ))}
 
                         <Box mt={2} textAlign="center">
-                            <Button variant="outlined" startIcon={<Add />} onClick={handleAddDog}>
+                            <Button variant="outlined" startIcon={<Add/>} onClick={handleAddDog}>
                                 Add Another Dog
                             </Button>
                         </Box>
@@ -218,7 +222,7 @@ const CashPayment = () => {
                             variant="outlined"
                             value={ticketSearch}
                             onChange={e => setTicketSearch(e.target.value)}
-                            sx={{ width: { xs: '90%', sm: '350px' } }}
+                            sx={{width: {xs: '90%', sm: '350px'}}}
                         />
                     </Box>
                     <Grid container spacing={2}>
@@ -228,7 +232,7 @@ const CashPayment = () => {
                                     <CardContent>
                                         <Typography variant="h6">{ticket.name}</Typography>
                                         <Typography variant="body2">Section: {ticket.section}</Typography>
-                                        <FormControl fullWidth sx={{ mt: 1 }}>
+                                        <FormControl fullWidth sx={{mt: 1}}>
                                             <Select
                                                 value={selectedTickets[ticket.name]?.quantity || 0}
                                                 onChange={e => handleTicketChange(e, ticket)}
@@ -238,7 +242,7 @@ const CashPayment = () => {
                                                 ))}
                                             </Select>
                                         </FormControl>
-                                        <Typography variant="body2" sx={{ mt: 1 }}>Price: £{ticket.price}</Typography>
+                                        <Typography variant="body2" sx={{mt: 1}}>Price: £{ticket.price}</Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>
@@ -251,14 +255,16 @@ const CashPayment = () => {
                     </Button>
                 </Box>
                 {errorMessage && (
-                    <Typography color="error" sx={{ mt: 2 }}>{errorMessage}</Typography>
+                    <Typography color="error" sx={{mt: 2}}>{errorMessage}</Typography>
                 )}
                 {successMessage && (
-                    <Typography color="primary" sx={{ mt: 2 }}>{successMessage}</Typography>
+                    <Typography color="primary" sx={{mt: 2}}>{successMessage}</Typography>
                 )}
             </form>
-            <Snackbar open={snackbarOpen} autoHideDuration={5000} onClose={() => setSnackbarOpen(false)} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
-                <MuiAlert elevation={6} variant="filled" onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: '100%' }}>
+            <Snackbar open={snackbarOpen} autoHideDuration={5000} onClose={() => setSnackbarOpen(false)}
+                      anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
+                <MuiAlert elevation={6} variant="filled" onClose={() => setSnackbarOpen(false)}
+                          severity={snackbarSeverity} sx={{width: '100%'}}>
                     {snackbarMsg}
                 </MuiAlert>
             </Snackbar>
