@@ -105,6 +105,11 @@ const Analytics = () => {
     const [orderExpanded, setOrderExpanded] = useState(false);
     const [ticketExpanded, setTicketExpanded] = useState(false);
     const [orderSearch, setOrderSearch] = useState('');
+    const [donationExpanded, setDonationExpanded] = useState(false);
+    const [donationData, setDonationData] = useState([]);
+    const [donationLoading, setDonationLoading] = useState(false);
+    const [donationError, setDonationError] = useState(null);
+    const [donationSearch, setDonationSearch] = useState("");
 
     const handleAuthSubmit = (e) => {
         e.preventDefault();
@@ -162,6 +167,21 @@ const Analytics = () => {
     };
     const handleTicketAccordion = (event, expanded) => {
         setTicketExpanded(expanded);
+    };
+    const handleDonationAccordion = (event, expanded) => {
+        setDonationExpanded(expanded);
+        if (expanded && donationData.length === 0 && !donationLoading) {
+            setDonationLoading(true);
+            setDonationError(null);
+            fetch('https://api.fawleydogshow.com/donation')
+                .then(res => {
+                    if (!res.ok) throw new Error('Failed to fetch donation analytics');
+                    return res.json();
+                })
+                .then(data => setDonationData(data))
+                .catch(e => setDonationError(e.message))
+                .finally(() => setDonationLoading(false));
+        }
     };
 
     const buyers = analytics[openTicket] || [];
@@ -401,6 +421,48 @@ const Analytics = () => {
                                                     </ul>
                                                 </Box>
                                             )}
+                                        </Card>
+                                    ))
+                            )}
+                        </Box>
+                    )}
+                </AccordionDetails>
+            </Accordion>
+            <Accordion expanded={donationExpanded} onChange={handleDonationAccordion}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
+                    <Typography variant="h5">Donation Analytics</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Box mb={2} display="flex" justifyContent="flex-start">
+                        <TextField
+                            label="Search by Name or Email"
+                            variant="outlined"
+                            value={donationSearch}
+                            onChange={e => setDonationSearch(e.target.value)}
+                            sx={{width: {xs: '90%', sm: '350px'}}}
+                        />
+                    </Box>
+                    {donationLoading ? (
+                        <CircularProgress/>
+                    ) : donationError ? (
+                        <Typography color="error">{donationError}</Typography>
+                    ) : (
+                        <Box display="flex" flexDirection="column" gap={3}>
+                            {donationData.length === 0 ? (
+                                <Typography>No donations found.</Typography>
+                            ) : (
+                                donationData
+                                    .filter(donation =>
+                                        (`${donation.first_name || ''} ${donation.last_name || ''} ${donation.email_address || ''}`.toLowerCase().includes(donationSearch.toLowerCase()))
+                                    )
+                                    .map((donation, idx) => (
+                                        <Card key={idx} sx={{width: '100%', p: 2, background: '#f9f9f9'}}>
+                                            <Typography variant="subtitle1" sx={{fontWeight: 600, mb: 1}}>
+                                                {donation.first_name || ''} {donation.last_name || ''}
+                                            </Typography>
+                                            <Typography variant="body2"><b>Email:</b> {donation.email_address || 'N/A'}</Typography>
+                                            <Typography variant="body2"><b>Date:</b> {donation.timestamp ? new Date(donation.timestamp).toLocaleString() : 'N/A'}</Typography>
+                                            <Typography variant="body2"><b>Amount:</b> £{donation.amount}</Typography>
                                         </Card>
                                     ))
                             )}
