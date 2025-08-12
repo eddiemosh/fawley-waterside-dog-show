@@ -150,7 +150,7 @@ const Analytics = () => {
         if (expanded && orderData.length === 0 && !orderLoading) {
             setOrderLoading(true);
             setOrderError(null);
-            fetch('https://api.fawleydogshow.com/order/')
+            fetch('https://api.fawleydogshow.com/order')
                 .then(res => {
                     if (!res.ok) throw new Error('Failed to fetch order analytics');
                     return res.json();

@@ -77,7 +77,7 @@ const Payments = () => {
                 email_address: userInfo.email,
             });
 
-            const response = await fetch(`https://api.fawleydogshow.com/payment/create-payment-intent?${queryParams.toString()}`, {
+            const response = await fetch(`https://api.fawleydogshow.com/payment/create?${queryParams.toString()}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
