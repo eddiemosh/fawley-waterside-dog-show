@@ -456,13 +456,32 @@ const Analytics = () => {
                                         (`${donation.first_name || ''} ${donation.last_name || ''} ${donation.email_address || ''}`.toLowerCase().includes(donationSearch.toLowerCase()))
                                     )
                                     .map((donation, idx) => (
-                                        <Card key={idx} sx={{width: '100%', p: 2, background: '#f9f9f9'}}>
+                                        <Card key={idx} sx={{width: '100%', p: 2, background: '#f9f9f9', position: 'relative'}}>
                                             <Typography variant="subtitle1" sx={{fontWeight: 600, mb: 1}}>
                                                 {donation.first_name || ''} {donation.last_name || ''}
                                             </Typography>
+                                            <Typography variant="body2"><b>Donation ID:</b> {donation.donation_id || 'N/A'}</Typography>
                                             <Typography variant="body2"><b>Email:</b> {donation.email_address || 'N/A'}</Typography>
                                             <Typography variant="body2"><b>Date:</b> {donation.timestamp ? new Date(donation.timestamp).toLocaleString() : 'N/A'}</Typography>
                                             <Typography variant="body2"><b>Amount:</b> £{donation.amount}</Typography>
+                                            <Button
+                                                variant="outlined"
+                                                color="error"
+                                                size="small"
+                                                sx={{ position: 'absolute', top: 8, right: 8, minWidth: 0, padding: '2px 8px' }}
+                                                onClick={async () => {
+                                                    if (window.confirm('Are you sure you want to delete this donation?')) {
+                                                        try {
+                                                            await fetch(`https://api.fawleydogshow.com/donation/delete?donation_id=${donation.donation_id}`, { method: 'DELETE' });
+                                                            setDonationData(donationData => donationData.filter((_, i) => i !== idx));
+                                                        } catch (e) {
+                                                            alert('Failed to delete donation.');
+                                                        }
+                                                    }
+                                                }}
+                                            >
+                                                Delete
+                                            </Button>
                                         </Card>
                                     ))
                             )}
