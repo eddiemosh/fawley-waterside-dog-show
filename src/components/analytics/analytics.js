@@ -537,13 +537,31 @@ const Analytics = () => {
                                         (`${fb.message || ''} ${fb.email_address || ''}`.toLowerCase().includes(feedbackSearch.toLowerCase()))
                                     )
                                     .map((fb, idx) => (
-                                        <Card key={fb.feedback_id || idx} sx={{width: '100%', p: 2, background: '#f9f9f9'}}>
+                                        <Card key={fb.feedback_id || idx} sx={{width: '100%', p: 2, background: '#f9f9f9', position: 'relative'}}>
                                             <Typography variant="subtitle1" sx={{fontWeight: 600, mb: 1}}>
                                                 Feedback ID: {fb.feedback_id || 'N/A'}
                                             </Typography>
                                             <Typography variant="body2"><b>Message:</b> {fb.message}</Typography>
                                             <Typography variant="body2"><b>Email:</b> {fb.email_address || 'N/A'}</Typography>
                                             <Typography variant="body2"><b>Date:</b> {fb.timestamp ? new Date(fb.timestamp).toLocaleString() : 'N/A'}</Typography>
+                                            <Button
+                                                variant="outlined"
+                                                color="error"
+                                                size="small"
+                                                sx={{ position: 'absolute', top: 8, right: 8, minWidth: 0, padding: '2px 8px' }}
+                                                onClick={async () => {
+                                                    if (window.confirm('Are you sure you want to delete this feedback?')) {
+                                                        try {
+                                                            await fetch(`https://api.fawleydogshow.com/feedback/delete?feedback_id=${fb.feedback_id}`, { method: 'DELETE' });
+                                                            setFeedbackData(feedbackData => feedbackData.filter((_, i) => i !== idx));
+                                                        } catch (e) {
+                                                            alert('Failed to delete feedback.');
+                                                        }
+                                                    }
+                                                }}
+                                            >
+                                                Delete
+                                            </Button>
                                         </Card>
                                     ))
                             )}
