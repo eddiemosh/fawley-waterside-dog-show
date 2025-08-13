@@ -110,6 +110,11 @@ const Analytics = () => {
     const [donationLoading, setDonationLoading] = useState(false);
     const [donationError, setDonationError] = useState(null);
     const [donationSearch, setDonationSearch] = useState("");
+    const [feedbackExpanded, setFeedbackExpanded] = useState(false);
+    const [feedbackData, setFeedbackData] = useState([]);
+    const [feedbackLoading, setFeedbackLoading] = useState(false);
+    const [feedbackError, setFeedbackError] = useState(null);
+    const [feedbackSearch, setFeedbackSearch] = useState("");
 
     const handleAuthSubmit = (e) => {
         e.preventDefault();
@@ -181,6 +186,21 @@ const Analytics = () => {
                 .then(data => setDonationData(data))
                 .catch(e => setDonationError(e.message))
                 .finally(() => setDonationLoading(false));
+        }
+    };
+    const handleFeedbackAccordion = (event, expanded) => {
+        setFeedbackExpanded(expanded);
+        if (expanded && feedbackData.length === 0 && !feedbackLoading) {
+            setFeedbackLoading(true);
+            setFeedbackError(null);
+            fetch('https://api.fawleydogshow.com/feedback')
+                .then(res => {
+                    if (!res.ok) throw new Error('Failed to fetch feedback analytics');
+                    return res.json();
+                })
+                .then(data => setFeedbackData(data))
+                .catch(e => setFeedbackError(e.message))
+                .finally(() => setFeedbackLoading(false));
         }
     };
 
@@ -482,6 +502,48 @@ const Analytics = () => {
                                             >
                                                 Delete
                                             </Button>
+                                        </Card>
+                                    ))
+                            )}
+                        </Box>
+                    )}
+                </AccordionDetails>
+            </Accordion>
+            <Accordion expanded={feedbackExpanded} onChange={handleFeedbackAccordion}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
+                    <Typography variant="h5">Feedback Analytics</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Box mb={2} display="flex" justifyContent="flex-start">
+                        <TextField
+                            label="Search by Message or Email"
+                            variant="outlined"
+                            value={feedbackSearch}
+                            onChange={e => setFeedbackSearch(e.target.value)}
+                            sx={{width: {xs: '90%', sm: '350px'}}}
+                        />
+                    </Box>
+                    {feedbackLoading ? (
+                        <CircularProgress/>
+                    ) : feedbackError ? (
+                        <Typography color="error">{feedbackError}</Typography>
+                    ) : (
+                        <Box display="flex" flexDirection="column" gap={3}>
+                            {feedbackData.length === 0 ? (
+                                <Typography>No feedback found.</Typography>
+                            ) : (
+                                feedbackData
+                                    .filter(fb =>
+                                        (`${fb.message || ''} ${fb.email_address || ''}`.toLowerCase().includes(feedbackSearch.toLowerCase()))
+                                    )
+                                    .map((fb, idx) => (
+                                        <Card key={fb.feedback_id || idx} sx={{width: '100%', p: 2, background: '#f9f9f9'}}>
+                                            <Typography variant="subtitle1" sx={{fontWeight: 600, mb: 1}}>
+                                                Feedback ID: {fb.feedback_id || 'N/A'}
+                                            </Typography>
+                                            <Typography variant="body2"><b>Message:</b> {fb.message}</Typography>
+                                            <Typography variant="body2"><b>Email:</b> {fb.email_address || 'N/A'}</Typography>
+                                            <Typography variant="body2"><b>Date:</b> {fb.timestamp ? new Date(fb.timestamp).toLocaleString() : 'N/A'}</Typography>
                                         </Card>
                                     ))
                             )}
