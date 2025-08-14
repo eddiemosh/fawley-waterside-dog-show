@@ -1,64 +1,42 @@
 /* src/components/events.css */
 .upcoming-events {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    font-size: 2.5rem; /* Larger font size for emphasis */
-    font-weight: bold; /* Make the text bold */
-    color: #ff6f61; /* Customize text color */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for better readability */
-    margin-top: 5% !important; /* Space above the title */
+    display: none; /* Hide old title styling, replaced by MUI Box */
 }
 
 /* Flex container for event boxes */
 .events-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    flex-wrap: wrap; /* Allow wrapping of boxes */
-    margin-top: 20px; /* Space between title and event boxes */
+    gap: 16px;
+    margin-top: 0;
+    width: 100%;
 }
 
 /* Style for individual event box */
 .event-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f5f5f5;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 250px; /* Fixed width for event boxes */
-    text-align: center;
-    margin: 0 10px; /* Space between event boxes */
-    margin-bottom: 20px; /* Space between rows */
+    /* All card styling now handled by MUI sx in JS */
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    width: auto;
 }
 
 /* Style for event icon */
 .event-icon {
-    font-size: 3rem;
-    color: #ff6f61;
-    margin-bottom: 10px; /* Space between icon and date */
+    /* IconButton styling handled by MUI sx */
+    font-size: inherit;
+    color: inherit;
+    margin-bottom: 0;
 }
 
 /* Style for event date */
 .event-date {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 15px; /* Space between date and button */
-}
-
-/* Style for view tickets button */
-.view-tickets-button {
-    font-size: 1.2rem;
-    border-radius: 30px;
-    background-color: #ff6f61;
-    color: #fff;
-    transition: background-color 0.3s ease;
-}
-
-/* Hover effect for button */
-.view-tickets-button:hover {
-    background-color: #e55d50;
+    font-size: inherit;
+    color: inherit;
+    margin-bottom: 0;
 }
 
 /* Media query for mobile devices */
@@ -89,62 +67,7 @@
 }
 
 @media (max-width: 600px) {
-    .upcoming-events {
-        font-size: 1.5rem;
-        margin-top: 24px;
-        color: #2d7a5f;
-        font-weight: 700;
-        letter-spacing: 1px;
-    }
-
     .events-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .event-box {
-        width: 90%;
-        max-width: 340px;
-        background: #fff;
-        border-radius: 18px;
-        box-shadow: 0 4px 24px rgba(45, 122, 95, 0.08);
-        padding: 18px 10px;
-        font-size: 1rem;
-        margin: 0 0 18px 0;
-    }
-
-    .event-icon {
-        background: linear-gradient(90deg, #2d7a5f 0%, #4caf50 100%) !important;
-        color: #fff !important;
-        font-size: 2rem !important;
-        width: 44px !important;
-        height: 44px !important;
-        margin-bottom: 8px;
-    }
-
-    .event-date {
-        font-size: 1.05rem;
-        font-weight: 600;
-        color: #2d7a5f;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    .view-tickets-button {
-        font-size: 1rem;
-        border-radius: 18px;
-        padding: 10px 24px;
-        background: linear-gradient(90deg, #2d7a5f 0%, #4caf50 100%);
-        color: #fff;
-        font-weight: 600;
-        letter-spacing: 1px;
-        border: none;
-        min-width: 120px;
-        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.08);
-    }
-
-    .view-tickets-button:hover {
-        background: linear-gradient(90deg, #388e3c 0%, #2d7a5f 100%);
+        gap: 10px;
     }
 }
