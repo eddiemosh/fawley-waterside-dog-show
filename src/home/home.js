@@ -57,7 +57,7 @@ const Home = () => {
                     Fawley & The Waterside Dog Show 2025
                 </Typography>
                 <Typography variant="body1" style={{color: '#444', marginBottom: 6}}>
-                    Sunday 7th December 2025 · Fawley Recreation Ground
+                    Sunday 7th December 2025 · Gang Warily Recreation Centre, Fawley, SO45 1GA
                 </Typography>
                 <Typography variant="body2" style={{color: '#666'}}>
                     Join us for a fun-filled day for all the family! Enjoy pedigree and novelty classes, stalls, food,

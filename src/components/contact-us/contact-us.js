@@ -30,7 +30,7 @@ const ContactUs = () => (
             <Box sx={{ mb: 2 }}>
                 <Typography variant="body2" sx={{ fontWeight: 500, color: '#2d7a5f' }}>Location:</Typography>
                 <Typography variant="body2" sx={{ color: '#444', fontWeight: 600 }}>
-                    Fawley Recreation Ground, Fawley, Southampton, UK
+                    Gang Warily Recreation Centre, Newlands Road, Fawley, SO45 1GA
                 </Typography>
             </Box>
         </Box>
