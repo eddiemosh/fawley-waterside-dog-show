@@ -81,7 +81,7 @@ const Home = () => {
                 <Button variant="text" size="small" style={{color: '#2d7a5f', fontWeight: 600}}
                         onClick={() => navigate('/what-to-expect')}>What To Expect</Button>
                 <Button variant="text" size="small" style={{color: '#2d7a5f', fontWeight: 600}}
-                        onClick={() => navigate('/contact')}>Contact Us</Button>
+                        onClick={() => navigate('/contact-us')}>Contact Us</Button>
             </Box>
             {/* Action buttons */}
             <Box className="button-container"

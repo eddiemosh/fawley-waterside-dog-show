@@ -16,9 +16,7 @@ import DonationSuccess from "./components/donation-complete/donation-success";
 import DonationFailure from "./components/donation-complete/donation-failure";
 import AboutUs from "./components/about-us/about-us";
 import WhatToExpect from "./components/what-to-expect/what-to-expect";
-// import About from './components/about/about';
-// import WhatToExpect from './components/about/what-to-expect';
-// import Contact from './components/about/contact';
+import ContactUs from "./components/contact-us/contact-us";
 
 function App() {
     return (
@@ -39,7 +37,7 @@ function App() {
                 <Route path="/donation-failure" element={<DonationFailure/>}/>
                 <Route path="/about" element={<AboutUs/>}/>
                 <Route path="/what-to-expect" element={<WhatToExpect/>}/>
-                {/*<Route path="/contact" element={<Contact/>}/>*/}
+                <Route path="/contact-us" element={<ContactUs/>}/>
                 <Route path="*" element={<Home/>}/> {/* Redirect to Home for any unknown routes */}
             </Routes>
         </Router>

@@ -24,6 +24,7 @@ const allTickets = [
 ];
 
 const CashPayment = () => {
+    const [auth, setAuth] = useState(false);
     const [userInfo, setUserInfo] = useState({firstName: '', lastName: '', email: ''});
     const [dogs, setDogs] = useState([{name: '', date_of_birth: '', sex: ''}]);
     const [selectedTickets, setSelectedTickets] = useState({});
@@ -34,6 +35,9 @@ const CashPayment = () => {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMsg, setSnackbarMsg] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [authError, setAuthError] = useState('');
 
     const handleUserInfoChange = (event) => {
         const {name, value} = event.target;
@@ -114,6 +118,61 @@ const CashPayment = () => {
             setErrorMessage(err.message);
         }
     };
+
+    const handleAuthSubmit = (e) => {
+        e.preventDefault();
+        const allowed = ["ed", "ian", "sally"];
+        if (allowed.includes(username.trim().toLowerCase())) {
+            setAuth(true);
+            setAuthError('');
+        } else {
+            setAuthError('Invalid username');
+        }
+    };
+
+    if (!auth) {
+        return (
+            <Container maxWidth="xs" sx={{mt: 8}}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        p: 4,
+                        border: '1px solid #ccc',
+                        borderRadius: 2,
+                        background: '#fff',
+                    }}
+                >
+                    <Typography variant="h5" gutterBottom>Cash Payment Login</Typography>
+                    <form onSubmit={handleAuthSubmit} style={{width: '100%'}}>
+                        <TextField
+                            label="Username"
+                            value={username}
+                            onChange={e => setUsername(e.target.value)}
+                            fullWidth
+                            margin="normal"
+                            autoFocus
+                        />
+                        <TextField
+                            label="Password"
+                            type="password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            fullWidth
+                            margin="normal"
+                        />
+                        {authError && (
+                            <Typography color="error" sx={{mt: 1}}>{authError}</Typography>
+                        )}
+                        <Button type="submit" variant="contained" color="primary" fullWidth sx={{mt: 2}}>
+                            Login
+                        </Button>
+                    </form>
+                </Box>
+            </Container>
+        );
+    }
 
     return (
         <Container>

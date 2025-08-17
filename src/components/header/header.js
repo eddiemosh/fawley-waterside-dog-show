@@ -95,7 +95,7 @@ const Header = () => {
                             <ListItem button onClick={() => handleMenuItemClick('/what-to-expect')}> <ListItemText
                                 primary="What To Expect"
                                 primaryTypographyProps={{style: {color: '#2d7a5f', fontWeight: 600}}}/> </ListItem>
-                            <ListItem button onClick={() => handleMenuItemClick('/contact')}> <ListItemText
+                            <ListItem button onClick={() => handleMenuItemClick('/contact-us')}> <ListItemText
                                 primary="Contact Us"
                                 primaryTypographyProps={{style: {color: '#2d7a5f', fontWeight: 600}}}/> </ListItem>
                             <ListItem button onClick={() => handleMenuItemClick('/donations')}> <ListItemText
