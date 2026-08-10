@@ -2,8 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import './App.css';
 
 const API_BASE = process.env.REACT_APP_PAYMENT_API || 'https://api.fawleydogshow.com';
-// Toggle payments via environment variable. Set REACT_APP_ENABLE_PAYMENTS=true to enable.
-const PAYMENTS_ENABLED = process.env.REACT_APP_ENABLE_PAYMENTS === 'true';
+const PAYMENTS_ENABLED = true; // Payments are re-enabled for this release.
 
 const funClasses = [
   {name: 'Best Puppy', key: 'best_puppy', price: 4},
