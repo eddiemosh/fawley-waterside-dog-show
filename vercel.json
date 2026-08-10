@@ -9,7 +9,7 @@
       }
     }
   ],
-  "outputDirectory": "v2/build",
+  "outputDirectory": "build",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
