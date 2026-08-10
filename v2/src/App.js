@@ -360,7 +360,7 @@ function App() {
         </div>
         <div className="summary-row">
           <span>Payment total</span>
-          <strong>£{(totalAmount / 100).toFixed(2)}</strong>
+          <strong>£{(totalAmountWithDonation / 100).toFixed(2)}</strong>
         </div>
         {PAYMENTS_ENABLED ? (
           <>
@@ -380,7 +380,7 @@ function App() {
                 </div>
               </div>
               <button className="checkout-button" type="button" onClick={handleCheckout} disabled={loading}>
-                {loading ? 'Starting payment...' : `Pay £${(totalAmount / 100).toFixed(2)}`}
+                {loading ? 'Starting payment...' : `Pay £${(totalAmountWithDonation / 100).toFixed(2)}`}
               </button>
             <p className="summary-note">Secure Stripe checkout. No account creation required.</p>
           </>
