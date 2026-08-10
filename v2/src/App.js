@@ -216,6 +216,11 @@ function App() {
           <>
             <p className="thank-you-copy">Payment verification failed.</p>
             <p className="section-copy">{errorMessage}</p>
+            <div style={{marginTop: '1rem'}}>
+              <button className="checkout-button" type="button" onClick={() => (window.location.href = '/')}>
+                Back to home
+              </button>
+            </div>
           </>
         ) : thankYouOrder ? (
           <>
@@ -229,6 +234,12 @@ function App() {
                 </div>
               ))}
             </div>
+            {thankYouOrder.donation_amount && Number(thankYouOrder.donation_amount) > 0 && (
+              <div className="order-summary-item" style={{marginTop: '0.5rem'}}>
+                <span>Donation</span>
+                <strong>£{Number(thankYouOrder.donation_amount).toFixed(2)}</strong>
+              </div>
+            )}
             <div className="summary-row" style={{marginTop: '1rem', fontWeight: 700}}>
               <span>Total paid</span>
               <strong>£{Number(thankYouOrder.amount).toFixed(2)}</strong>
@@ -240,6 +251,11 @@ function App() {
             >
               Visit our Facebook page
             </button>
+            <div style={{marginTop: '1rem'}}>
+              <button className="checkout-button" type="button" onClick={() => (window.location.href = '/')}>
+                Back to home
+              </button>
+            </div>
           </>
         ) : (
           <p className="section-copy">We could not find your order. Please contact support if you need help.</p>
