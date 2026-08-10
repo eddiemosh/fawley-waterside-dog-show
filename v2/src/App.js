@@ -38,7 +38,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [thankYouOrder, setThankYouOrder] = useState(null);
   const [thankYouLoading, setThankYouLoading] = useState(false);
-  const [paymentVerified, setPaymentVerified] = useState(null);
 
   const orderIdFromUrl = useMemo(() => {
     const params = new URLSearchParams(window.location.search);
