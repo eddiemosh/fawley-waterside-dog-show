@@ -37,7 +37,6 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [donationAmount, setDonationAmount] = useState('');
-  const [donationLoading, setDonationLoading] = useState(false);
   const [thankYouOrder, setThankYouOrder] = useState(null);
   const [thankYouLoading, setThankYouLoading] = useState(false);
 
@@ -110,6 +109,11 @@ function App() {
     }, 0) * 100;
   }, [quantities]);
 
+  const totalAmountWithDonation = useMemo(() => {
+    const donation = parseFloat(donationAmount) || 0;
+    return totalAmount + Math.round(donation * 100);
+  }, [totalAmount, donationAmount]);
+
   const selectedCount = useMemo(
     () => Object.values(quantities).reduce((sum, value) => sum + (value || 0), 0),
     [quantities]
@@ -134,12 +138,14 @@ function App() {
     setErrorMessage('');
 
     try {
+      const donation = parseFloat(donationAmount) || 0;
       const payload = {
         first_name: firstName.trim(),
         last_name: lastName.trim(),
         email_address: email.trim(),
         doggie_info: {},
         regular_class_tickets: buildTicketPayload(quantities, funClasses),
+        donation_amount: donation,
       };
 
       const response = await fetch(`${API_BASE}/payment/create`, {
@@ -166,51 +172,7 @@ function App() {
     }
   };
 
-  const handleDonate = async () => {
-    if (!PAYMENTS_ENABLED) {
-      setErrorMessage('Payments are temporarily disabled. Please check back later.');
-      return;
-    }
-    const amountNum = parseFloat(donationAmount);
-    if (!amountNum || amountNum <= 0) {
-      setErrorMessage('Please enter a donation amount greater than zero.');
-      return;
-    }
-
-    setDonationLoading(true);
-    setErrorMessage('');
-    try {
-      const payload = {
-        first_name: firstName.trim() || '',
-        last_name: lastName.trim() || '',
-        email_address: email.trim() || '',
-        amount: amountNum,
-      };
-
-      const response = await fetch(`${API_BASE}/donation/create`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.detail || 'Donation request failed.');
-      }
-      if (data.checkout_url) {
-        window.location.href = data.checkout_url;
-      } else if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error('Donation request did not return a checkout URL.');
-      }
-    } catch (error) {
-      setErrorMessage(error.message || 'Unable to start donation. Please try again.');
-      console.error(error);
-    } finally {
-      setDonationLoading(false);
-    }
-  };
+  // Donation is included in the main payment payload as `donation_amount`.
 
   const handleQuantity = (ticketKey, delta) => {
     setQuantities((prev) => {
@@ -404,7 +366,7 @@ function App() {
           <>
               <div style={{marginBottom: '0.75rem'}}>
                 <label style={{display: 'block', marginBottom: '0.5rem'}}>Donate (optional)</label>
-                <div style={{display: 'flex', gap: '0.5rem'}}>
+                <div style={{display: 'flex', gap: '0.5rem', alignItems: 'center'}}>
                   <input
                     type="number"
                     min="0"
@@ -414,9 +376,7 @@ function App() {
                     placeholder="Amount £"
                     style={{flex: '1'}}
                   />
-                  <button className="donate-button" type="button" onClick={handleDonate} disabled={donationLoading}>
-                    {donationLoading ? 'Starting...' : 'Donate'}
-                  </button>
+                  <span style={{fontSize: '0.9rem', color: '#475569'}}>will be added to total</span>
                 </div>
               </div>
               <button className="checkout-button" type="button" onClick={handleCheckout} disabled={loading}>
