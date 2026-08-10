@@ -139,8 +139,7 @@ const TicketSelection = () => {
         navigate('/payments', {
             state: {
                 totalAmount: total * 100, // in pence
-                pedigreeTickets: pedigree,
-                allDogTickets: allDog
+                regularClassTickets: {...pedigree, ...allDog}
             }
         });
     };

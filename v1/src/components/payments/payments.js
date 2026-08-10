@@ -11,8 +11,7 @@ const Payments = () => {
     // Extract totalAmount from location state
     const {
         totalAmount = 0,
-        pedigreeTickets = {},
-        allDogTickets = {},
+        regularClassTickets = {},
     } = location.state || {};
     const [userInfo, setUserInfo] = useState({
         firstName: '',
@@ -73,8 +72,7 @@ const Payments = () => {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     doggie_info: doggieDict,
-                    pedigree_tickets: pedigreeTickets,
-                    all_dog_tickets: allDogTickets,
+                    regular_class_tickets: {...pedigreeTickets, ...allDogTickets},
                 }),
             });
 

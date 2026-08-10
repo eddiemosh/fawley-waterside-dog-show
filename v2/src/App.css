@@ -143,6 +143,20 @@ h1 {
   color: #166534;
 }
 
+.test-banner {
+  margin: 1rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: 18px;
+  background: #fffbeb;
+  border: 1px solid #facc15;
+  color: #92400e;
+  font-weight: 700;
+}
+
+.test-banner p {
+  margin: 0;
+}
+
 .ticket-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

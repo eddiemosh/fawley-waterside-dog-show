@@ -2,7 +2,8 @@ import React, {useEffect, useMemo, useState} from 'react';
 import './App.css';
 
 const API_BASE = process.env.REACT_APP_PAYMENT_API || 'https://api.fawleydogshow.com';
-const PAYMENTS_ENABLED = true; // Payments are re-enabled for this release.
+// Toggle payments via environment variable. Set REACT_APP_ENABLE_PAYMENTS=true to enable.
+const PAYMENTS_ENABLED = process.env.REACT_APP_ENABLE_PAYMENTS === 'true';
 
 const funClasses = [
   {name: 'Best Puppy', key: 'best_puppy', price: 4},
@@ -107,8 +108,7 @@ function App() {
         last_name: lastName.trim(),
         email_address: email.trim(),
         doggie_info: {},
-        pedigree_tickets: {},
-        all_dog_tickets: buildTicketPayload(quantities, funClasses),
+        regular_class_tickets: buildTicketPayload(quantities, funClasses),
       };
 
       const response = await fetch(`${API_BASE}/payment/create`, {
@@ -149,8 +149,7 @@ function App() {
     if (!thankYouOrder) return items;
 
     const combined = {
-      ...((thankYouOrder.pedigree_tickets && thankYouOrder.pedigree_tickets) || {}),
-      ...((thankYouOrder.all_dog_tickets && thankYouOrder.all_dog_tickets) || {}),
+      ...((thankYouOrder.regular_class_tickets && thankYouOrder.regular_class_tickets) || {}),
     };
 
     Object.entries(combined).forEach(([key, quantity]) => {

@@ -101,8 +101,7 @@ const CashPayment = () => {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     doggie_info: doggieDict,
-                    pedigree_tickets: pedigree,
-                    all_dog_tickets: allDog,
+                    regular_class_tickets: {...pedigree, ...allDog},
                 }),
             });
             if (!response.ok) throw new Error('Failed to record cash payment');

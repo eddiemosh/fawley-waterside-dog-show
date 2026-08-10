@@ -397,27 +397,12 @@ const Analytics = () => {
                                             <Typography variant="body2"><b>Order
                                                 Status:</b> {order.order_status ? 'Complete' : 'Incomplete'}
                                             </Typography>
-                                            {/* Pedigree Tickets */}
-                                            {order.pedigree_tickets && Object.values(order.pedigree_tickets).some(v => v) && (
+                                            {/* Regular Class Tickets */}
+                                            {order.regular_class_tickets && Object.values(order.regular_class_tickets).some(v => v) && (
                                                 <Box mt={1}>
-                                                    <Typography variant="body2" sx={{fontWeight: 500}}>Pedigree
-                                                        Tickets:</Typography>
+                                                    <Typography variant="body2" sx={{fontWeight: 500}}>Regular Class Tickets:</Typography>
                                                     <ul style={{margin: 0, paddingLeft: 18}}>
-                                                        {Object.entries(order.pedigree_tickets)
-                                                            .filter(([_, v]) => v)
-                                                            .map(([k, v]) => (
-                                                                <li key={k}>{k.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}: {v}</li>
-                                                            ))}
-                                                    </ul>
-                                                </Box>
-                                            )}
-                                            {/* All Dog Tickets */}
-                                            {order.all_dog_tickets && Object.values(order.all_dog_tickets).some(v => v) && (
-                                                <Box mt={1}>
-                                                    <Typography variant="body2" sx={{fontWeight: 500}}>All Dog
-                                                        Tickets:</Typography>
-                                                    <ul style={{margin: 0, paddingLeft: 18}}>
-                                                        {Object.entries(order.all_dog_tickets)
+                                                        {Object.entries(order.regular_class_tickets)
                                                             .filter(([_, v]) => v)
                                                             .map(([k, v]) => (
                                                                 <li key={k}>{k.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}: {v}</li>
