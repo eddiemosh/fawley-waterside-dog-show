@@ -4,11 +4,11 @@
     {
       "src": "v2/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "v2/build" }
+      "config": { "distDir": "build" }
     }
   ],
   "routes": [
     { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/v2/build/$1" }
+    { "src": "/(.*)", "dest": "/build/$1" }
   ]
 }
