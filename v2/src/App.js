@@ -2,6 +2,8 @@ import React, {useEffect, useMemo, useState} from 'react';
 import './App.css';
 
 const API_BASE = process.env.REACT_APP_PAYMENT_API || 'https://api.fawleydogshow.com';
+// Toggle payments via environment variable. Set REACT_APP_ENABLE_PAYMENTS=true to enable.
+const PAYMENTS_ENABLED = process.env.REACT_APP_ENABLE_PAYMENTS === 'true';
 
 const funClasses = [
   {name: 'Best Puppy', key: 'best_puppy', price: 4},
@@ -83,6 +85,10 @@ function App() {
   );
 
   const handleCheckout = async () => {
+    if (!PAYMENTS_ENABLED) {
+      setErrorMessage('Payments are temporarily disabled. Please check back later.');
+      return;
+    }
     if (!firstName.trim() || !lastName.trim()) {
       setErrorMessage('Please enter your first and last name before paying.');
       return;
@@ -314,10 +320,21 @@ function App() {
           <span>Payment total</span>
           <strong>£{(totalAmount / 100).toFixed(2)}</strong>
         </div>
-        <button className="checkout-button" type="button" onClick={handleCheckout} disabled={loading}>
-          {loading ? 'Starting payment...' : `Pay £${(totalAmount / 100).toFixed(2)}`}
-        </button>
-        <p className="summary-note">Secure Stripe checkout. No account creation required.</p>
+        {PAYMENTS_ENABLED ? (
+          <>
+            <button className="checkout-button" type="button" onClick={handleCheckout} disabled={loading}>
+              {loading ? 'Starting payment...' : `Pay £${(totalAmount / 100).toFixed(2)}`}
+            </button>
+            <p className="summary-note">Secure Stripe checkout. No account creation required.</p>
+          </>
+        ) : (
+          <>
+            <button className="checkout-button" type="button" disabled>
+              Payments temporarily disabled
+            </button>
+            <p className="summary-note">Payments are disabled while we perform maintenance.</p>
+          </>
+        )}
         {errorMessage && <p className="status error">{errorMessage}</p>}
       </aside>
     </main>
