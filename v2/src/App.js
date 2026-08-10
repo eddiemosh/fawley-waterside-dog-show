@@ -82,6 +82,54 @@ function App() {
     [quantities]
   );
 
+  const handleCheckout = async () => {
+    if (!firstName.trim() || !lastName.trim()) {
+      setErrorMessage('Please enter your first and last name before paying.');
+      return;
+    }
+
+    if (selectedCount === 0) {
+      setErrorMessage('Please select at least one class before checkout.');
+      return;
+    }
+
+    setLoading(true);
+    setErrorMessage('');
+
+    try {
+      const payload = {
+        first_name: firstName.trim(),
+        last_name: lastName.trim(),
+        email_address: email.trim(),
+        doggie_info: {},
+        pedigree_tickets: {},
+        all_dog_tickets: buildTicketPayload(quantities, funClasses),
+      };
+
+      const response = await fetch(`${API_BASE}/payment/create`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.detail || 'Payment request failed.');
+      }
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('Payment request did not return a checkout URL.');
+      }
+    } catch (error) {
+      setErrorMessage(error.message || 'Unable to start payment. Please try again.');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleQuantity = (ticketKey, delta) => {
     setQuantities((prev) => {
       const current = prev[ticketKey] || 0;
