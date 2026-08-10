@@ -286,16 +286,13 @@ h1 {
 }
 
 .summary-sheet {
-  position: sticky;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
+  /* Keep the sheet in document flow so it appears at page bottom, not fixed/sticky */
+  position: static;
   padding: 1rem 1rem 1.5rem;
   margin-top: 1.5rem;
   border-top: 1px solid rgba(15, 23, 42, 0.08);
   background: #ffffff;
-  box-shadow: 0 -12px 40px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 -6px 20px rgba(15, 23, 42, 0.04);
 }
 
 .summary-row {
@@ -355,6 +352,23 @@ h1 {
   font-weight: 700;
   cursor: pointer;
   transition: transform 120ms ease, opacity 120ms ease;
+}
+
+/* Smaller, less visually-mandatory donate button */
+.donate-button {
+  width: auto;
+  border: 1px solid #bfdbfe;
+  background: #e6f0ff;
+  color: #1e3a8a;
+  padding: 0.6rem 0.9rem;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.donate-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #dbeafe;
 }
 
 .checkout-button:hover:not(:disabled) {

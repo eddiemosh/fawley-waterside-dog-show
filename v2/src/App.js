@@ -414,8 +414,8 @@ function App() {
                     placeholder="Amount £"
                     style={{flex: '1'}}
                   />
-                  <button className="checkout-button" type="button" onClick={handleDonate} disabled={donationLoading}>
-                    {donationLoading ? 'Starting donation...' : 'Donate'}
+                  <button className="donate-button" type="button" onClick={handleDonate} disabled={donationLoading}>
+                    {donationLoading ? 'Starting...' : 'Donate'}
                   </button>
                 </div>
               </div>
