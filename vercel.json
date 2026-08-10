@@ -11,6 +11,7 @@
   ],
   "routes": [
     { "handle": "filesystem" },
-    { "src": "^/(.*)$", "dest": "/index.html" }
+    { "src": "^/static/(.*)$", "dest": "/v2/static/$1" },
+    { "src": "^/(.*)$", "dest": "/v2/index.html" }
   ]
 }
