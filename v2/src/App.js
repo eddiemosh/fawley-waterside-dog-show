@@ -36,6 +36,8 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [donationAmount, setDonationAmount] = useState('');
+  const [donationLoading, setDonationLoading] = useState(false);
   const [thankYouOrder, setThankYouOrder] = useState(null);
   const [thankYouLoading, setThankYouLoading] = useState(false);
 
@@ -161,6 +163,52 @@ function App() {
       console.error(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDonate = async () => {
+    if (!PAYMENTS_ENABLED) {
+      setErrorMessage('Payments are temporarily disabled. Please check back later.');
+      return;
+    }
+    const amountNum = parseFloat(donationAmount);
+    if (!amountNum || amountNum <= 0) {
+      setErrorMessage('Please enter a donation amount greater than zero.');
+      return;
+    }
+
+    setDonationLoading(true);
+    setErrorMessage('');
+    try {
+      const payload = {
+        first_name: firstName.trim() || '',
+        last_name: lastName.trim() || '',
+        email_address: email.trim() || '',
+        amount: amountNum,
+      };
+
+      const response = await fetch(`${API_BASE}/donation/create`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.detail || 'Donation request failed.');
+      }
+      if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+      } else if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('Donation request did not return a checkout URL.');
+      }
+    } catch (error) {
+      setErrorMessage(error.message || 'Unable to start donation. Please try again.');
+      console.error(error);
+    } finally {
+      setDonationLoading(false);
     }
   };
 
@@ -354,9 +402,26 @@ function App() {
         </div>
         {PAYMENTS_ENABLED ? (
           <>
-            <button className="checkout-button" type="button" onClick={handleCheckout} disabled={loading}>
-              {loading ? 'Starting payment...' : `Pay £${(totalAmount / 100).toFixed(2)}`}
-            </button>
+              <div style={{marginBottom: '0.75rem'}}>
+                <label style={{display: 'block', marginBottom: '0.5rem'}}>Donate (optional)</label>
+                <div style={{display: 'flex', gap: '0.5rem'}}>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.5"
+                    value={donationAmount}
+                    onChange={(e) => setDonationAmount(e.target.value)}
+                    placeholder="Amount £"
+                    style={{flex: '1'}}
+                  />
+                  <button className="checkout-button" type="button" onClick={handleDonate} disabled={donationLoading}>
+                    {donationLoading ? 'Starting donation...' : 'Donate'}
+                  </button>
+                </div>
+              </div>
+              <button className="checkout-button" type="button" onClick={handleCheckout} disabled={loading}>
+                {loading ? 'Starting payment...' : `Pay £${(totalAmount / 100).toFixed(2)}`}
+              </button>
             <p className="summary-note">Secure Stripe checkout. No account creation required.</p>
           </>
         ) : (
