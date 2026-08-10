@@ -226,7 +226,7 @@ function App() {
             <button
               className="facebook-button"
               type="button"
-              onClick={() => window.open('https://facebook.com/fawleydogshow', '_blank')}
+              onClick={() => window.open('https://www.facebook.com/profile.php?id=61554694584616', '_blank')}
             >
               Visit our Facebook page
             </button>
