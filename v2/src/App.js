@@ -6,10 +6,10 @@ const API_BASE = process.env.REACT_APP_PAYMENT_API || 'https://api.fawleydogshow
 const PAYMENTS_ENABLED = process.env.REACT_APP_ENABLE_PAYMENTS === 'true';
 
 const funClasses = [
-  {name: 'Best Puppy', key: 'best_puppy', price: 4},
+  {name: 'Best Puppy', key: 'puppy', price: 4},
   {name: 'Prettiest', key: 'prettiest', price: 4},
   {name: 'Handsome', key: 'handsome', price: 4},
-  {name: 'Waggiest Tail', key: 'waggiest_tail', price: 4},
+  {name: 'Waggiest Tail', key: 'waggiest_tale', price: 4},
   {name: "Child's Best Friend", key: 'childs_best_friend', price: 4},
   {name: 'Scruffiest', key: 'scruffiest', price: 4},
   {name: 'Fluffiest', key: 'fluffiest', price: 4},
