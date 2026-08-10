@@ -18,6 +18,8 @@ const funClasses = [
   {name: 'Best Trick', key: 'best_trick', price: 4},
 ];
 
+const money = (value) => `£${Number(value || 0).toFixed(2)}`;
+
 const buildTicketPayload = (quantities, ticketList) => {
   return ticketList.reduce((payload, ticket) => {
     const quantity = quantities[ticket.key] || 0;
@@ -39,6 +41,14 @@ function App() {
   const [donationAmount, setDonationAmount] = useState('');
   const [thankYouOrder, setThankYouOrder] = useState(null);
   const [thankYouLoading, setThankYouLoading] = useState(false);
+  const [adminOrders, setAdminOrders] = useState([]);
+  const [adminRevenue, setAdminRevenue] = useState(null);
+  const [adminLoading, setAdminLoading] = useState(false);
+  const [adminError, setAdminError] = useState('');
+  const [orderLookupId, setOrderLookupId] = useState('');
+  const [orderLookupResult, setOrderLookupResult] = useState(null);
+  const [orderLookupLoading, setOrderLookupLoading] = useState(false);
+  const [orderLookupError, setOrderLookupError] = useState('');
 
   const orderIdFromUrl = useMemo(() => {
     const params = new URLSearchParams(window.location.search);
@@ -51,6 +61,59 @@ function App() {
   }, []);
 
   const orderPath = useMemo(() => window.location.pathname, []);
+  const isAdminPage = orderPath === '/admin';
+
+  const calculateTicketStats = (orders) => {
+    const stats = funClasses.reduce((acc, ticket) => {
+      acc[ticket.key] = 0;
+      return acc;
+    }, {});
+
+    orders.forEach((order) => {
+      const tickets = order.regular_class_tickets || {};
+      Object.entries(tickets).forEach(([key, quantity]) => {
+        if (stats[key] !== undefined) {
+          stats[key] += Number(quantity) || 0;
+        }
+      });
+    });
+
+    return stats;
+  };
+
+  useEffect(() => {
+    const loadAdmin = async () => {
+      if (!isAdminPage) return;
+      setAdminLoading(true);
+      setAdminError('');
+
+      try {
+        const [ordersResponse, revenueResponse] = await Promise.all([
+          fetch(`${API_BASE}/order`),
+          fetch(`${API_BASE}/analytics/revenue`),
+        ]);
+
+        const ordersData = await ordersResponse.json();
+        const revenueData = await revenueResponse.json();
+
+        if (!ordersResponse.ok) {
+          throw new Error(ordersData.detail || 'Failed to load orders.');
+        }
+        if (!revenueResponse.ok) {
+          throw new Error(revenueData.detail || 'Failed to load revenue summary.');
+        }
+
+        setAdminOrders(Array.isArray(ordersData) ? ordersData : []);
+        setAdminRevenue(revenueData.total_revenue ?? 0);
+      } catch (error) {
+        setAdminError(error.message || 'Unable to load admin data.');
+      } finally {
+        setAdminLoading(false);
+      }
+    };
+
+    loadAdmin();
+  }, [isAdminPage]);
 
   useEffect(() => {
     const loadOrder = async () => {
@@ -202,6 +265,165 @@ function App() {
 
   const orderSummaryItems = getOrderSummary();
 
+  const adminTicketStats = calculateTicketStats(adminOrders);
+
+  const handleLookupOrder = async (event) => {
+    event.preventDefault();
+    if (!orderLookupId.trim()) {
+      setOrderLookupError('Enter an order ID first.');
+      return;
+    }
+
+    setOrderLookupLoading(true);
+    setOrderLookupError('');
+    setOrderLookupResult(null);
+
+    try {
+      const response = await fetch(`${API_BASE}/order?order_id=${encodeURIComponent(orderLookupId.trim())}`);
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.detail || 'Order not found.');
+      }
+      setOrderLookupResult(data);
+    } catch (error) {
+      setOrderLookupError(error.message || 'Unable to look up order.');
+    } finally {
+      setOrderLookupLoading(false);
+    }
+  };
+
+  const renderAdminPage = () => (
+    <main className="app-shell light-shell">
+      <header className="hero light-hero">
+        <p className="eyebrow">Admin</p>
+        <h1>Orders and analysis</h1>
+        <p className="tagline">View revenue, ticket totals, and search for any order by ID.</p>
+        <button className="facebook-button" type="button" onClick={() => (window.location.href = '/')}>Back to home</button>
+      </header>
+
+      <section className="section light-section">
+        <div className="section-header">
+          <div>
+            <h2>Summary</h2>
+            <p className="section-copy">Live data is loaded from the backend order and analytics endpoints.</p>
+          </div>
+        </div>
+        {adminLoading ? (
+          <p className="section-copy">Loading admin data…</p>
+        ) : adminError ? (
+          <p className="status error">{adminError}</p>
+        ) : (
+          <div className="admin-stats-grid">
+            <article className="admin-stat-card">
+              <span>Total revenue</span>
+              <strong>{money(adminRevenue)}</strong>
+            </article>
+            <article className="admin-stat-card">
+              <span>Total orders</span>
+              <strong>{adminOrders.length}</strong>
+            </article>
+            <article className="admin-stat-card">
+              <span>Paid orders</span>
+              <strong>{adminOrders.filter((order) => order.order_status).length}</strong>
+            </article>
+            <article className="admin-stat-card">
+              <span>Donation orders</span>
+              <strong>{adminOrders.filter((order) => Number(order.donation_amount || 0) > 0).length}</strong>
+            </article>
+          </div>
+        )}
+      </section>
+
+      <section className="section light-section">
+        <div className="section-header">
+          <div>
+            <h2>Ticket analysis</h2>
+            <p className="section-copy">Counts are aggregated from all orders currently in the database.</p>
+          </div>
+        </div>
+        <div className="admin-ticket-list">
+          {funClasses.map((ticket) => (
+            <div key={ticket.key} className="admin-ticket-row">
+              <span>{ticket.name}</span>
+              <strong>{adminTicketStats[ticket.key] || 0}</strong>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section light-section">
+        <div className="section-header">
+          <div>
+            <h2>Order lookup</h2>
+            <p className="section-copy">Enter an order ID to fetch the full order record.</p>
+          </div>
+        </div>
+        <form className="admin-lookup-form" onSubmit={handleLookupOrder}>
+          <input
+            className="search-input"
+            type="text"
+            value={orderLookupId}
+            onChange={(event) => setOrderLookupId(event.target.value)}
+            placeholder="Order ID"
+          />
+          <button className="checkout-button" type="submit" disabled={orderLookupLoading}>
+            {orderLookupLoading ? 'Looking up…' : 'Find order'}
+          </button>
+        </form>
+        {orderLookupError && <p className="status error">{orderLookupError}</p>}
+        {orderLookupResult && (
+          <div className="admin-order-panel">
+            <div className="summary-row">
+              <span>Order ID</span>
+              <strong>{orderLookupResult.order_id}</strong>
+            </div>
+            <div className="summary-row">
+              <span>Name</span>
+              <strong>{orderLookupResult.first_name} {orderLookupResult.last_name}</strong>
+            </div>
+            <div className="summary-row">
+              <span>Status</span>
+              <strong>{orderLookupResult.order_status ? 'Paid' : 'Pending'}</strong>
+            </div>
+            <div className="summary-row">
+              <span>Total</span>
+              <strong>{money(orderLookupResult.amount)}</strong>
+            </div>
+            {Number(orderLookupResult.donation_amount || 0) > 0 && (
+              <div className="summary-row">
+                <span>Donation</span>
+                <strong>{money(orderLookupResult.donation_amount)}</strong>
+              </div>
+            )}
+          </div>
+        )}
+      </section>
+
+      <section className="section light-section">
+        <div className="section-header">
+          <div>
+            <h2>Recent orders</h2>
+            <p className="section-copy">Most recent entries from the order collection.</p>
+          </div>
+        </div>
+        <div className="admin-orders-list">
+          {adminOrders.slice(0, 20).map((order) => (
+            <div key={order.order_id} className="admin-order-row">
+              <div>
+                <strong>{order.first_name} {order.last_name}</strong>
+                <p>{order.order_id}</p>
+              </div>
+              <div>
+                <strong>{money(order.amount)}</strong>
+                <p>{order.order_status ? 'Paid' : 'Pending'}{Number(order.donation_amount || 0) > 0 ? ` · Donation ${money(order.donation_amount)}` : ''}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+
   const renderThankYouPage = () => (
     <main className="app-shell light-shell">
       <header className="hero light-hero">
@@ -263,6 +485,10 @@ function App() {
       </section>
     </main>
   );
+
+  if (isAdminPage) {
+    return renderAdminPage();
+  }
 
   if (orderIdFromUrl) {
     return renderThankYouPage();
