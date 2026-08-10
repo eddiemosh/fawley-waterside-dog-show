@@ -4,10 +4,12 @@
     {
       "src": "v2/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "build" }
+      "config": { "distDir": "v2/build" }
     }
   ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "routes": [
+    { "src": "/static/(.*)", "dest": "/v2/build/static/$1" },
+    { "src": "/asset-manifest.json", "dest": "/v2/build/asset-manifest.json" },
+    { "src": "/(.*)", "dest": "/v2/build/index.html" }
   ]
 }
