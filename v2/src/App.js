@@ -56,7 +56,6 @@ function App() {
       if (!orderIdFromUrl) return;
       setThankYouLoading(true);
       setErrorMessage('');
-      setPaymentVerified(null);
 
       try {
         if (orderPath.endsWith('/order-success')) {
@@ -70,9 +69,7 @@ function App() {
           if (!verifyResponse.ok || !verifyData.success) {
             throw new Error(verifyData.detail || 'Payment was not completed.');
           }
-          setPaymentVerified(true);
         } else if (orderPath.endsWith('/order-failure')) {
-          setPaymentVerified(false);
           setErrorMessage('Payment was not completed. Please try again or contact support.');
           return;
         }
@@ -89,7 +86,6 @@ function App() {
       } catch (error) {
         setErrorMessage(error.message || 'Unable to load thank you details.');
         setThankYouOrder(null);
-        setPaymentVerified(false);
         console.error(error);
       } finally {
         setThankYouLoading(false);
