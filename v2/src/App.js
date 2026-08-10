@@ -4,6 +4,7 @@ import './App.css';
 const API_BASE = process.env.REACT_APP_PAYMENT_API || 'https://api.fawleydogshow.com';
 // Toggle payments via environment variable. Set REACT_APP_ENABLE_PAYMENTS=true to enable.
 const PAYMENTS_ENABLED = process.env.REACT_APP_ENABLE_PAYMENTS === 'true';
+const ADMIN_PASSWORD = process.env.REACT_APP_ADMIN_PASSWORD || '';
 
 const funClasses = [
   {name: 'Best Puppy', key: 'puppy', price: 4},
@@ -49,6 +50,8 @@ function App() {
   const [orderLookupResult, setOrderLookupResult] = useState(null);
   const [orderLookupLoading, setOrderLookupLoading] = useState(false);
   const [orderLookupError, setOrderLookupError] = useState('');
+  const [adminAuthed, setAdminAuthed] = useState(false);
+  const [adminAuthError, setAdminAuthError] = useState('');
 
   const orderIdFromUrl = useMemo(() => {
     const params = new URLSearchParams(window.location.search);
@@ -82,8 +85,38 @@ function App() {
   };
 
   useEffect(() => {
+    if (!isAdminPage) return;
+
+    const sessionKey = 'fawley_waterside_admin_authed';
+    if (sessionStorage.getItem(sessionKey) === 'true') {
+      setAdminAuthed(true);
+      return;
+    }
+
+    if (!ADMIN_PASSWORD) {
+      setAdminAuthError('Admin password is not configured for this build.');
+      return;
+    }
+
+    const enteredPassword = window.prompt('Enter the admin password to continue');
+    if (enteredPassword === null) {
+      setAdminAuthError('Admin access cancelled.');
+      return;
+    }
+
+    if (enteredPassword === ADMIN_PASSWORD) {
+      sessionStorage.setItem(sessionKey, 'true');
+      setAdminAuthed(true);
+      setAdminAuthError('');
+      return;
+    }
+
+    setAdminAuthError('Incorrect password.');
+  }, [isAdminPage]);
+
+  useEffect(() => {
     const loadAdmin = async () => {
-      if (!isAdminPage) return;
+      if (!isAdminPage || !adminAuthed) return;
       setAdminLoading(true);
       setAdminError('');
 
@@ -113,7 +146,7 @@ function App() {
     };
 
     loadAdmin();
-  }, [isAdminPage]);
+  }, [isAdminPage, adminAuthed]);
 
   useEffect(() => {
     const loadOrder = async () => {
@@ -301,7 +334,20 @@ function App() {
         <button className="facebook-button" type="button" onClick={() => (window.location.href = '/')}>Back to home</button>
       </header>
 
-      <section className="section light-section">
+      {!adminAuthed ? (
+        <section className="section light-section">
+          <div className="admin-auth-panel">
+            <h2>Protected area</h2>
+            <p className="section-copy">Enter the admin password to load analytics and order data.</p>
+            {adminAuthError && <p className="status error">{adminAuthError}</p>}
+            <button className="checkout-button" type="button" onClick={() => window.location.reload()}>
+              Try again
+            </button>
+          </div>
+        </section>
+      ) : null}
+
+      {adminAuthed ? <section className="section light-section">
         <div className="section-header">
           <div>
             <h2>Summary</h2>
@@ -332,9 +378,9 @@ function App() {
             </article>
           </div>
         )}
-      </section>
+      </section> : null}
 
-      <section className="section light-section">
+      {adminAuthed ? <section className="section light-section">
         <div className="section-header">
           <div>
             <h2>Ticket analysis</h2>
@@ -349,9 +395,9 @@ function App() {
             </div>
           ))}
         </div>
-      </section>
+      </section> : null}
 
-      <section className="section light-section">
+      {adminAuthed ? <section className="section light-section">
         <div className="section-header">
           <div>
             <h2>Order lookup</h2>
@@ -397,9 +443,9 @@ function App() {
             )}
           </div>
         )}
-      </section>
+      </section> : null}
 
-      <section className="section light-section">
+      {adminAuthed ? <section className="section light-section">
         <div className="section-header">
           <div>
             <h2>Recent orders</h2>
@@ -420,7 +466,7 @@ function App() {
             </div>
           ))}
         </div>
-      </section>
+      </section> : null}
     </main>
   );
 
