@@ -38,32 +38,66 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [thankYouOrder, setThankYouOrder] = useState(null);
   const [thankYouLoading, setThankYouLoading] = useState(false);
+  const [paymentVerified, setPaymentVerified] = useState(null);
 
   const orderIdFromUrl = useMemo(() => {
     const params = new URLSearchParams(window.location.search);
     return params.get('orderId') || '';
   }, []);
 
+  const sessionIdFromUrl = useMemo(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('session_id') || '';
+  }, []);
+
+  const orderPath = useMemo(() => window.location.pathname, []);
+
   useEffect(() => {
     const loadOrder = async () => {
       if (!orderIdFromUrl) return;
       setThankYouLoading(true);
+      setErrorMessage('');
+      setPaymentVerified(null);
+
       try {
+        if (orderPath.endsWith('/order-success')) {
+          if (!sessionIdFromUrl) {
+            throw new Error('Payment could not be verified. No Stripe session ID was provided.');
+          }
+          const verifyResponse = await fetch(
+            `${API_BASE}/payment/verify?order_id=${orderIdFromUrl}&session_id=${sessionIdFromUrl}`
+          );
+          const verifyData = await verifyResponse.json();
+          if (!verifyResponse.ok || !verifyData.success) {
+            throw new Error(verifyData.detail || 'Payment was not completed.');
+          }
+          setPaymentVerified(true);
+        } else if (orderPath.endsWith('/order-failure')) {
+          setPaymentVerified(false);
+          setErrorMessage('Payment was not completed. Please try again or contact support.');
+          return;
+        }
+
         const response = await fetch(`${API_BASE}/order?order_id=${orderIdFromUrl}`);
         if (!response.ok) {
           throw new Error('Unable to load order details.');
         }
         const data = await response.json();
+        if (orderPath.endsWith('/order-success') && !data.order_status) {
+          throw new Error('Payment was not completed for this order.');
+        }
         setThankYouOrder(data);
       } catch (error) {
-        setErrorMessage('Unable to load thank you details.');
+        setErrorMessage(error.message || 'Unable to load thank you details.');
+        setThankYouOrder(null);
+        setPaymentVerified(false);
         console.error(error);
       } finally {
         setThankYouLoading(false);
       }
     };
     loadOrder();
-  }, [orderIdFromUrl]);
+  }, [orderIdFromUrl, orderPath, sessionIdFromUrl]);
 
   const filteredClasses = useMemo(() => {
     if (!searchTerm.trim()) return funClasses;
@@ -173,6 +207,11 @@ function App() {
       <section className="section light-section thank-you-section">
         {thankYouLoading ? (
           <p className="section-copy">Loading your order details…</p>
+        ) : errorMessage ? (
+          <>
+            <p className="thank-you-copy">Payment verification failed.</p>
+            <p className="section-copy">{errorMessage}</p>
+          </>
         ) : thankYouOrder ? (
           <>
             <p className="thank-you-copy">Hi {thankYouOrder.first_name || 'Guest'} — your order is confirmed.</p>
